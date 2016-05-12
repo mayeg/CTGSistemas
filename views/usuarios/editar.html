@@ -1,0 +1,78 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}Editar Usuario{% endblock %}
+{% block username %}{% endblock %}
+{% block header%}
+
+{% endblock %}
+{% block menu %}
+
+{% endblock %}
+{% block contenido %}
+  <div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Editar Usuario</h3>
+    </div>
+    <form class="form-horizontal" action="/usuarios/editar/{{id}}" method="POST"
+          id="form-editar">
+        <div class="box-body">
+            <p>En esté formulario, usted podra editar el usuario del
+                sistema.</p>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="nombres">Nombres: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="nombres"
+                           placeholder="Nombres" name="nombres"
+                           value="{{usuario_edit['nombres']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="apellidos">Apellidos: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="apellidos"
+                           placeholder="Apellidos" name="apellidos"
+                           value="{{usuario_edit['apellidos']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="cedula">Cedula: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="cedula"
+                           placeholder="Cedula" name="cedula"
+                           value="{{usuario_edit['cedula']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="email">Email: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="email"
+                           placeholder="Email" name="email"
+                           value="{{usuario_edit['email']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="tipo_usuario">Tipo de Usuario: </label>
+                <div class="col-md-5 col-xs-12">
+                    <select id="tipo_usuario" name="tipo_usuario" class="form-control">
+                        {% for tipo in tipos %}
+                            <option value="{{tipo.getId()}}">{{tipo.getLabel()}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default" href="/usuarios">Volver</a>
+            <button type="submit" class="btn btn-info pull-right">Guardar Cambios
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
