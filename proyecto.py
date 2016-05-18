@@ -15,7 +15,7 @@ mysql = MySQL()
 app.register_blueprint(login_r)
 app.register_blueprint(usuario, url_prefix="/usuarios")
 
-# MySQL configurations
+# MySQL configurations esta joda no sube
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'maye'
 app.config['MYSQL_DATABASE_DB'] = 'control_proyectos'
