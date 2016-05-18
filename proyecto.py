@@ -17,7 +17,7 @@ app.register_blueprint(usuario, url_prefix="/usuarios")
 
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'maye123'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'maye'
 app.config['MYSQL_DATABASE_DB'] = 'control_proyectos'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
