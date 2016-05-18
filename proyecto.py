@@ -16,10 +16,11 @@ app.register_blueprint(login_r)
 app.register_blueprint(usuario, url_prefix="/usuarios")
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'maye123'
-app.config['MYSQL_DATABASE_DB'] = 'control_proyectos'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+
+app.config['MYSQL_DATABASE_USER'] = 'ufps_35'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'ufps_11'
+app.config['MYSQL_DATABASE_DB'] = 'ufps_35'
+app.config['MYSQL_DATABASE_HOST'] = 'sandbox2.ufps.edu.co'
 mysql.init_app(app)
 
 if __name__ == "__main__":
