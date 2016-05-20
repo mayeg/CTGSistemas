@@ -3,6 +3,7 @@ import hashlib
 
 from flask import session, render_template
 
+from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.usuario_dao import UsuarioDao
 from dto.usuario import Usuario
 
@@ -14,9 +15,10 @@ class Login:
 
     @staticmethod
     def get_home_usuario():
+        tipos = TipoUsuarioDao().listar_tipo_usuario()
         if 'usuario' in session:
-            return render_template('home/home.html', titulo="Inicio")
-        return render_template('login/login.html')
+            return render_template('home/home.html', titulo="Inicio", nombre=session['nombre'])
+        return render_template('login/login.html', tipos=tipos)
 
     def login(self, codigo, contrasena):
         contrasena_c = hashlib.sha1(contrasena).hexdigest()

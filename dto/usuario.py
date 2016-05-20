@@ -70,5 +70,6 @@ class Usuario:
     def get_dict(self):
         return {
             'id': self.__id,
-            'codigo': self.__codigo
+            'codigo': self.__codigo,
+            'nombre': self.__nombres
         }
