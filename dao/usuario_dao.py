@@ -90,8 +90,8 @@ class UsuarioDao:
                     "email, contraseña, tipo_usuario) VALUES (%s, %s, %s, %s, %s" \
                     ", %s, %s)"
             param = (usuario.getCodigo(), usuario.getNombres(),
-                     usuario.getApellidos(),str(usuario.getCedula()),
-                     usuario.getEmail(),usuario.getContrasena(),
+                     usuario.getApellidos(), str(usuario.getCedula()),
+                     usuario.getEmail(), usuario.getContrasena(),
                      int(usuario.getTipoUsuario().getId()))
             self.__cur.execute(query, param)
             self.__conn.commit()
