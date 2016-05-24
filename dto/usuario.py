@@ -69,7 +69,7 @@ class Usuario:
 
     def get_dict(self):
         return {
+            'nombres': self.__nombres,
             'id': self.__id,
-            'codigo': self.__codigo,
-            'nombre': self.__nombres
+            'codigo': self.__codigo
         }

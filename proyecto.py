@@ -14,7 +14,6 @@ mysql = MySQL()
 # import routes
 app.register_blueprint(login_r)
 app.register_blueprint(usuario, url_prefix="/usuarios")
-app.register_blueprint()
 
 # MySQL configurations
 

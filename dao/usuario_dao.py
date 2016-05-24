@@ -12,13 +12,16 @@ class UsuarioDao:
 
     def get_user_login(self, usuario):
         try:
-            query = "SELECT * FROM usuario WHERE codigo=%s AND contraseña=%s"
-            param = (usuario.getCodigo(), usuario.getContrasena())
+            query = "SELECT * FROM usuario WHERE codigo=%s AND contraseña=%s AND " \
+                    "tipo_usuario=%s"
+            param = (usuario.getCodigo(), usuario.getContrasena(),
+                     int(usuario.getTipoUsuario().getId()))
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return Usuario(id=data[0], codigo=data[1], contrasena=data[3])
+            return Usuario(id=data[0], codigo=data[1], contrasena=data[3],
+                           tipo_usuario=data[7])
         except Exception as e:
             print e.message
             return None

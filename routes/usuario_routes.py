@@ -1,6 +1,5 @@
 from flask.blueprints import Blueprint
 from flask import request, session
-
 from controllers.usuario import UsuarioController
 
 usuario = Blueprint("usuarios", __name__)

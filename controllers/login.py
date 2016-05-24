@@ -14,15 +14,18 @@ class Login:
         pass
 
     @staticmethod
-    def get_home_usuario():
+    def get_home_usuario(self, id):
         tipos = TipoUsuarioDao().listar_tipo_usuario()
         if 'usuario' in session:
-            return render_template('home/home.html', titulo="Inicio", nombre=session['nombre'])
+            usuario = UsuarioDao.get_usuario_por_id(id)
+            return render_template('home/home.html', titulo="Inicio",
+                                   usuario=usuario)
         return render_template('login/login.html', tipos=tipos)
 
-    def login(self, codigo, contrasena):
+    def login(self, codigo, contrasena, tipo):
         contrasena_c = hashlib.sha1(contrasena).hexdigest()
-        usuario = Usuario(codigo=codigo, contrasena=contrasena_c)
+        usuario = Usuario(codigo=codigo, contrasena=contrasena_c,
+                          tipo_usuario=tipo)
         usuario_logueado = UsuarioDao().get_user_login(usuario)
         if usuario_logueado is not None:
             session['usuario'] = usuario_logueado.get_dict()
@@ -31,6 +34,3 @@ class Login:
     def logout(self):
         del session['usuario']
 
-    @staticmethod
-    def get_login():
-        return render_template('login/login.html', list=['hola', 'carlos'], titulo="mi titulo")
