@@ -1,4 +1,4 @@
-class Propuesta
+class Propuesta:
 
     def __init__(self, codigo, titulo, director_propuesta, cod_estudiante1,
                  cod_estudiante2, cod_estudiante4, cod_estudiante3,
@@ -28,6 +28,7 @@ class Propuesta
         self.__fecha_cometario = fecha_cometario
         self.__fecha_emtregables = fecha_emtregables
         self.__fecha = fecha
+
 
 
 
