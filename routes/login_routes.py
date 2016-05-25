@@ -1,7 +1,6 @@
 from flask.blueprints import Blueprint
 from flask import request, redirect, url_for
 from flask.globals import session
-
 from controllers.login import Login
 
 login_r = Blueprint("login", __name__)
@@ -9,8 +8,7 @@ login_r = Blueprint("login", __name__)
 
 @login_r.route("/", methods=["GET"])
 def get_home():
-    id = session['usuario']['id']
-    return Login().get_home_usuario(id)
+    return Login().get_home_usuario()
 
 
 @login_r.route("/", methods=["POST"])

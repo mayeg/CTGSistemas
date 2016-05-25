@@ -70,6 +70,7 @@ class Usuario:
     def get_dict(self):
         return {
             'nombres': self.__nombres,
+            'tipo': self.__tipo_usuario.getId(),
             'id': self.__id,
             'codigo': self.__codigo
         }

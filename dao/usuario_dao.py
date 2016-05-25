@@ -104,6 +104,21 @@ class UsuarioDao:
             print e.message
             return False
 
+    def get_usuario_por_id_(self, id):
+        try:
+            query = "SELECT * FROM usuario WHERE id = %s"
+            param = (id,)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchone()
+            if data is None:
+                return None
+            return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
+                           nombres=data[4], apellidos=data[5], tipo_usuario=data[7])
+        except Exception as e:
+            print e.message
+            return None
+
+
     def get_usuario_por_id(self, usuario):
         try:
             query = "SELECT * FROM usuario WHERE id = %s"
@@ -113,7 +128,8 @@ class UsuarioDao:
             if data is None:
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
-                           nombres=data[4], apellidos=data[5], email=data[6])
+                           nombres=data[4], apellidos=data[5], email=data[6],
+                           tipo_usuario=data[7])
         except Exception as e:
             print e.message
             return None
