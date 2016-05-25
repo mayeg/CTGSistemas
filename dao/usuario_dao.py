@@ -71,6 +71,7 @@ class UsuarioDao:
             print e.message
             return 0
 
+
     def get_usuario_por_codigo(self, usuario):
         try:
             query = "SELECT * FROM usuario WHERE codigo = %s"
