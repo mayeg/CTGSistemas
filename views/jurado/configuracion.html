@@ -1,12 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% extends "jurado/home.html" %}
 {% block titulo %}Titulo{% endblock %}
 {% block username %}{{titulo}}{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
 <li class="treeview">
-    <a href="/usuarios/configuracion/">
+    <a href="/jurado/configuracion/">
         <i class="fa fa-pie-cog" aria-hidden="true"></i>
         <span>Consultar Propuesta</span>
         <i class="fa fa-angle-left pull-right"></i>
@@ -24,7 +23,7 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <li class="treeview">
-    <a href="/usuarios/configuracion">
+    <a href="/jurado/configuracion">
         <i class="fa fa-pie-cong"></i>
         <span>Configuracion</span>
         <i class="fa fa-angle-left pull-right"></i>
@@ -36,7 +35,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Configuracion</h3>
         </div>
-        <form class="form-horizontal" action="/usuarios/configuracion"
+        <form class="form-horizontal" action="/jurado/configuracion"
               method="POST"
               id="form-config">
             <div class="box-body">
@@ -66,7 +65,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                <a class="btn btn-default" href="/home/home">Volver</a>
+                <a class="btn btn-default" href="/jurado/home">Volver</a>
                 <button type="submit" class="btn btn-info pull-right">Guardar
                     Cambios
                 </button>

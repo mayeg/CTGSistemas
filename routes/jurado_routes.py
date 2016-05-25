@@ -1,9 +1,14 @@
 from flask.blueprints import Blueprint
 from flask import request, session
+
+from controllers.login import Login
 from controllers.usuario import UsuarioController
 
 jurado = Blueprint("jurado", __name__)
 
+@jurado.route("/home", methods=["GET"])
+def home():
+        return Login().get_home_usuario()
 
 @jurado.route("/configuracion", methods=["GET", "POST"])
 def cambiar_contrasena():

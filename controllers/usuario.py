@@ -96,7 +96,7 @@ class UsuarioController:
         return redirect(url_for("usuarios.listar_usuarios"))
 
     def get_cambiar_contrasena(self):
-        return render_template("usuarios/configuracion.html")
+        return render_template("jurado/configuracion.html")
 
     def cambiar_contrasena(self, contrasena_a, contrasena_n,
                            contrasena_nc):

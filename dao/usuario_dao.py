@@ -160,7 +160,7 @@ class UsuarioDao:
 
     def cambiar_contrasena(self, usuario, contrasena_n):
         try:
-            query = "UPDATE usuario SET contrasena= %s WHERE id=%s"
+            query = "UPDATE usuario SET contraseña = %s WHERE id=%s"
             param = (contrasena_n, usuario.getId())
             print contrasena_n, usuario.getId()
             self.__cur.execute(query, param)
