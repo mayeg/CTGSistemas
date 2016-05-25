@@ -1,9 +1,34 @@
 {% extends "plantillas/principal.html" %}
+{% extends "jurado/home.html" %}
 {% block titulo %}Titulo{% endblock %}
 {% block username %}{{titulo}}{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
+<li class="treeview">
+    <a href="/usuarios/configuracion/">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consultar Propuesta</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+<li class="treeview">
+    <a href="/usuarios/configuracion/">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consutar Trabajo de Grado</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+<li class="treeview">
+    <a href="/usuarios/configuracion/">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consultar Sustentaciones</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <li class="treeview">
+    <a href="/usuarios/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
 
     {% endblock %}
     {% block contenido %}

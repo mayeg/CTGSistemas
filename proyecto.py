@@ -3,6 +3,8 @@ import os
 
 from flask import Flask
 from flaskext.mysql import MySQL
+
+from routes.jurado_routes import jurado
 from routes.login_routes import login_r
 from routes.usuario_routes import usuario
 
@@ -14,6 +16,7 @@ mysql = MySQL()
 # import routes
 app.register_blueprint(login_r)
 app.register_blueprint(usuario, url_prefix="/usuarios")
+app.register_blueprint(jurado, url_prefix="/jurado")
 
 # MySQL configurations
 

@@ -12,16 +12,16 @@ class UsuarioDao:
 
     def get_user_login(self, usuario):
         try:
-            query = "SELECT * FROM usuario WHERE codigo=%s AND contraseña=%s AND " \
-                    "tipo_usuario=%s"
+            query = "SELECT * FROM usuario WHERE codigo=%s AND contraseña=%s " \
+                    "AND tipo_usuario=%s"
             param = (usuario.getCodigo(), usuario.getContrasena(),
                      int(usuario.getTipoUsuario().getId()))
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return Usuario(id=data[0], codigo=data[1], contrasena=data[3],
-                           tipo_usuario=data[7])
+            return Usuario(id=data[0], nombres=data[4], codigo=data[1],
+                           contrasena=data[3], tipo_usuario=data[7])
         except Exception as e:
             print e.message
             return None
@@ -85,8 +85,6 @@ class UsuarioDao:
             print e.message
             return None
 
-
-
     def crear_usuario(self, usuario):
         try:
             query = "INSERT INTO usuario (codigo, nombres, apellidos, cedula, " \
@@ -104,20 +102,20 @@ class UsuarioDao:
             print e.message
             return False
 
-    def get_usuario_por_id_(self, id):
+    def get_usuario_por_tipo(self, usuario_tipo):
         try:
-            query = "SELECT * FROM usuario WHERE id = %s"
-            param = (id,)
+            query = "SELECT * FROM usuario WHERE tipo_usuario = %s"
+            param = (int(usuario_tipo.getTipoUsuario().getId()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             if data is None:
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
-                           nombres=data[4], apellidos=data[5], tipo_usuario=data[7])
+                           nombres=data[4], apellidos=data[5],
+                           tipo_usuario=data[7])
         except Exception as e:
             print e.message
             return None
-
 
     def get_usuario_por_id(self, usuario):
         try:
@@ -133,8 +131,6 @@ class UsuarioDao:
         except Exception as e:
             print e.message
             return None
-
-
 
     def eliminar_usuario(self, usuario):
         try:
