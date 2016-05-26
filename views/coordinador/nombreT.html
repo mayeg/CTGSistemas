@@ -1,0 +1,65 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}Titulo{% endblock %}
+{% block username %}{{titulo}}{% endblock %}
+{% block header%}
+{% endblock %}
+{% block menu %}
+
+<ul class="sidebar-menu">
+        <li class="header">MENU PRINCIPAL</li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Trabajo De Grado</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li ><a href="nombreT.html"><i class="fa fa-circle-o"></i>  Nombre </a></li>
+            <li class ="active"><a href="modalidadT.html"><i class="fa fa-circle-o"></i>  Modalidad </a></li>
+            <li><a href="juradoEstudiante.html"><i class="fa fa-circle-o"></i>  Jurado o Estudiante </a></li>
+            <li><a href="estado.html"><i class="fa fa-circle-o"></i> Estado </a></li>
+
+
+          </ul>
+        </li>
+
+ <li class="  treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Propuesta</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li ><a href="nombreP.html"><i class="fa fa-circle-o"></i>  Nombre </a></li>
+            <li><a href="estadoP.html"><i class="fa fa-circle-o"></i> Estado </a></li>
+            <li><a href="cancelarP.html"><i class="fa fa-circle-o"></i> Cancelar  Propuesta </a></li>
+          </ul>
+        </li>
+
+
+         <li class=" treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Otras Consultas</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li ><a href="estudiantesM.html"><i class="fa fa-circle-o"></i> Estudiantes Por Modalidad</a></li>
+            <li><a href="consultaA.html"><i class="fa fa-circle-o"></i> Acta Por Fecha</a></li>
+          </ul>
+        </li>
+</ul>
+
+ {% endblock %}
+{% block contenido %}
+
+ <div class="content-wrapper">
+
+    <section class="content-header">
+      <h1>
+        Consultar Trabajo de Grado
+        <small>Coordinador</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="principal.html"><i class="fa fa-dashboard"></i> Perfil</a></li>
+        <li class="active">Consultas</li>
+      </ol>
+    </section>
+
+
+
+</div>
