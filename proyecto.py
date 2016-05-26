@@ -17,6 +17,9 @@ mysql = MySQL()
 app.register_blueprint(login_r)
 app.register_blueprint(usuario, url_prefix="/usuarios")
 app.register_blueprint(jurado, url_prefix="/jurado")
+app.register_blueprint(jurado, url_prefix="/secretaria")
+app.register_blueprint(jurado, url_prefix="/coordinador")
+app.register_blueprint(jurado, url_prefix="/estudiante")
 
 # MySQL configurations
 

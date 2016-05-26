@@ -31,7 +31,7 @@ class UsuarioController:
             'contrasena': "", 'email': ""
         }
         tipos = TipoUsuarioDao().listar_tipo_usuario()
-        return render_template("usuarios/registro.html", usuario=usuario,
+        return render_template("usuarios/registroJ.html", usuario=usuario,
                                tipos=tipos)
 
     def crear_usuario(self, codigo, nombres, apellidos, cedula, email, contrasena,
@@ -49,7 +49,7 @@ class UsuarioController:
                 usuario.getCodigo()), "error")
             tipos = TipoUsuarioDao().listar_tipo_usuario()
             return render_template(
-                "usuarios/registro.html", usuario=usuario_error, tipos=tipos)
+                "usuarios/registroJ.html", usuario=usuario_error, tipos=tipos)
 
         if UsuarioDao().crear_usuario(usuario):
             flash("El usuario se creo correctamente.", "success")
