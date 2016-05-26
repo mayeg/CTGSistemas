@@ -19,3 +19,18 @@ def cambiar_contrasena():
     contrasena_nc = request.form.get('contrasena_nc', None)
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
+@secretaria.route("/registrar/jurado", methods=["GET", "POST"])
+def registrar_jurado():
+    if request.method == "GET":
+        return UsuarioController().get_registrar_jurado()
+    codigo = request.form.get('codigo', None)
+    nombres = request.form.get('nombres', None)
+    apellidos = request.form.get('apellidos', None)
+    cedula = request.form.get('cedula', None)
+    email = request.form.get('email', None)
+    contrasena = request.form.get('contrasena', None)
+    tipo_usuario = request.form.get('tipo_usuario', 0)
+    return UsuarioController().crear_usuario(codigo,
+                                             nombres, apellidos, cedula, email,
+                                             contrasena, tipo_usuario)
+

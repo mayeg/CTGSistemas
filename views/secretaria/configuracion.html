@@ -3,6 +3,7 @@
 {% block username %}{{titulo}}{% endblock %}
 {% block header%}
 {% endblock %}
+
 {% block menu %}
 <li class="treeview">
     <a href="#">
@@ -57,7 +58,6 @@
     </ul>
 </li>
 <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-<li><a href="#"><i class="fa fa-book"></i> <span>Registrar Jurados</span></a>
 </li>
 <li class=" activate treeview">
     <a href="/secretaria/configuracion">
@@ -78,7 +78,9 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     {% endblock %}
+
     {% block contenido %}
+
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Configuraciones</h3>

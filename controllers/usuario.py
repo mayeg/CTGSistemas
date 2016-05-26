@@ -25,13 +25,22 @@ class UsuarioController:
                                total_paginas=total_paginas,
                                total_usuarios=total_usuarios)
 
-    def get_registro(self):
+    def get_registrar_jurado(self):
         usuario = {
             'codigo':"", 'nombres': "", 'apellidos': "", 'cedula': "",
             'contrasena': "", 'email': ""
         }
         tipos = TipoUsuarioDao().listar_tipo_usuario()
-        return render_template("usuarios/registroJ.html", usuario=usuario,
+        return render_template("secretaria/registroJ.html", usuario=usuario,
+                               tipos=tipos)
+
+    def get_registro(self):
+        usuario = {
+            'codigo': "", 'nombres': "", 'apellidos': "", 'cedula': "",
+            'contrasena': "", 'email': ""
+        }
+        tipos = TipoUsuarioDao().listar_tipo_usuario()
+        return render_template("usuarios/registro.html", usuario=usuario,
                                tipos=tipos)
 
     def crear_usuario(self, codigo, nombres, apellidos, cedula, email, contrasena,
@@ -49,7 +58,7 @@ class UsuarioController:
                 usuario.getCodigo()), "error")
             tipos = TipoUsuarioDao().listar_tipo_usuario()
             return render_template(
-                "usuarios/registroJ.html", usuario=usuario_error, tipos=tipos)
+                "usuarios/registro.html", usuario=usuario_error, tipos=tipos)
 
         if UsuarioDao().crear_usuario(usuario):
             flash("El usuario se creo correctamente.", "success")
@@ -116,7 +125,6 @@ class UsuarioController:
         if usuario_e is not None:
             if usuario_e.getContrasena() == contrasena_c:
                 if contrasena_n == contrasena_nc:
-                    print contrasena_n, "confirmacion", contrasena_nc
                     contrasena_cn = hashlib.sha1(contrasena_n).hexdigest()
                     if UsuarioDao().cambiar_contrasena(usuario_e,
                                                        contrasena_cn):
