@@ -45,3 +45,79 @@
 </ul>
 {% endblock %}
 {% block contenido %}
+
+
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Consultar Trabajo de Grado
+        <small>Coordinador</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="principal.html"><i class="fa fa-dashboard"></i> Perfil</a></li>
+        <li class="active">Consultas</li>
+      </ol>
+    </section>
+
+    <section class= "content-header">
+       <div class = "row">
+          <div class= "col-xs-5">
+             <div class = "box box-info">
+               <div class="box-header with-border">
+                 <h3 class="box-title"> Jurado o Estudiante
+                  </h3>
+
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1"></label>
+                  <input type="text" class="form-control" id="nombreT" placeholder="Nombre...">
+                </div>
+
+                <div class="form-group">
+                  <select class="form-control">
+                    <option>Jurado</option>
+                    <option>Estudiante</option>
+                  </select>
+                </div>
+            <button type="submit" class="btn btn-primary">Consultar<i class="fa fa-success"></i></button>
+      </div>
+   </div>
+</div>
+ </div>
+ </section>
+
+
+ <section class="content-header">
+
+     <div class="box-header with-border">
+      <div class="box-header with-border">
+      <div class = "row">
+      <div class="col-xs-10">
+          <div class="box box-info">
+            <div class="box-body">
+              <h3 class="box-title">Trabajos Encontrados</h3>
+            </div>
+               <div class="box-body">
+              <table id="trabajoGradoN" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Titulo</th>
+                  <th>Modalidad</th>
+                  <th>Estado</th>
+                  <th>Estudiantes</th>
+                  <th>Jurados</th>
+                </tr>
+                </thead>
+                </table>
+
+      </div>
+     </div>
+    </div>
+    </div>
+          </div>
+         </div>
+
+      </section>
+  </div>
