@@ -13,7 +13,7 @@ def home():
 @jurado.route("/configuracion", methods=["GET", "POST"])
 def cambiar_contrasena():
     if request.method == "GET":
-        return UsuarioController().get_cambiar_contrasena()
+        return UsuarioController().get_cambiar_contrasena_jurado()
     contrasena_a = request.form.get('contrasena_a', None)
     contrasena_n = request.form.get('contrasena_n', None)
     contrasena_nc = request.form.get('contrasena_nc', None)

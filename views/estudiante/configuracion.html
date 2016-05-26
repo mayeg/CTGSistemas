@@ -4,13 +4,14 @@
 {% block header%}
 {% endblock %}
 {% block menu %}
+
     {% endblock %}
     {% block contenido %}
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Configuraciones</h3>
         </div>
-        <form class="form-horizontal" action="/usuarios/configuracion"
+        <form class="form-horizontal" action="/estudiante/configuracion"
               method="POST"
               id="form-config">
             <div class="box-body">
@@ -40,7 +41,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                <a class="btn btn-default" href="/home/home">Volver</a>
+                <a class="btn btn-default" href="/estudiante/home">Volver</a>
                 <button type="submit" class="btn btn-info pull-right">Guardar
                     Cambios
                 </button>

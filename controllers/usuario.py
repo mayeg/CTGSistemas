@@ -95,8 +95,17 @@ class UsuarioController:
             flash("Error al editar el usuario.", "error")
         return redirect(url_for("usuarios.listar_usuarios"))
 
-    def get_cambiar_contrasena(self):
+    def get_cambiar_contrasena_jurado(self):
         return render_template("jurado/configuracion.html")
+
+    def get_cambiar_contrasena_secretaria(self):
+        return render_template("secretaria/configuracion.html")
+
+    def get_cambiar_contrasena_coordinador(self):
+        return render_template("coordinador/configuracion.html")
+
+    def get_cambiar_contrasena_estudiante(self):
+        return render_template("estudiante/configuracion.html")
 
     def cambiar_contrasena(self, contrasena_a, contrasena_n,
                            contrasena_nc):
