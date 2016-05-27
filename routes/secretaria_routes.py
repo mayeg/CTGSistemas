@@ -2,6 +2,7 @@ from flask.blueprints import Blueprint
 from flask import request, session
 
 from controllers.login import Login
+from controllers.secretaria import SecretariaController
 from controllers.usuario import UsuarioController
 
 secretaria = Blueprint("secretaria", __name__)
@@ -33,4 +34,31 @@ def registrar_jurado():
     return UsuarioController().crear_usuario(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)
+
+
+
+@secretaria.route("/consultar_acta", methods=["GET","POST"])
+def consultar_acta():
+    if(request.method == "GET"):
+        return SecretariaController().get_view_consulta()
+    titulo = request.form.get('titulo',None)
+    tipo = request.form.get('tipo',None)
+    fecha = request.form.get('fecha',None)
+    return SecretariaController().get_consulta(titulo,tipo,fecha)
+
+
+@secretaria.route("/registrar_acta",methods=["GET","POST"])
+def registro_acta():
+    if(request.method == "GET"):
+        return SecretariaController().get_view_registro()
+    titulo = request.form.get('titulo',None)
+    tipo = request.form.get('tipo',None)
+    fecha = request.form.get('fecha',None)
+    archivo = request.form.get('archivo', None)
+    descripcion = request.form.get('descripcion',None)
+    return SecretariaController().crear_acta(titulo,tipo,fecha,archivo,descripcion)
+
+
+
+
 
