@@ -26,11 +26,17 @@ class ActaDao:
 
     def crear_acta(self, acta):
         print "entro a crear acta"
-        try:
-            query = "INSERT INTO ufps35.acta (codigo,titulo, tipo, fecha, " \
-                    "documento, Descripcion) VALUES (%s,%s, %s, %s, %s, %s)"
+        print acta.getTitulo()
+        print acta.getTipo()
+        print acta.getFecha()
+        print acta.getArchivo()
+        print acta.getDescripcion()
 
-            param = (None,acta.getTitulo(), acta.getTipo(), acta.getFecha(),
+        try:
+            query = "INSERT INTO ufps35.acta (titulo, tipo, fecha, " \
+                    "documento, Descripcion) VALUES ( %s, %s, %s, %s, %s)"
+
+            param = (acta.getTitulo(), acta.getTipo(), acta.getFecha(),
                      acta.getArchivo(), acta.getDescripcion())
             self.__cur.execute(query, param)
             self.__conn.commit()
