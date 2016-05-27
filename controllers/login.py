@@ -24,7 +24,6 @@ class Login:
             if usuario.getTipoUsuario().getId() == 2:
                 return render_template('secretaria/home.html', titulo="Inicio",
                                        usuario=usuario)
-
             elif usuario.getTipoUsuario().getId() == 3:
                return render_template('coordinador/home.html', titulo="Inicio",
                                        usuario=usuario)
