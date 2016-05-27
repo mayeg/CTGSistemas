@@ -33,7 +33,7 @@ class ActaDao:
         print acta.getDescripcion()
 
         try:
-            query = "INSERT INTO ufps35.acta (titulo, tipo, fecha, " \
+            query = "INSERT INTO acta (titulo, tipo, fecha, " \
                     "documento, Descripcion) VALUES ( %s, %s, %s, %s, %s)"
 
             param = (acta.getTitulo(), acta.getTipo(), acta.getFecha(),
