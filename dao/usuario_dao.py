@@ -56,7 +56,6 @@ class UsuarioDao:
 
     def get_total_usuarios(self, pagina, codigo, nombres, cedula, apellidos):
         try:
-            print "aquiii"
             query = "SELECT Count(*) FROM usuario WHERE codigo LIKE %s AND"  \
                     "nombres LIKE %s AND cedula LIKE %s AND apellidos LIKE %s"
             param = ("%"+codigo+"%", "%"+nombres+"%", "%"+cedula+"%"
@@ -109,13 +108,15 @@ class UsuarioDao:
             param = (int(usuario_tipo.getTipoUsuario().getId()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
+            print data, "data dao"
             if data is None:
+
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
                            nombres=data[4], apellidos=data[5],
                            tipo_usuario=data[7])
         except Exception as e:
-            print e.message
+            print e.message, "execpcion"
             return None
 
     def get_usuario_por_id(self, usuario):

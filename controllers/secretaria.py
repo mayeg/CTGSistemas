@@ -40,18 +40,32 @@ class SecretariaController:
     def get_view_consulta(self):
         return render_template("secretaria/acta/ConsultarActa.html")
 
+
+
+
+
     def get_consulta(self,titulo,tipo,fecha):
         acta = Acta(titulo,tipo,fecha,"","")
-        if(ActaDao.get_acta_consulta(acta)is not None):
-            actas = ActaDao.get_acta_consulta(acta)
+        actas = ActaDao().get_acta_consulta(acta)
+        if(actas is not None):
             return render_template("secretaria/acta/ConsultarActa.html",actas=actas)
         else:
             flash("No existen Actas con esos parametros.","error")
         return render_template("secretaria/acta/ConsultarActa.html")
 
+
+
+
+
+
+
+
     def get_view_descargar(self):
         print "entro"
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
+
+
+
 
     def get_descarga(self, titulo, tipo, fecha):
         acta = Acta(titulo, tipo, fecha, "", "")
