@@ -1,6 +1,11 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}Titulo{% endblock %}
-{% block username %}{{titulo}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
@@ -38,6 +43,7 @@
         <form class="form-horizontal" action="/jurado/configuracion"
               method="POST"
               id="form-config">
+            <h3 class="box-title">Cambiar Contraseña</h3>
             <div class="box-body">
                 <div class="form-group">
                     <label class="control-label col-md-3 col-xs-12"

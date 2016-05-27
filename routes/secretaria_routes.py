@@ -21,7 +21,7 @@ def cambiar_contrasena():
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
 @secretaria.route("/registrar/jurado", methods=["GET", "POST"])
-def registrar_jurado():
+def registrar_jurados():
     if request.method == "GET":
         return UsuarioController().get_registrar_jurado()
     codigo = request.form.get('codigo', None)
@@ -49,8 +49,12 @@ def consultar_acta():
 
 @secretaria.route("/registrar_acta",methods=["GET","POST"])
 def registro_acta():
+    print "entro a registrar_acta"
     if(request.method == "GET"):
+        print "va para get"
         return SecretariaController().get_view_registro()
+
+    print "va para post"
     titulo = request.form.get('titulo',None)
     tipo = request.form.get('tipo',None)
     fecha = request.form.get('fecha',None)

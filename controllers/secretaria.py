@@ -22,7 +22,6 @@ class SecretariaController:
 
         acta = Acta(titulo,tipo,fecha,archivo,descripcion)
 
-
         if(ActaDao().get_acta_titulo(acta)!= None):
             flash("Ya existe un acta con ese titulo {}.".format(
                 acta.getTitulo()), "error")
