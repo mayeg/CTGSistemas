@@ -25,13 +25,6 @@ class ActaDao:
 
 
     def crear_acta(self, acta):
-        print "entro a crear acta"
-        print acta.getTitulo()
-        print acta.getTipo()
-        print acta.getFecha()
-        print acta.getArchivo()
-        print acta.getDescripcion()
-
         try:
             query = "INSERT INTO acta (titulo, tipo, fecha, " \
                     "documento, Descripcion) VALUES ( %s, %s, %s, %s, %s)"
