@@ -20,7 +20,7 @@ def cambiar_contrasena():
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
 @secretaria.route("/registrar/jurado", methods=["GET", "POST"])
-def registrar_jurado():
+def registrar_jurados():
     if request.method == "GET":
         return UsuarioController().get_registrar_jurado()
     codigo = request.form.get('codigo', None)
