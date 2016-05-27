@@ -12,7 +12,7 @@ class SecretariaController:
 
 
     def get_view_registro(self):
-        return render_template("acta/RegistrarActa.html")
+        return render_template("secretaria/acta/RegistrarActa.html")
 
     def crear_acta(self,titulo,tipo,fecha,archivo,descripcion):
         acta = Acta(titulo,tipo,fecha,archivo,descripcion)

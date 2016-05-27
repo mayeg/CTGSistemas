@@ -45,3 +45,20 @@ def consultar_acta():
     tipo = request.form.get('tipo',None)
     fecha = request.form.get('fecha',None)
     return SecretariaController().get_consulta(titulo,tipo,fecha)
+
+
+@secretaria.route("/registrar_acta",methods=["GET","POST"])
+def registro_acta():
+    if(request.method == "GET"):
+        return SecretariaController().get_view_registro()
+    titulo = request.form.get('titulo',None)
+    tipo = request.form.get('tipo',None)
+    fecha = request.form.get('fecha',None)
+    archivo = request.form.get('archivo', None)
+    descripcion = request.form.get('descripcion',None)
+    return SecretariaController().crear_acta(titulo,tipo,fecha,archivo,descripcion)
+
+
+
+
+
