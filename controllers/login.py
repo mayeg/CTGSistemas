@@ -17,14 +17,13 @@ class Login:
     def get_home_usuario():
         tipos = TipoUsuarioDao().listar_tipo_usuario()
         if 'usuario' in session:
-            tipo = session['usuario']['tipo']
-            usuario_tipo = Usuario(tipo_usuario=tipo)
+            tipoU = session['usuario']['tipo']
+            usuario_tipo = Usuario(tipo_usuario=tipoU)
             usuario = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
             print usuario.getTipoUsuario().getId()
             if usuario.getTipoUsuario().getId() == 2:
                 return render_template('secretaria/home.html', titulo="Inicio",
                                        usuario=usuario)
-
             elif usuario.getTipoUsuario().getId() == 3:
                return render_template('coordinador/home.html', titulo="Inicio",
                                        usuario=usuario)
@@ -38,8 +37,7 @@ class Login:
         return render_template('login/login.html', tipos=tipos)
 
     def login(self, codigo, contrasena, tipo):
-        #contrasena_c = hashlib.sha1(contrasena).hexdigest()
-        contrasena_c = contrasena
+        contrasena_c = hashlib.sha1(contrasena).hexdigest()
         usuario = Usuario(codigo=codigo, contrasena=contrasena_c,
                           tipo_usuario=tipo)
         usuario_logueado = UsuarioDao().get_user_login(usuario)
