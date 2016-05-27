@@ -17,8 +17,8 @@ class Login:
     def get_home_usuario():
         tipos = TipoUsuarioDao().listar_tipo_usuario()
         if 'usuario' in session:
-            tipo = session['usuario']['tipo']
-            usuario_tipo = Usuario(tipo_usuario=tipo)
+            tipoU = session['usuario']['tipo']
+            usuario_tipo = Usuario(tipo_usuario=tipoU)
             usuario = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
             print usuario.getTipoUsuario().getId()
             if usuario.getTipoUsuario().getId() == 2:
