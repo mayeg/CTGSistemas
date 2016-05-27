@@ -105,7 +105,10 @@ class UsuarioController:
         return redirect(url_for("usuarios.listar_usuarios"))
 
     def get_cambiar_contrasena_jurado(self):
-        return render_template("jurado/configuracion.html")
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("jurado/configuracion.html", usuario=usuario)
 
     def get_cambiar_contrasena_secretaria(self):
         return render_template("secretaria/configuracion.html")

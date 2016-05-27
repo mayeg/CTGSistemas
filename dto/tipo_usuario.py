@@ -6,7 +6,7 @@ class TipoUsuario:
         self.__label = label
 
     def getId(self):
-        return  self.__id
+        return self.__id
 
     def setId(self, id):
         self.__id = id
