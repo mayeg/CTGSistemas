@@ -39,11 +39,15 @@ def registrar_jurados():
 
 @secretaria.route("/consultar_acta", methods=["GET","POST"])
 def consultar_acta():
+    print "entra consultar_acta"
     if(request.method == "GET"):
+        print "entra consultar_acta get"
         return SecretariaController().get_view_consulta()
+    print "entra consultar_acta post"
     titulo = request.form.get('titulo',None)
     tipo = request.form.get('tipo',None)
     fecha = request.form.get('fecha',None)
+    print "fecha desde secretarias_routes:" + fecha
     return SecretariaController().get_consulta(titulo,tipo,fecha)
 
 
@@ -61,7 +65,6 @@ def registro_acta():
     archivo = request.form.get('archivo', None)
     descripcion = request.form.get('descripcion',None)
     return SecretariaController().crear_acta(titulo,tipo,fecha,archivo,descripcion)
-
 
 
 
