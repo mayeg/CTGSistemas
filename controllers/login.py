@@ -38,7 +38,8 @@ class Login:
         return render_template('login/login.html', tipos=tipos)
 
     def login(self, codigo, contrasena, tipo):
-        contrasena_c = hashlib.sha1(contrasena).hexdigest()
+        #contrasena_c = hashlib.sha1(contrasena).hexdigest()
+        contrasena_c = contrasena
         usuario = Usuario(codigo=codigo, contrasena=contrasena_c,
                           tipo_usuario=tipo)
         usuario_logueado = UsuarioDao().get_user_login(usuario)
