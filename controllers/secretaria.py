@@ -1,4 +1,5 @@
 import hashlib
+from _hashlib import new
 
 from dao.acta_dao import ActaDao
 from dto.acta import Acta
@@ -14,18 +15,28 @@ class SecretariaController:
     def get_view_registro(self):
         return render_template("secretaria/acta/RegistrarActa.html")
 
+
+
+
     def crear_acta(self,titulo,tipo,fecha,archivo,descripcion):
+
         acta = Acta(titulo,tipo,fecha,archivo,descripcion)
-        if(ActaDao.get_acta_titulo(titulo) is not None):
+
+
+        if(ActaDao().get_acta_titulo(acta)!= None):
             flash("Ya existe un acta con ese titulo {}.".format(
                 acta.getTitulo()), "error")
             return render_template("secretaria/acta/RegistrarActa.html")
 
-        if ActaDao().crear_acta(acta):
+        if (ActaDao().crear_acta(acta)):
             flash("El acta se registro correctamente.", "success")
         else:
             flash("Error al registrar el acta.", "error")
-        return render_template("acta/RegistrarActa.html")
+        return render_template("secretaria/acta/RegistrarActa.html")
+
+
+
+
 
     def get_view_consulta(self):
         return render_template("secretaria/acta/ConsultarActa.html")

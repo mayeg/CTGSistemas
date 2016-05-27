@@ -2,8 +2,6 @@
 {% block titulo %}Titulo{% endblock %}
 {% block nombreU %}{% endblock %}
 {% block username %}{% endblock %}
-{% block header%}
-{% endblock %}
 {% block menu %}
         <li class="treeview">
     <a href="#">
@@ -84,11 +82,8 @@
 <!-- -----------------------------------------------------------------------------------------------  -->
 
 <!--  ------------------------------------------ Cabezera Main ------------------------------------- -->
-  {% block contenido %}
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
+
+         {% block header %}
       <h1>
         Gestion de Acta
         <small>Registro de Acta</small>
@@ -97,7 +92,7 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Gestion de Acta</a></li>
         <li class="active">Registrar Acta</li>
       </ol>
-    </section>
+    {% endblock %}
 
 
 <!-- -----------------------------------------------------------------------------------------------  -->
@@ -107,7 +102,7 @@
 <!-- ---------------------------------  CONTENIDO PRINCIPAL  ------------------------------------------------  -->
 
 
-<section class="content">
+{% block contenido %}
 
 
     <div class="row">
@@ -214,34 +209,23 @@
 
 
   </div>
+{% endblock%}
 
 
-</section>
 
-    </div>
 
 
 
 <!-- -----------------------------------------------------------------------------------------------  -->
 
 
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.3
-    </div>
-    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
-
   <!-- Control Sidebar -->
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
 
+<!-- ./wrapper -->
+{% block scripts %}
 <!-- jQuery 2.2.0 -->
 <script src="../../plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -391,8 +375,5 @@
 <!-- Bootstrap WYSIHTML5 -->
 <script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
+{% endblock %}
 
-
-</body>
-</html>
-{% endblock%}
