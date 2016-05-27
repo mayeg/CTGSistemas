@@ -1,6 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block username %}{{titulo}}{% endblock %}
+{% block titulo %}GTG| Configuracion {% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}

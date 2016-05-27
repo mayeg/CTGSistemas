@@ -18,9 +18,7 @@ class Login:
         tipos = TipoUsuarioDao().listar_tipo_usuario()
         if 'usuario' in session:
             tipoU = session['usuario']['tipo']
-            print session['usuario']['tipo'], "id picho", session['usuario']['nombres']
             usuario_tipo = Usuario(tipo_usuario=tipoU)
-            print usuario_tipo, "usuario_tipo"
             usuario = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
             if usuario.getTipoUsuario().getId() == 2:
                 return render_template('secretaria/home.html', titulo="Inicio",

@@ -114,7 +114,10 @@ class UsuarioController:
         return render_template("secretaria/configuracion.html")
 
     def get_cambiar_contrasena_coordinador(self):
-        return render_template("coordinador/configuracion.html")
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("coordinador/configuracion.html", usuario=usuario)
 
     def get_cambiar_contrasena_estudiante(self):
         return render_template("estudiante/configuracion.html")
