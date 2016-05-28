@@ -46,4 +46,3 @@ class Login:
 
     def logout(self):
         del session['usuario']
-

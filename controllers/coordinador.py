@@ -22,7 +22,7 @@ class CoordinadorController:
 
         else:
 
-         flash("No existen Trabajos con esos parametros.", "error")
+         flash("No existen Trabajos con esos parametrosiiii.", "error")
 
         return render_template("/coordinador/nombreT.html")
 
