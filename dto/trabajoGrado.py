@@ -3,11 +3,12 @@
 
 class TrabajoGrado:
 
-    def __init__(self, codigo, titulo, director_proyecto, cod_estudiante1,
-                 cod_estudiante2, cod_estudiante4, cod_estudiante3,
-                 cod_jurado1, cod_jurado2, cod_jurado3, correciones , protocolo,
-                 estado, documentacion, modalidad, fecha_correciones,
-                 fecha_sustentacion, lugar_sustentacion, fecha):
+    def __init__(self, codigo="", titulo="", director_proyecto="", cod_estudiante1="",
+                 cod_estudiante2="", cod_estudiante4="", cod_estudiante3="",
+                 cod_jurado1="", cod_jurado2="", cod_jurado3="", correciones="",
+                 protocolo="", estado="", documentacion="", modalidad="",
+                 fecha_correciones="", fecha_sustentacion="",
+                 lugar_sustentacion="", fecha=""):
 
         self.__codigo = codigo
         self.__titulo = titulo

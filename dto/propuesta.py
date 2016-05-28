@@ -1,11 +1,12 @@
 class Propuesta:
 
-    def __init__(self, codigo, titulo, director_propuesta, cod_estudiante1,
-                 cod_estudiante2, cod_estudiante4, cod_estudiante3,
-                 cod_jurado1, cod_jurado2, cod_jurado3, comentario, entegrables,
-                 estado, documentacion, modalidad, solicitud_retiro,
-                 solicitud_sustentacion, solicitud_prorroga, fecha_cometario,
-                 fecha_entregables, fecha):
+    def __init__(self, codigo="", titulo="", director_propuesta="",
+                 cod_estudiante1="", cod_estudiante2="",
+                 cod_estudiante4="", cod_estudiante3="",cod_jurado1="",
+                 cod_jurado2="", cod_jurado3="", comentario="", entegrables="",
+                 estado="", documentacion="", modalidad="", solicitud_retiro="",
+                 solicitud_sustentacion="", solicitud_prorroga="",
+                 fecha_cometario="", fecha_entregables="", fecha=""):
 
         self.__codigo = codigo
         self.__titulo = titulo

@@ -25,14 +25,6 @@ class UsuarioController:
                                total_paginas=total_paginas,
                                total_usuarios=total_usuarios)
 
-    def get_registrar_jurado(self):
-        usuario = {
-            'codigo':"", 'nombres': "", 'apellidos': "", 'cedula': "",
-            'contrasena': "", 'email': ""
-        }
-        tipos = TipoUsuarioDao().listar_tipo_usuario()
-        return render_template("secretaria/registroJ.html", usuario=usuario,
-                               tipos=tipos)
 
     def get_registro(self):
         usuario = {
@@ -111,7 +103,10 @@ class UsuarioController:
         return render_template("jurado/configuracion.html", usuario=usuario)
 
     def get_cambiar_contrasena_secretaria(self):
-        return render_template("secretaria/configuracion.html")
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("secretaria/configuracion.html", usuario=usuario)
 
     def get_cambiar_contrasena_coordinador(self):
         tipo = session['usuario']['tipo']
@@ -120,7 +115,10 @@ class UsuarioController:
         return render_template("coordinador/configuracion.html", usuario=usuario)
 
     def get_cambiar_contrasena_estudiante(self):
-        return render_template("estudiante/configuracion.html")
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("estudiante/configuracion.html", usuario=usuario)
 
     def cambiar_contrasena(self, contrasena_a, contrasena_n,
                            contrasena_nc):
