@@ -20,7 +20,7 @@ class SecretariaController:
 
     def crear_acta(self,titulo,tipo,fecha,archivo,descripcion):
 
-        acta = Acta(titulo,tipo,fecha,archivo,descripcion)
+        acta = Acta("",titulo,tipo,fecha,archivo,descripcion)
 
         if(ActaDao().get_acta_titulo(acta)!= None):
             flash("Ya existe un acta con ese titulo {}.".format(
@@ -36,16 +36,34 @@ class SecretariaController:
 
 
 
+    def modificar_acta(self,titulo_acta,codigo, titulo, tipo, fecha, archivo, descripcion):
+
+        acta = Acta(codigo, titulo, tipo, fecha, archivo, descripcion)
+
+        if (ActaDao().modificar_acta(titulo_acta,acta)):
+            flash("Se ha modificado correctamente.", "success")
+            return render_template("secretaria/acta/Descargar-ModificarActa.html")
+        else:
+            flash("Error modificar acta.", "error")
+        return render_template("secretaria/acta/ModificarActa.html")
+
+
+
 
     def get_view_consulta(self):
         return render_template("secretaria/acta/ConsultarActa.html")
 
 
 
+    def get_modificar(self,titulo):
+        act = Acta("",titulo,"<-- No Selected -->","","","")
+        acta = ActaDao().get_acta_consulta(act)
+        return render_template("secretaria/acta/ModificarActa.html",acta=acta)
+
 
 
     def get_consulta(self,titulo,tipo,fecha):
-        acta = Acta(titulo,tipo,fecha,"","")
+        acta = Acta("",titulo,tipo,fecha,"","")
         actas = ActaDao().get_acta_consulta(acta)
         if(actas is not None):
             return render_template("secretaria/acta/ConsultarActa.html",actas=actas)
@@ -54,14 +72,20 @@ class SecretariaController:
         return render_template("secretaria/acta/ConsultarActa.html")
 
 
-
+    def get_consulta_descarga(self,titulo,tipo,fecha):
+        acta = Acta("", titulo, tipo, fecha, "", "")
+        actas = ActaDao().get_acta_consulta(acta)
+        if (actas is not None):
+            return render_template("secretaria/acta/Descargar-ModificarActa.html", actas=actas)
+        else:
+            flash("No existen Actas con esos parametros.", "error")
+        return render_template("secretaria/acta/Descargar-ModificarActa.html")
 
 
 
 
 
     def get_view_descargar(self):
-        print "entro"
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
 
 
