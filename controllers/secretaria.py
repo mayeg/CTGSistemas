@@ -60,6 +60,7 @@ class SecretariaController:
             flash("Error al registrar el usuario.", "error")
         return redirect(url_for("secretaria.listar_jurados"))
 
+
     def get_view_registro(self):
         return render_template("secretaria/acta/RegistrarActa.html")
 
