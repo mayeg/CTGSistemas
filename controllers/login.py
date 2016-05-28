@@ -20,6 +20,7 @@ class Login:
             tipoU = session['usuario']['tipo']
             usuario_tipo = Usuario(tipo_usuario=tipoU)
             usuario = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
+
             if usuario.getTipoUsuario().getId() == 2:
                 return render_template('secretaria/home.html', titulo="Inicio",
                                        usuario=usuario)
@@ -40,6 +41,7 @@ class Login:
         usuario = Usuario(codigo=codigo, contrasena=contrasena_c,
                           tipo_usuario=tipo)
         usuario_logueado = UsuarioDao().get_user_login(usuario)
+        print usuario_logueado.get_dict()
         if usuario_logueado is not None:
             session['usuario'] = usuario_logueado.get_dict()
 

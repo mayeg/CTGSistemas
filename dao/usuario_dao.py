@@ -104,13 +104,13 @@ class UsuarioDao:
 
     def get_usuario_por_tipo(self, usuario_tipo):
         try:
+            print "en el dao"+ usuario_tipo.getTipoUsuario().getId()
             query = "SELECT * FROM usuario WHERE tipo_usuario = %s"
             param = (int(usuario_tipo.getTipoUsuario().getId()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             print data, "data dao"
             if data is None:
-
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
                            nombres=data[4], apellidos=data[5],
