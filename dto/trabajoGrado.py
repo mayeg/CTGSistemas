@@ -1,7 +1,7 @@
 
 
 
-class trabajoGrado:
+class TrabajoGrado:
 
     def __init__(self, codigo, titulo, director_proyecto, cod_estudiante1,
                  cod_estudiante2, cod_estudiante4, cod_estudiante3,
