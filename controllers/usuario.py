@@ -25,14 +25,6 @@ class UsuarioController:
                                total_paginas=total_paginas,
                                total_usuarios=total_usuarios)
 
-    def get_registrar_jurado(self):
-        usuario = {
-            'codigo':"", 'nombres': "", 'apellidos': "", 'cedula': "",
-            'contrasena': "", 'email': ""
-        }
-        tipos = TipoUsuarioDao().listar_tipo_usuario()
-        return render_template("secretaria/registroJ.html", usuario=usuario,
-                               tipos=tipos)
 
     def get_registro(self):
         usuario = {
