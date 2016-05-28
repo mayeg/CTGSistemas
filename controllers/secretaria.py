@@ -2,13 +2,21 @@ import hashlib
 from _hashlib import new
 
 from dao.acta_dao import ActaDao
+<<<<<<< HEAD
 from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.usuario_dao import UsuarioDao
+=======
+from dao.propuesta_dao import PropuestaDao
+>>>>>>> 5990457ce2d2e2e44d076a21258c7be43599fd94
 from dto.acta import Acta
 from flask.helpers import flash, url_for
 from flask import render_template, redirect, url_for, session
 
+<<<<<<< HEAD
 from dto.usuario import Usuario
+=======
+from dto.propuesta import Propuesta
+>>>>>>> 5990457ce2d2e2e44d076a21258c7be43599fd94
 
 
 class SecretariaController:
@@ -151,3 +159,14 @@ class SecretariaController:
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
 
 
+    def get_view_consultar_propuesta(self):
+        return render_template("secretaria/propuesta/ConsultarPropuesta.html")
+
+    def consultar_propuesta(self,titulo,codigo):
+        propuesta = Propuesta(codigo,titulo)
+        propuestas= PropuestaDao().get_propuesta_consulta(propuesta)
+        if(propuestas is not None):
+            return render_template("secretaria/propuesta/ConsultarPropuesta.html", propuestas=propuestas)
+        else:
+            flash("No existen Propuestas con esos parametros.", "error")
+        return render_template("secretaria/propuesta/ConsultarPropuesta.html")

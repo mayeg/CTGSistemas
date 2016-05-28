@@ -81,11 +81,8 @@ def descargar_modificar_acta():
 
 @secretaria.route("/modificar/<titulo_acta>", methods=["GET","POST"])
 def modificar_acta(titulo_acta):
-    print "entro a modificar"
     if(request.method== "GET"):
-        print "entro a get"
         return SecretariaController().get_modificar(titulo_acta)
-    print "entro a post"
     titulo = request.form.get('titulo', None)
     codigo = request.form.get('codigo',None)
     tipo = request.form.get('tipo', None)
@@ -95,6 +92,15 @@ def modificar_acta(titulo_acta):
     return SecretariaController().modificar_acta(titulo_acta,codigo,titulo, tipo, fecha, archivo, descripcion)
 
 
-
+@secretaria.route("/consultar_propuesta",methods=["GET","POST"])
+def consultar_propuesta():
+    print "entro a consultar_propuesta"
+    if(request.method == "GET"):
+        print "entro a get"
+        return SecretariaController().get_view_consultar_propuesta()
+    print "entro a post"
+    titulo = request.form.get('titulo',None)
+    codigo = request.form.get('codigo',None)
+    return SecretariaController().consultar_propuesta(titulo,codigo)
 
 
