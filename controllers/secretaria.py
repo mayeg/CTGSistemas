@@ -2,21 +2,14 @@ import hashlib
 from _hashlib import new
 
 from dao.acta_dao import ActaDao
-<<<<<<< HEAD
 from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.usuario_dao import UsuarioDao
-=======
 from dao.propuesta_dao import PropuestaDao
->>>>>>> 5990457ce2d2e2e44d076a21258c7be43599fd94
 from dto.acta import Acta
 from flask.helpers import flash, url_for
 from flask import render_template, redirect, url_for, session
-
-<<<<<<< HEAD
 from dto.usuario import Usuario
-=======
 from dto.propuesta import Propuesta
->>>>>>> 5990457ce2d2e2e44d076a21258c7be43599fd94
 
 
 class SecretariaController:
@@ -67,14 +60,8 @@ class SecretariaController:
             flash("Error al registrar el usuario.", "error")
         return redirect(url_for("secretaria.listar_jurados"))
 
-
-
-
     def get_view_registro(self):
         return render_template("secretaria/acta/RegistrarActa.html")
-
-
-
 
     def crear_acta(self,titulo,tipo,fecha,archivo,descripcion):
 
@@ -91,9 +78,6 @@ class SecretariaController:
             flash("Error al registrar el acta.", "error")
         return render_template("secretaria/acta/RegistrarActa.html")
 
-
-
-
     def modificar_acta(self,titulo_acta,codigo, titulo, tipo, fecha, archivo, descripcion):
 
         acta = Acta(codigo, titulo, tipo, fecha, archivo, descripcion)
@@ -106,18 +90,14 @@ class SecretariaController:
         return render_template("secretaria/acta/ModificarActa.html")
 
 
-
-
     def get_view_consulta(self):
         return render_template("secretaria/acta/ConsultarActa.html")
-
 
 
     def get_modificar(self,titulo):
         act = Acta("",titulo,"<-- No Selected -->","","","")
         acta = ActaDao().get_acta_consulta(act)
         return render_template("secretaria/acta/ModificarActa.html",acta=acta)
-
 
 
     def get_consulta(self,titulo,tipo,fecha):
@@ -140,14 +120,8 @@ class SecretariaController:
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
 
 
-
-
-
     def get_view_descargar(self):
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
-
-
-
 
     def get_descarga(self, titulo, tipo, fecha):
         acta = Acta(titulo, tipo, fecha, "", "")
