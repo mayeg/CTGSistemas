@@ -1,5 +1,7 @@
 from flask.blueprints import Blueprint
 from flask import request, session
+
+from controllers.coordinador import CoordinadorController
 from controllers.login import Login
 from controllers.usuario import UsuarioController
 
@@ -18,3 +20,14 @@ def cambiar_contrasena():
     contrasena_nc = request.form.get('contrasena_nc', None)
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
+
+@coordinador.route("/nombreT", methods=["GET", "POST"])
+def consultar_trabajo():
+    if request.method == "GET":
+        return CoordinadorController().get_view_nombreT()
+
+    nombre_a = request.form.get('nombre_a',None)
+    return CoordinadorController().consulta_nombreT(nombre_a)
+
+
+

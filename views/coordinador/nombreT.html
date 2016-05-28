@@ -11,8 +11,8 @@
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Consultar Trabajo De Grado</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
-          <ul class="treeview-menu">
-            <li ><a href="nombreT.html"><i class="fa fa-circle-o"></i>  Nombre </a></li>
+          <ul class=" treeview-menu">
+            <li class = "active" ><a href="/coordinador/nombreT"><i class="fa fa-circle-o"></i>  Nombre </a></li>
             <li class ="active"><a href="modalidadT.html"><i class="fa fa-circle-o"></i>  Modalidad </a></li>
             <li><a href="juradoEstudiante.html"><i class="fa fa-circle-o"></i>  Jurado o Estudiante </a></li>
             <li><a href="estado.html"><i class="fa fa-circle-o"></i> Estado </a></li>
@@ -50,7 +50,8 @@
  <div class="content-wrapper">
 
     <section class="content-header">
-      <h1>
+
+        <h1>
         Consultar Trabajo de Grado
         <small>Coordinador</small>
       </h1>
@@ -58,6 +59,7 @@
         <li><a href="principal.html"><i class="fa fa-dashboard"></i> Perfil</a></li>
         <li class="active">Consultas</li>
       </ol>
+
     </section>
 
 <div class = "row">
@@ -86,8 +88,11 @@
 
       <section class="content">
 
+          {% if trabajosDeGrado %}
      <div class="box-header with-border">
       <div class="box-header with-border">
+
+
       <div class = "row">
       <div class="col-xs-10">
           <div class="box box-primary">
@@ -95,7 +100,7 @@
               <h3 class="box-title">Trabajos Encontrados</h3>
             </div>
                <div class="box-body">
-              <table id="trabajoGradoN" class="table table-bordered table-hover">
+              <body id="trabajoGradoN" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>Codigo</th>
@@ -106,7 +111,25 @@
                   <th>Jurados</th>
                 </tr>
                 </thead>
+                </body>
+
+                   {% for trabajoDeGrado in trabajosDeGrado %}
+                    <tr>
+                  <th>{{trabajoDeGrado.getCodigo}}</th>
+                  <th>{{trabajoDeGrado.getTitulo}}</th>
+                  <th>{{trabajoDeGrado.getModalidad}}</th>
+                  <th>{{trabajoDeGrado.Estado}}</th>
+                  <th>{{trabajoDeGrado.Cod_estudiante1 <br>  </br>
+                        trabajoDeGrado.Cod_estudiante2 <br>  </br>
+                        trabajoDeGrado.Cod_estudiante3 <br>  </br>
+                        trabajoDeGrado.Cod_estudiante4 <br>  </br>}}</th>
+                  <th>{{trabajoDeGrado.Cod_jurado1 <br>  </br>
+                        trabajoDeGrado.Cod_estudiante2 <br>  </br>
+                        trabajoDeGrado.Cod_estudiante3 <br>  </br>}}</th>
+                </tr>
+                   {% endfor %}
                 </table>
+
 
       </div>
      </div>
@@ -114,6 +137,13 @@
     </div>
           </div>
          </div>
+          {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                No se ha realizado ninguna consulta.
+            </div>
+        </div>
+        {% endif %}
       </section>
 
 

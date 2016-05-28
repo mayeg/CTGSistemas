@@ -1,6 +1,5 @@
 from flask.blueprints import Blueprint
 from flask import request, session
-
 from controllers.login import Login
 from controllers.secretaria import SecretariaController
 from controllers.usuario import UsuarioController
@@ -49,18 +48,38 @@ def consultar_acta():
 
 @secretaria.route("/registrar_acta",methods=["GET","POST"])
 def registro_acta():
-    print "entro a registrar_acta"
     if(request.method == "GET"):
-        print "va para get"
         return SecretariaController().get_view_registro()
-
-    print "va para post"
     titulo = request.form.get('titulo',None)
     tipo = request.form.get('tipo',None)
     fecha = request.form.get('fecha',None)
     archivo = request.form.get('archivo', None)
     descripcion = request.form.get('descripcion',None)
     return SecretariaController().crear_acta(titulo,tipo,fecha,archivo,descripcion)
+
+@secretaria.route("/descargar-modificar_acta",methods=["GET","POST"])
+def descargar_modificar_acta():
+    if(request.method == "GET"):
+        return SecretariaController().get_view_descargar()
+    titulo = request.form.get('titulo', None)
+    tipo = request.form.get('tipo', None)
+    fecha = request.form.get('fecha', None)
+    return SecretariaController().get_consulta_descarga(titulo, tipo, fecha)
+
+@secretaria.route("/modificar/<titulo_acta>", methods=["GET","POST"])
+def modificar_acta(titulo_acta):
+    print "entro a modificar"
+    if(request.method== "GET"):
+        print "entro a get"
+        return SecretariaController().get_modificar(titulo_acta)
+    print "entro a post"
+    titulo = request.form.get('titulo', None)
+    codigo = request.form.get('codigo',None)
+    tipo = request.form.get('tipo', None)
+    fecha = request.form.get('fecha', None)
+    archivo = request.form.get('archivo', None)
+    descripcion = request.form.get('descripcion', None)
+    return SecretariaController().modificar_acta(titulo_acta,codigo,titulo, tipo, fecha, archivo, descripcion)
 
 
 

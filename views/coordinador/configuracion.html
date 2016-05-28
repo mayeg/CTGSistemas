@@ -1,6 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block username %}{{titulo}}{% endblock %}
+{% block titulo %}GTG| Configuracion {% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
@@ -18,10 +23,7 @@
             Jurado o Estudiante </a></li>
         <li><a href="estado.html"><i class="fa fa-circle-o"></i> Estado </a>
         </li>
-        <a href="/usuarios/configuracion">
-        <i class="fa fa-pie-cong"></i>
-        <span>Configuracion</span>
-        <i class="fa fa-angle-left pull-right"></i>
+
     </a>
 
 

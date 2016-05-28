@@ -3,13 +3,20 @@
 
 class Acta:
 
-    def __init__(self, titulo="", tipo="", fecha="", archivo="", descripcion=""):
+    def __init__(self,codigo="", titulo="", tipo="", fecha="", archivo="", descripcion=""):
+        self.__codigo = codigo
         self.__titulo = titulo
         self.__tipo = tipo
         self.__fecha = fecha
         self.__archivo = archivo
         self.__descripcion = descripcion
 
+
+    def getCodigo(self):
+        return self.__codigo
+
+    def setCodigo(self,codigo):
+        return self.__codigo
 
     def getTitulo(self):
         return self.__titulo
