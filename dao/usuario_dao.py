@@ -138,7 +138,6 @@ class UsuarioDao:
             data = self.__cur.fetchone()
             print data, "data dao"
             if data is None:
-
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
                            nombres=data[4], apellidos=data[5],
