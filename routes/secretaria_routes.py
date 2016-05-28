@@ -33,6 +33,16 @@ def registrar_jurados():
     return SecretariaController().crear_jurado(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)
+@secretaria.route("/listar_jurado", methods=["GET"])
+def listar_jurados():
+    pagina = request.args.get('pagina', 1)
+    codigo = request.args.get('codigo', "")
+    nombre = request.args.get('nombres', "")
+    cedula = request.args.get('cedula', "")
+    apellidos = request.args.get('apellidos', "")
+    return SecretariaController().get_lista_usuarios(
+        pagina, codigo, nombre, cedula, apellidos)
+
 
 @secretaria.route("/registrar/trabajo_grado", methods=["GET", "POST"])
 def registrar_trabajo_grado():
