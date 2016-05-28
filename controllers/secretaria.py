@@ -16,13 +16,13 @@ class SecretariaController:
     def __init__(self):
         pass
 
-    def get_lista_usuarios(self, pagina, codigo, nombres, cedula, apellidos):
+    def get_lista_jurados(self, pagina, codigo, nombres, cedula, apellidos,tipoU):
         usuarios = UsuarioDao().get_lista_usuarios(
-            pagina, codigo, nombres, cedula, apellidos)
+            pagina, codigo, nombres, cedula, apellidos, tipoU)
         total_usuarios = UsuarioDao().get_total_usuarios(
             pagina, codigo, nombres, cedula, apellidos)
         total_paginas = (total_usuarios / 10) + 1
-        return render_template("usuarios/listar.html", usuarios=usuarios,
+        return render_template("secretaria/listar.html", usuarios=usuarios,
                                total_paginas=total_paginas,
                                total_usuarios=total_usuarios)
 
@@ -115,7 +115,8 @@ class SecretariaController:
         acta = Acta("", titulo, tipo, fecha, "", "")
         actas = ActaDao().get_acta_consulta(acta)
         if (actas is not None):
-            return render_template("secretaria/acta/Descargar-ModificarActa.html", actas=actas)
+            return render_template("secretaria/acta/Descargar-ModificarActa.html",
+                                   actas=actas)
         else:
             flash("No existen Actas con esos parametros.", "error")
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
@@ -128,7 +129,8 @@ class SecretariaController:
         acta = Acta(titulo, tipo, fecha, "", "")
         if (ActaDao.get_acta_consulta(acta) is not None):
             actas = ActaDao.get_acta_consulta(acta)
-            return render_template("secretaria/acta/Descargar-ModificarActa.html", actas=actas)
+            return render_template("secretaria/acta/Descargar-ModificarActa.html",
+                                   actas=actas)
         else:
             flash("No existen Actas con esos parametros.", "error")
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
@@ -141,7 +143,8 @@ class SecretariaController:
         propuesta = Propuesta(codigo,titulo)
         propuestas= PropuestaDao().get_propuesta_consulta(propuesta)
         if(propuestas is not None):
-            return render_template("secretaria/propuesta/ConsultarPropuesta.html", propuestas=propuestas)
+            return render_template("secretaria/propuesta/ConsultarPropuesta.html",
+                                   propuestas=propuestas)
         else:
             flash("No existen Propuestas con esos parametros.", "error")
         return render_template("secretaria/propuesta/ConsultarPropuesta.html")
