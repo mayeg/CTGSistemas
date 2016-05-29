@@ -81,13 +81,32 @@ def modificar_acta(titulo_acta):
 
 @secretaria.route("/consultar_propuesta",methods=["GET","POST"])
 def consultar_propuesta():
-    print "entro a consultar_propuesta"
     if(request.method == "GET"):
-        print "entro a get"
         return SecretariaController().get_view_consultar_propuesta()
-    print "entro a post"
     titulo = request.form.get('titulo',None)
     codigo = request.form.get('codigo',None)
     return SecretariaController().consultar_propuesta(titulo,codigo)
 
 
+@secretaria.route("/modificarEstado_propuesta/<codigo_propuesta>", methods=["GET","POST"])
+def modificarEstado_propuesta(codigo_propuesta):
+    if(request.method=="GET"):
+        return SecretariaController().get_modificar_estado_propuesta(codigo_propuesta)
+    estado = request.form.get('estado',None)
+    return SecretariaController().modificar_estado_propuesta(codigo_propuesta,estado)
+
+@secretaria.route("/agregarFechas_propuesta/<codigo_propuesta>", methods=["GET","POST"])
+def modificarFechas_propuesta(codigo_propuesta):
+    if(request.method=="GET"):
+        return SecretariaController().get_agregar_fechas_propuesta(codigo_propuesta)
+    fechaCorrecciones = request.form.get('fechaCorrecciones',None)
+    fechaComentarios = request.form.get('fechaComentarios',None)
+    print "lo que recibe: "+fechaComentarios
+    return SecretariaController().modificar_fechas_propuesta(codigo_propuesta,fechaCorrecciones,fechaComentarios)
+
+@secretaria.route("/habilitarEntregables_propuesta/<codigo_propuesta>", methods = ["GET","POST"])
+def habilitar_envios_entregables(codigo_propuesta):
+    if(request.method=="GET"):
+        return SecretariaController().get_habilitar_envio_entregables(codigo_propuesta)
+    entregable = request.form.get('entregable',None)
+    return SecretariaController().habilitar_envio_entregables(codigo_propuesta,entregable)
