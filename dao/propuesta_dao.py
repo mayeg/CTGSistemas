@@ -94,7 +94,6 @@ class PropuestaDao:
 
     def habilitar_envio_entregables(self,propuesta):
         try:
-            print "entro a la correcta"
             query = "UPDATE propuesta SET entregables= %s WHERE id=%s "
 
             param = (propuesta.getEntregables(), propuesta.getCodigo())
