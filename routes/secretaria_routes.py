@@ -22,7 +22,32 @@ def cambiar_contrasena():
 @secretaria.route("/registrar/jurado", methods=["GET", "POST"])
 def registrar_jurados():
     if request.method == "GET":
-        return UsuarioController().get_registrar_jurado()
+        return SecretariaController().get_registrar_jurado()
+    codigo = request.form.get('codigo', None)
+    nombres = request.form.get('nombres', None)
+    apellidos = request.form.get('apellidos', None)
+    cedula = request.form.get('cedula', None)
+    email = request.form.get('email', None)
+    contrasena = request.form.get('contrasena', None)
+    tipo_usuario = request.form.get('tipo_usuario', 0)
+    return SecretariaController().crear_jurado(codigo,
+                                             nombres, apellidos, cedula, email,
+                                             contrasena, tipo_usuario)
+@secretaria.route("/listar_jurado", methods=["GET"])
+def listar_jurados():
+    pagina = request.args.get('pagina', 1)
+    codigo = request.args.get('codigo', "")
+    nombre = request.args.get('nombres', "")
+    cedula = request.args.get('cedula', "")
+    apellidos = request.args.get('apellidos', "")
+    return SecretariaController().get_lista_usuarios(
+        pagina, codigo, nombre, cedula, apellidos)
+
+
+@secretaria.route("/registrar/trabajo_grado", methods=["GET", "POST"])
+def registrar_trabajo_grado():
+    if request.method == "GET":
+        return SecretariaController().get_registrar_jurado()
     codigo = request.form.get('codigo', None)
     nombres = request.form.get('nombres', None)
     apellidos = request.form.get('apellidos', None)
@@ -33,8 +58,6 @@ def registrar_jurados():
     return UsuarioController().crear_usuario(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)
-
-
 
 @secretaria.route("/consultar_acta", methods=["GET","POST"])
 def consultar_acta():

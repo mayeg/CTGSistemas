@@ -1,0 +1,83 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %} CTG|Configuracion {% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
+{% block titulo %}Titulo{% endblock %}
+{% block username %}{{titulo}}{% endblock %}
+{% block header%}
+{% endblock %}
+{% block menu %}
+<li class="treeview">
+    <a href="/jurado/configuracion/">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consultar Propuestas</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+<li class="treeview">
+    <a href="/usuarios/configuracion/">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consutar Trabajo de Grado</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+<li class="treeview">
+    <a href="/usuarios/configuracion/">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consultar Sustentaciones</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <li class="treeview">
+    <a href="/jurado/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+
+    {% endblock %}
+    {% block contenido %}
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Configuracion</h3>
+        </div>
+        <form class="form-horizontal" action="/jurado/configuracion"
+              method="POST"
+              id="form-config">
+            <h3 class="box-title">Cambiar Contraseña</h3>
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-xs-12"
+                           for="contrasena_a">Contraseña Actual: </label>
+                    <div class="col-md-5 col-xs-12">
+                        <input type="password" class="form-control" id="contrasena_a"
+                               placeholder="Contraseña actual" name="contrasena_a">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-xs-12"
+                           for="contrasena_n">Contraseña Nueva: </label>
+                    <div class="col-md-5 col-xs-12">
+                        <input type="password" class="form-control" id="contrasena_n"
+                               placeholder="Contraseña Nueva" name="contrasena_n">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-xs-12"
+                           for="contrasena_nc">Confirmar Contraseña Nueva: </label>
+                    <div class="col-md-5 col-xs-12">
+                        <input type="password" class="form-control" id="contrasena_nc"
+                               placeholder=" Confirmar Contraseña Nueva" name="contrasena_nc">
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <a class="btn btn-default" href="/jurado/home">Volver</a>
+                <button type="submit" class="btn btn-info pull-right">Guardar
+                    Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+    {% endblock %}

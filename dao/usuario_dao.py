@@ -26,16 +26,18 @@ class UsuarioDao:
             print e.message
             return None
 
-    def get_lista_usuarios(self, pagina, codigo, nombres, cedula, apellidos):
+    def get_lista_usuarios(self, pagina, codigo, nombres, cedula, apellidos,
+                           tipoU):
         try:
             limit = 10
             offset = (pagina - 1) * limit
             query = "SELECT * FROM usuario " \
                     "JOIN tipo_usuario ON tipo_usuario.id = usuario.tipo_usuario " \
-                    "WHERE codigo LIKE %s AND nombres LIKE %s AND cedula " \
-                    "LIKE %s AND apellidos LIKE %s LIMIT %s OFFSET %s"
-            param = ("%"+codigo+"%","%"+nombres+"%", "%"+cedula+"%", "%"+apellidos+"%",
-                     limit, offset)
+                    "WHERE tipo_usuario = %s AND codigo LIKE %s AND nombres " \
+                    "LIKE %s AND cedula LIKE %s AND apellidos LIKE %s LIMIT %s " \
+                    "OFFSET %s"
+            param = (tipoU, "%"+codigo+"%", "%"+nombres+"%", "%"+cedula+"%",
+                     "%"+apellidos+"%", limit, offset)
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
             resultado = list()
@@ -53,6 +55,32 @@ class UsuarioDao:
         except Exception as e:
             print e.message
             return []
+
+    def listar_jurados(self, usuario):
+        try:
+            query= "SELECT * FROM usuario WHERE tipo_usuario=%s"
+            param = (int(usuario.getTipoUsuario().getId()),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for jurado in data:
+                user = Usuario(id=jurado[0], codigo=jurado[1], cedula=jurado[2],
+                               contrasena=jurado[3], nombres=jurado[4],
+                               apellidos=jurado[5], email=jurado[6])
+
+                tipo_usuario = TipoUsuario(id=jurado[8], label=jurado[10],
+                                       nombre=jurado[9])
+                user.setTipoUsuario(tipo_usuario)
+                resultado.append(user)
+
+            return resultado
+
+        except Exception as e:
+            print e.message
+            return []
+
 
     def get_total_usuarios(self, pagina, codigo, nombres, cedula, apellidos):
         try:
@@ -104,13 +132,13 @@ class UsuarioDao:
 
     def get_usuario_por_tipo(self, usuario_tipo):
         try:
+            print "en el dao"+ usuario_tipo.getTipoUsuario().getId()
             query = "SELECT * FROM usuario WHERE tipo_usuario = %s"
             param = (int(usuario_tipo.getTipoUsuario().getId()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             print data, "data dao"
             if data is None:
-
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
                            nombres=data[4], apellidos=data[5],
