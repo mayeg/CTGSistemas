@@ -107,7 +107,9 @@ class PropuestaDao:
     
     def get_propuesta_consulta_jurado(self, jurado):
             try:
-                query = "SELECT * FROM propuesta WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
+                print jurado.getCodigo()
+                query = "SELECT * FROM  `propuesta` WHERE  `cod_jurado1` = %s OR  `cod_jurado2` =%s " \
+                        "OR  `cod_jurado3` =%s"
                 param = (jurado.getCodigo(), jurado.getCodigo(), jurado.getCodigo())
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
@@ -115,7 +117,7 @@ class PropuestaDao:
                 if data is None:
                     return []
                 for propuesta in data:
-                    print "---"
+
                     pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
                                     cod_estudiante1=propuesta[3],
                                     cod_estudiante2=propuesta[4], cod_estudiante3=propuesta[5],
@@ -129,8 +131,9 @@ class PropuestaDao:
                                     fecha_comentario=propuesta[18], fecha_correcciones=propuesta[19],
                                     fecha_entregables=propuesta[20],
                                     fecha=propuesta[21])
+                    print pro.getCodigo()
                     resultado.append(pro)
-                    return resultado
+                return resultado
             except Exception as e:
                 print e.message
                 return []
