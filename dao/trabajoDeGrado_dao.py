@@ -85,24 +85,26 @@ class TrabajoGradoDao:
             print e.__class__
             print e.message
             return False
-    
-    def get_trabajo_consulta_jurado(self, jurado):
+
+    def get_trabajo_consulta_jurado(self,jurado):
         try:
-            query = "SELECT * FROM 'trabajo de grado'  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
-            param = (jurado.getCodigo(), jurado.getCodigo(), jurado.getCodigo())
+            query = "SELECT * FROM `trabajo de grado`  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
+            param = (jurado.getCodigo(),jurado.getCodigo(),jurado.getCodigo())
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
             resultado = list()
             if data is None:
                 return []
             for trabajoG in data:
-                pro = trabajoG(codigo=data[0], titulo=data[1], estudiante1=data[3], estudiante2=data[4],
-                                estudiante3=data[5], estudiante4=data[6], jurado1=data[7], jurado2=data[8],
-                               jurado3=data[9],modalidad=[10], estado=data[13],documentacion=data[14],
-                               protocolo=data[15],fecha_correcciones=data[16],fecha_sustentacion=data[17],
-                               lugar_sustentacion=data[18],fecha=data[19],nota=data[20],hora_sustentacion=data[21])
+                pro = TrabajoGrado(codigo=trabajoG[0], titulo=trabajoG[1], cod_estudiante1=trabajoG[3],
+                                   cod_estudiante2=trabajoG[4],cod_estudiante3=trabajoG[5], cod_estudiante4=trabajoG[6],
+                                   cod_jurado1=trabajoG[7], cod_jurado2=trabajoG[8], cod_jurado3=trabajoG[9],
+                                   modalidad=[10], correciones=trabajoG[11],documentacion=trabajoG[12],
+                                   estado=trabajoG[13], protocolo=trabajoG[14],fecha_sustentacion=trabajoG[15],
+                                   lugar_sustentacion=trabajoG[16],fecha_correcciones=trabajoG[17],
+                                   fecha=trabajoG[18],nota=trabajoG[19],hora_sustentacion=trabajoG[20])
                 resultado.append(pro)
-                return resultado
+            return resultado
         except Exception as e:
             print e.message
             return []
