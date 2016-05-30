@@ -1,76 +1,37 @@
-{% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block username %}{{titulo}}{% endblock %}
-{% block header%}
-{% endblock %}
-{% block menu %}
-<li class="treeview">
-    <a href="/usuarios/configuracion/">
-        <i class="fa fa-pie-cog" aria-hidden="true"></i>
-        <span>Consultar Propuesta</span>
-        <i class="fa fa-angle-left pull-right"></i>
-    </a>
-<li class="treeview">
-    <a href="/usuarios/configuracion/">
-        <i class="fa fa-pie-cog" aria-hidden="true"></i>
-        <span>Consutar Trabajos de Grado</span>
-        <i class="fa fa-angle-left pull-right"></i>
-    </a>
-<li class="treeview">
-    <a href="/usuarios/configuracion/">
-        <i class="fa fa-pie-cog" aria-hidden="true"></i>
-        <span>Consultar Sustentaciones</span>
-        <i class="fa fa-angle-left pull-right"></i>
-    </a>
-      {% endblock %}
-    {% block contenido %}
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">Propuestas a Cargo</h3>
-        </div>
-        <form class="form-horizontal" action="/usuarios/configuracion"
-              method="POST"
-              id="form-config">
-            <div class="box-body">
-                <div class="box-body">
-                <h3 class="box-title">Propuestas</h3>
-                </div>
-                <table id="trabajoGradoN" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Titulo</th>
-                  <th>Estudiantes</th>
-                    <th>Fecha Comentario</th>
-                    <th>Fecha Correcciones</th>
-                  <th>Opciones</th>
-                </tr>
-                <tr>
-                  <th>---</th>
-                  <th>---</th>
-                    <th>---</th>
-                    <th>---</th>
-                  <th>
-                      <div class="btn-group ">
-                  <button type="button" class="btn btn-default  btn-bitbucket">Opciones</button>
-                  <button type="button" class="btn btn-default  btn-bitbucket dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Enviar Comentario</a></li>
-                    <li><a href="#">Descargar</a></li>
-                  </ul>
-                      </div>
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                </table>
-            </div>
-            <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">Actualizar</button>
-            </div>
-        </form>
-    </div>
-    {% endblock
-    %}
+from flask.blueprints import Blueprint
+from flask import request, session
+from controllers.jurado import JuradoController
+from controllers.login import Login
+from controllers.usuario import UsuarioController
+
+jurado = Blueprint("jurado", __name__)
+
+@jurado.route("/home", methods=["GET"])
+def home():
+        return Login().get_home_usuario()
+
+@jurado.route("/configuracion", methods=["GET", "POST"])
+def cambiar_contrasena():
+    if request.method == "GET":
+        return UsuarioController().get_cambiar_contrasena_jurado()
+    contrasena_a = request.form.get('contrasena_a', None)
+    contrasena_n = request.form.get('contrasena_n', None)
+    contrasena_nc = request.form.get('contrasena_nc', None)
+    return UsuarioController().cambiar_contrasena(contrasena_a,
+                                                  contrasena_n, contrasena_nc)
+
+@jurado.route("/propuestas_cargo",methods=["GET", "POST"])
+def consultar_propuestas():
+    if request.method == "GET":
+        return JuradoController().get_view_consultar_propuesta()
+
+
+@jurado.route("/trabajos_cargo",methods=["GET", "POST"])
+def consultar_trabajos():
+    if request.method == "GET":
+        return JuradoController().get_view_consultar_trabajo()
+
+@jurado.route("/sustentaciones",methods=["GET", "POST"])
+def consultar_sustentacion():
+    if request.method == "GET":
+        return JuradoController().get_view_consultar_sustentaciones()
