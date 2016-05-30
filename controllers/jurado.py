@@ -35,11 +35,14 @@ class JuradoController:
             return render_template("jurado/consulta_trabajo.html", usuario=usuario, trabajos=trabajos)
         else:
             flash("No existen Trabajos a cargo.", "error")
-        return render_template("jurado/consulta_trabajo.html", usuario=usuario)
-
+            return render_template("jurado/consulta_trabajo.html", usuario=usuario)
 
     def get_view_consultar_sustentaciones(self):
-        tipo = session['usuario']['tipo']
-        usuario = Usuario(nombres=session['usuario']['nombres'],
-                          tipo_usuario=tipo)
-        return render_template("jurado/consulta_sustentacion.html", usuario=usuario)
+        cod = session['usuario']['codigo']
+        usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
+        trabajos = TrabajoGradoDao().get_trabajo_consulta_jurado(usuario)
+        if (trabajos != ""):
+            return render_template("jurado/consulta_sustentacion.html", usuario=usuario, trabajos=trabajos)
+        else:
+            flash("No existen Trabajos a cargo.", "error")
+            return render_template("jurado/consulta_sustentacion.html", usuario=usuario)
