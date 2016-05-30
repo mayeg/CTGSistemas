@@ -37,6 +37,7 @@ class JuradoController:
             flash("No existen Trabajos a cargo.", "error")
             return render_template("jurado/consulta_trabajo.html", usuario=usuario)
 
+
     def get_view_consultar_sustentaciones(self):
         cod = session['usuario']['codigo']
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
