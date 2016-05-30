@@ -51,9 +51,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Fechas de Sustentaciones</h3>
-                    </div>
+
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table id="example2" class="table table-bordered table-hover">
@@ -75,18 +73,10 @@
                                 <td>{{trabajo.getLugar_Sustentacion()}}</td>
                                 <td>{{trabajo.getHora_Sustentacion()}}</td>
                                 <td>
-
                                     <div class="modal fade" id="info1" tabindex="-1" role="dialog"
                                          aria-labelledby="myModalLabel">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    <h4 class="modal-title" id="myModalLabel">TRABAJO </h4>
-                                                </div>
-                                                <div class="modal-body">
 
                                                     <div class="row">
 
@@ -179,7 +169,7 @@
                                                                             <div id="collapseThree"
                                                                                  class="panel-collapse collapse in">
                                                                                 <div class="box-body">
-                                                                                    {{propuesta.getLugar_Sustentacion()}}
+                                                                                    {{trabajo.getLugar_Sustentacion()}}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -196,7 +186,7 @@
                                                                             <div id="collapseThree"
                                                                                  class="panel-collapse collapse in">
                                                                                 <div class="box-body">
-                                                                                    {{propuesta.getHora_Sustentacion()}}
+                                                                                    {{trabajo.getHora_Sustentacion()}}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -207,14 +197,9 @@
                                                             <!-- /.box -->
                                                         </div>
 
-                                                    </div>
 
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                        Close
-                                                    </button>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
