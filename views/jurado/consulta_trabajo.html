@@ -1,33 +1,39 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block username %}{{titulo}}{% endblock %}
+{% block titulo %}CTG|Home{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block header%}
+
 {% endblock %}
 {% block menu %}
 <li class="treeview">
-    <a href="/usuarios/configuracion/">
+    <a href="/jurado/propuestas_cargo">
         <i class="fa fa-pie-cog" aria-hidden="true"></i>
         <span>Consultar Propuesta</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
 <li class="treeview">
-    <a href="/usuarios/configuracion/">
+    <a href="/jurado/trabajos_cargo">
         <i class="fa fa-pie-cog" aria-hidden="true"></i>
         <span>Consutar Trabajo de Grado</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
 <li class="treeview">
-    <a href="/usuarios/configuracion/">
+    <a href="/jurado/sustentaciones">
         <i class="fa fa-pie-cog" aria-hidden="true"></i>
         <span>Consultar Sustentaciones</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
+    <li class="treeview">
     <a href="/jurado/configuracion">
         <i class="fa fa-pie-cong"></i>
         <span>Configuracion</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
-
     {% endblock %}
     {% block contenido %}
     <div class="box box-primary">
@@ -73,5 +79,4 @@
             </div>
         </form>
     </div>
-    {% endblock
-    %}
+    {% endblock%}
