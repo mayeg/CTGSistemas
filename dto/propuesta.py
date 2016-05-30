@@ -15,8 +15,8 @@ class Propuesta:
         self.__cod_estudiante3 = cod_estudiante3
         self.__cod_estudiante4 = cod_estudiante4
         self.__cod_jurado1 = cod_jurado1
-        self.__cod_jurado1 = cod_jurado2
-        self.__cod_jurado1 = cod_jurado3
+        self.__cod_jurado2 = cod_jurado2
+        self.__cod_jurado3 = cod_jurado3
         self.__comentario = comentario
         self.__entegrables = entegrables
         self.__estado = estado
