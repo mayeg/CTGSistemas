@@ -100,7 +100,7 @@ class TrabajoGradoDao:
                                 estudiante3=data[5], estudiante4=data[6], jurado1=data[7], jurado2=data[8],
                                jurado3=data[9],modalidad=[10], estado=data[13],documentacion=data[14],
                                protocolo=data[15],fecha_correcciones=data[16],fecha_sustentacion=data[17],
-                               lugar_sustentacion=data[18],fecha=data[19])
+                               lugar_sustentacion=data[18],fecha=data[19],nota=data[20],hora_sustentacion=data[21])
                 resultado.append(pro)
                 return resultado
         except Exception as e:
