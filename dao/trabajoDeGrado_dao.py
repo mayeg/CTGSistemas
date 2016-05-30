@@ -85,3 +85,22 @@ class TrabajoGradoDao:
             print e.__class__
             print e.message
             return False
+    
+    def get_trabajo_consulta_jurado(self, jurado):
+        try:
+            query = "SELECT * FROM 'trabajo de grado'  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
+            param = (jurado.getCodigo(), jurado.getCodigo(), jurado.getCodigo())
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for trabajoG in data:
+                pro = trabajoG(codigo=data[0], titulo=data[1], estudiante1=data[3], estudiante2=data[4],
+                                estudiante3=data[5], estudiante4=data[6], jurado1=data[7], jurado2=data[8], jurado3=data[9],
+                                modalidad=[10], estado=data[13])
+                resultado.append(pro)
+                return resultado
+        except Exception as e:
+            print e.message
+            return []
