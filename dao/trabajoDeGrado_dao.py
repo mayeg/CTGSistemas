@@ -97,8 +97,10 @@ class TrabajoGradoDao:
                 return []
             for trabajoG in data:
                 pro = trabajoG(codigo=data[0], titulo=data[1], estudiante1=data[3], estudiante2=data[4],
-                                estudiante3=data[5], estudiante4=data[6], jurado1=data[7], jurado2=data[8], jurado3=data[9],
-                                modalidad=[10], estado=data[13])
+                                estudiante3=data[5], estudiante4=data[6], jurado1=data[7], jurado2=data[8],
+                               jurado3=data[9],modalidad=[10], estado=data[13],documentacion=data[14],
+                               protocolo=data[15],fecha_correcciones=data[16],fecha_sustentacion=data[17],
+                               lugar_sustentacion=data[18],fecha=data[19])
                 resultado.append(pro)
                 return resultado
         except Exception as e:
