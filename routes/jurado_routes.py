@@ -1,5 +1,6 @@
 from flask.blueprints import Blueprint
 from flask import request, session
+
 from controllers.jurado import JuradoController
 from controllers.login import Login
 from controllers.usuario import UsuarioController
