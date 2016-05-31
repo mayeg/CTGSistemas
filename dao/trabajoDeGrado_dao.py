@@ -60,19 +60,24 @@ class TrabajoGradoDao:
 
         if (trabaj.getTitulo() != "" and trabaj.getCodigo() != ""):
             try:
-                print "entro"
-                query = "SELECT * FROM `trabajo de grado` WHERE titulo LIKE %s or titulo LIKE %s " \
-                        "or titulo LIKE %s AND codigo LIKE %s or `codigo` LIKE %s or `codigo` LIKE %s"
-                param = (trabaj.getTitulo() + "%", "%" + trabaj.getTitulo() + "%", "%" + trabaj.getTitulo(),
-                         trabaj.getCodigo() + "%", "%" + trabaj.getCodigo() + "%", "%" + trabaj.getCodigo())
+                query = "SELECT * FROM `trabajo de grado` WHERE titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
+                        "titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
+                        "titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
+                        "titulo LIKE %s AND codigo LIKE %s"
+                param = (trabaj.getTitulo() + "%",trabaj.getCodigo() + "%",trabaj.getTitulo() + "%", "%" + trabaj.getCodigo() + "%",
+                         trabaj.getTitulo() + "%","%" + trabaj.getCodigo(),"%" + trabaj.getTitulo() + "%",trabaj.getCodigo() + "%",
+                         "%" + trabaj.getTitulo() + "%","%" + trabaj.getCodigo() + "%","%" + trabaj.getTitulo() + "%","%" + trabaj.getCodigo(),
+                         "%" + trabaj.getTitulo(),trabaj.getCodigo() + "%","%" + trabaj.getTitulo(),"%" + trabaj.getCodigo() + "%",
+                         "%" + trabaj.getTitulo(),"%" + trabaj.getCodigo())
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
                 resultado = list()
                 if data is None:
                     return []
                 for trabajo in data:
-                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha_sustentacion=trabajo[12],lugar_sustentacion=trabajo[13],
-                                   hora_sustentacion=trabajo[17],nota=trabajo[16],fecha=trabajo[15])
+                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha_sustentacion=trabajo[12],
+                                       lugar_sustentacion=trabajo[13],hora_sustentacion=trabajo[17],nota=trabajo[16],
+                                       fecha=trabajo[15])
                     resultado.append(tra)
                 return resultado
             except Exception as e:
@@ -123,7 +128,6 @@ class TrabajoGradoDao:
 
     def get_trabajos_sin_sustentacion(self):
         try:
-            print "entra a dao"
             query = "SELECT * FROM  `trabajo de grado` WHERE  fecha_sustentacion ='' AND  lugar_sustentacion ='' " \
                     "AND  hora_sustentacion =''"
             param = ()
@@ -188,6 +192,7 @@ class TrabajoGradoDao:
             print e.__class__
             print e.message
             return False
+
 
     def get_trabajo_consulta_jurado(self,jurado):
         try:
