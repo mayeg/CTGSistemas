@@ -7,9 +7,11 @@ from controllers.usuario import UsuarioController
 
 jurado = Blueprint("jurado", __name__)
 
+
 @jurado.route("/home", methods=["GET"])
 def home():
-        return Login().get_home_usuario()
+    return Login().get_home_usuario()
+
 
 @jurado.route("/configuracion", methods=["GET", "POST"])
 def cambiar_contrasena():
@@ -21,18 +23,24 @@ def cambiar_contrasena():
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
 
-@jurado.route("/propuestas_cargo",methods=["GET"])
+@jurado.route("/propuestas_cargo", methods=["GET"])
 def consultar_propuestas():
     if request.method == "GET":
         return JuradoController().get_view_consultar_propuesta()
 
 
-@jurado.route("/trabajos_cargo",methods=["GET"])
+@jurado.route("/trabajos_cargo", methods=["GET"])
 def consultar_trabajos():
     if request.method == "GET":
         return JuradoController().get_view_consultar_trabajo()
 
-@jurado.route("/sustentaciones",methods=["GET"])
+
+@jurado.route("/sustentaciones", methods=["GET"])
 def consultar_sustentacion():
     if request.method == "GET":
         return JuradoController().get_view_consultar_sustentaciones()
+
+@jurado.route("/enviar_comentario/<codigo_propuesta>")
+def enviar_comentario(codigo_propuesta):
+    if request.method == "GET":
+        return JuradoController().get_view_enviar_comentario(codigo_propuesta)
