@@ -31,9 +31,11 @@ class SecretariaController:
             'codigo': "", 'nombres': "", 'apellidos': "", 'cedula': "",
             'contrasena': "", 'email': ""
         }
+        tipoU = TipoUsuarioDao().get_nombre(session['usuario']['tipo'])
+        usuario_u = Usuario(nombres=session['usuario']['nombres'])
         tipos = TipoUsuarioDao().listar_tipo_usuario()
         return render_template("secretaria/registroJ.html", usuario=usuario,
-                               tipos=tipos)
+                               tipos=tipos, usuario_u=usuario_u, tipoU=tipoU)
 
     def crear_jurado(self, codigo, nombres, apellidos, cedula, email,
                           contrasena,
@@ -59,6 +61,38 @@ class SecretariaController:
         else:
             flash("Error al registrar el usuario.", "error")
         return redirect(url_for("secretaria.listar_jurados"))
+
+    def get_editar_jurado(self, id_usuario):
+        print "id", id_usuario
+        usuario = Usuario(id=id_usuario)
+        usuario_e = UsuarioDao().get_usuario_por_id(usuario)
+        usuario_edit = {
+            'nombres': usuario_e.getNombres(),
+            'apellidos': usuario_e.getApellidos(),
+            'cedula': usuario_e.getCedula(),
+            'email': usuario_e.getEmail(),
+            'tipo_usuario': usuario_e.getTipoUsuario()
+        }
+        tipos = TipoUsuarioDao().listar_tipo_usuario()
+        tipoU = TipoUsuarioDao().get_nombre(session['usuario']['tipo'])
+        usuario_u = Usuario(nombres=session['usuario']['nombres'])
+        if usuario_e is None:
+            flash("El usuario que intenta editar no existe.", "error")
+        return render_template(
+            "secretaria/editar_jurado.html", usuario_edit=usuario_edit,
+            id=id_usuario, tipos=tipos, usuario_u=usuario_u, tipoU=tipoU)
+
+    def editar_usuario(self, nombres, apellidos, cedula, email, tipo_usuario,
+                       id):
+
+        usuario_e = Usuario(nombres=nombres, apellidos=apellidos, cedula=cedula,
+                    email=email, tipo_usuario=tipo_usuario, id=id)
+
+        if UsuarioDao().editar_usuario(usuario_e):
+            flash("El usuario se edito correctamente.", "success")
+        else:
+            flash("Error al editar el usuario.", "error")
+        return redirect(url_for("usuarios.listar_usuarios"))
 
 
     def get_view_registro(self):

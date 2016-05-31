@@ -24,3 +24,17 @@ class TipoUsuarioDao:
         except Exception as e:
             print e.message
             return []
+
+    def get_nombre(self, id):
+        try:
+            query = "SELECT * FROM tipo_usuario WHERE id= %s "
+            param = (id,)
+            self.__cur.execute(query,param)
+            data = self.__cur.fetchone()
+            if data is None:
+                return None
+            return TipoUsuario(label=data[2])
+
+        except Exception as e:
+            print e.message
+            return None

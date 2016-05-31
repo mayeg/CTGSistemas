@@ -25,7 +25,6 @@ class UsuarioController:
                                total_paginas=total_paginas,
                                total_usuarios=total_usuarios)
 
-
     def get_registro(self):
         usuario = {
             'codigo': "", 'nombres': "", 'apellidos': "", 'cedula': "",
@@ -82,7 +81,7 @@ class UsuarioController:
         if usuario_e is None:
             flash("El usuario que intenta editar no existe.", "error")
         return render_template(
-            "usuarios/editar.html", usuario_edit=usuario_edit, id=id_usuario,
+            "secretaria/editar.html", usuario_edit=usuario_edit, id=id_usuario,
             tipos=tipos)
 
     def editar_usuario(self, nombres, apellidos, cedula, email, tipo_usuario,

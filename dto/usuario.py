@@ -5,7 +5,7 @@ from dto.tipo_usuario import TipoUsuario
 class Usuario:
 
     def __init__(self, codigo="", cedula="", contrasena="", id=0, nombres="",
-                 apellidos="", email="", tipo_usuario=0):
+                 apellidos="", email="", tipo_usuario=0, token_password=""):
         self.__codigo = codigo
         self.__cedula = cedula
         self.__contrasena = contrasena
@@ -14,6 +14,7 @@ class Usuario:
         self.__email = email
         self.__id = id
         self.__tipo_usuario = TipoUsuario(id=tipo_usuario)
+        self.__token_password = token_password
 
     def getCodigo(self):
         return self.__codigo
@@ -62,6 +63,12 @@ class Usuario:
 
     def setTipoUsuario(self, tipo_usuario):
         self.__tipo_usuario = tipo_usuario
+
+    def getTokenPassword(self):
+        return self.__token_password
+
+    def setTokenPassword(self, token):
+        self.__token_password = token
 
     def __unicode__(self):
         return "Codigo: {}, contrasena:{}".format(

@@ -8,6 +8,7 @@ secretaria = Blueprint("secretaria", __name__)
 
 @secretaria.route("/home", methods=["GET"])
 def home():
+
         return Login().get_home_usuario()
 
 @secretaria.route("/configuracion", methods=["GET", "POST"])
@@ -33,6 +34,19 @@ def registrar_jurados():
     return SecretariaController().crear_jurado(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)
+@secretaria.route("/editar/<id_usuario>", methods=["GET", "POST"])
+def editar_usuario(id_usuario):
+    if request.method == "GET":
+        return SecretariaController().get_editar_jurado(id_usuario)
+    nombres = request.form.get('nombres', None)
+    apellidos = request.form.get('apellidos', None)
+    cedula = request.form.get('cedula', None)
+    email = request.form.get('email', None)
+    tipo_usuario = request.form.get('tipo_usuario', 0)
+    id = id_usuario
+    return SecretariaController().editar_usuario(nombres, apellidos, cedula,
+                                                 email, tipo_usuario, id)
+
 @secretaria.route("/listar_jurado", methods=["GET"])
 def listar_jurados():
     pagina = request.args.get('pagina', 1)
@@ -40,7 +54,7 @@ def listar_jurados():
     nombre = request.args.get('nombres', "")
     cedula = request.args.get('cedula', "")
     apellidos = request.args.get('apellidos', "")
-    return SecretariaController().get_lista_usuarios(
+    return SecretariaController().get_lista_jurados(
         pagina, codigo, nombre, cedula, apellidos)
 
 
