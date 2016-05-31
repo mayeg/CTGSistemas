@@ -1,0 +1,155 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}Titulo{% endblock %}
+{% block username %}{{titulo}}{% endblock %}
+
+{% block menu %}
+
+<ul class="sidebar-menu">
+    <li >
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Trabajo De Grado</span> <i
+                class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class=" treeview-menu">
+            <li><a href="/coordinador/nombreT"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li><a href="/coordinador/modalidadT"><i class="fa fa-circle-o"></i> Modalidad </a></li>
+            <li ><a href="/coordinador/juradoEstudiante"><i class="fa fa-circle-o"></i> Jurado o Estudiante </a></li>
+            <li><a href="/coordinador/estadoT"><i class="fa fa-circle-o"></i> Estado </a></li>
+
+
+        </ul>
+    </li>
+
+    <li >
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Propuesta</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="/coordinador/nombreP"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li><a href="/coordinador/estadoP"><i class="fa fa-circle-o"></i> Estado </a></li>
+            <li><a href="/coordinador/cancelarP"><i class="fa fa-circle-o"></i> Cancelar Propuesta </a></li>
+        </ul>
+    </li>
+
+
+    <li class=" active treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Acta</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li  class = "active"><a href="/coordinador/consultarA"><i class="fa fa-circle-o"></i> Acta Por Fecha</a></li>
+        </ul>
+    </li>
+</ul>
+
+<li>
+    <a href="/coordinador/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+</li>
+
+{% endblock %}
+
+{% block header %}
+
+<h1>
+    Consultar Acta
+    <small>Coordinador</small>
+</h1>
+<ol class="breadcrumb">
+    <li><a href="/coordinador/home"><i class="fa fa-dashboard"></i> Perfil</a></li>
+    <li class="active">Consultas</li>
+</ol>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+
+    <div class="col-xs-5">
+
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title"> Consultar Por Nombre </h3>
+<br>  </div>
+                <form action="/coordinador/consultarA" method="POST">
+                    <div class="form-group">
+                                <label>Fecha:</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" name="fecha" id="fecha">
+                                </div>
+                            </div>
+                    <button type="submit" class="btn btn-primary">Consultar<i class="fa fa-success"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<section class="content">
+
+    {% if actas %}
+    <div class="box-header with-border">
+        <div class="box-header with-border">
+
+
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <h3 class="box-title">Actas Encontradas</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>Titulo</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha</th>
+                                    <th>Descripcion</th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for acta in actas  %}
+                                <tr>
+
+                                    <td>{{acta.getTitulo()}}</td>
+                                    <td>{{acta.getTipo()}}</td>
+                                    <td>{{acta.getFecha()}}</td>
+                                    <td>{{acta.getDescripcion()}}</td>
+
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            No se ha realizado ninguna consulta.
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+
+{% endblock %}
+
+
+
