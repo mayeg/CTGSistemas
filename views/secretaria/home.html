@@ -1,11 +1,7 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}CTG|Home{% endblock %}
-{% block username %}{{usuario.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
-{% block informacionU %}
-{{usuario.getNombres()}}
-{{usuario.getTipoUsuario().getNombre()}}
-{% endblock %}
+{% block titulo %}Titulo{% endblock %}
+{% block nombreU %}{% endblock %}
+{% block username %}{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
@@ -25,12 +21,12 @@
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Gestión Propuesta</span>
-        <span class="label label-primary pull-right">4</span>
+        <span class="label label-primary pull-right"></span>
     </a>
     <ul class="treeview-menu">
         <li><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
         </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado en
+        <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
             Propuesta</a></li>
     </ul>
 </li>
@@ -41,14 +37,11 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Trabajo de
+        <li><a href="/secretaria/consultar_trabajo_de_grado"><i class="fa fa-circle-o"></i> Consultar Trabajo de
             Grado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Agregar datos
+        <li><a href="/secretaria/agregar_datos_sustentacion"><i class="fa fa-circle-o"></i> Agregar datos
             Sustentación</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Correción
-            ,selecciona el trabajo de grado y le asigna las correcciones</a>
-        </li>
+        <li><a href="/secretaria/asignar_jurados_trabajo"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
     </ul>
 </li>
 <li class="treeview">
@@ -58,22 +51,11 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
+        <li><a href="/secretaria/registrar_protocolo"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
     </ul>
 </li>
 <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-<li>
-    <a href="#"><i class="fa fa-book"></i>
-        <span>Registrar Jurados</span></a>
-    <ul class="treeview-menu">
-        <li><a href="/secretaria/registrar/jurado"><i class="fa fa-circle-o"></i>
-            Registrar Jurado</a>
-        </li>
-        <li><a href="/secretaria/editar/{{id}}"><i class="fa fa-circle-o"></i>
-            Editar Jurado</a></li>
-        <li><a href="/secretaria/listar_jurados"><i class="fa fa-circle-o"></i>
-            Listar Jurados</a></li>
-    </ul>
+<li><a href="#"><i class="fa fa-book"></i> <span>Registrar Jurados</span></a>
 </li>
 <li class="treeview">
     <a href="/secretaria/configuracion">
