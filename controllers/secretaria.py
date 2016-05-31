@@ -417,3 +417,6 @@ class SecretariaController:
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
         return render_template("secretaria/protocolo/SubirArchivo.html",usuario=usuario)
 
+    def get_actas(self):
+        actas = ActaDao().get_actas()
+        return actas
