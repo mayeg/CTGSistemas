@@ -1,7 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block nombreU %}{% endblock %}
-{% block username %}{% endblock %}
+{% block titulo %}CTG | Protocolo{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block menu %}
 <li class="treeview">
     <a href="#">
