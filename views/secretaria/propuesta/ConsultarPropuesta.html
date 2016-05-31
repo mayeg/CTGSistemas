@@ -1,7 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block nombreU %}{% endblock %}
-{% block username %}{% endblock %}
+{% block titulo %}CTG | Consultar Propuesta{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block menu %}
 <li class="treeview">
     <a href="#">
@@ -9,22 +13,22 @@
             class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Descargar/Modificiar Acta</a>
+        <li><a href="/secretaria/descargar-modificar_acta"><i class="fa fa-circle-o"></i> Descargar/Modificiar Acta</a>
         </li>
         <li><a href="/secretaria/registrar_acta"><i class="fa fa-circle-o"></i> Registrar Acta</a></li>
-        <li class="active"><a href="/secretaria/consultar_acta"><i class="fa fa-circle-o"></i> Consultar Acta</a></li>
+        <li><a href="/secretaria/consultar_acta"><i class="fa fa-circle-o"></i> Consultar Acta</a></li>
     </ul>
 </li>
 <li class="active treeview">
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Gestión Propuesta</span>
-        <span class="label label-primary pull-right">4</span>
+        <span class="label label-primary pull-right"></span>
     </a>
     <ul class="treeview-menu">
-        <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
+       <li class="active"><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
         </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado en
+        <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
             Propuesta</a></li>
     </ul>
 </li>
@@ -35,14 +39,11 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Trabajo de
+        <li><a href="/secretaria/consultar_trabajo_de_grado"><i class="fa fa-circle-o"></i> Consultar Trabajo de
             Grado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Agregar datos
+        <li><a href="/secretaria/agregar_datos_sustentacion"><i class="fa fa-circle-o"></i> Agregar datos
             Sustentación</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Correción
-            ,selecciona el trabajo de grado y le asigna las correcciones</a>
-        </li>
+        <li><a href="/secretaria/asignar_jurados_trabajo"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
     </ul>
 </li>
 <li class="treeview">
@@ -52,7 +53,7 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
+        <li><a href="/secretaria/registrar_protocolo"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
     </ul>
 </li>
 <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
@@ -180,7 +181,7 @@
                                 <td>
 
                                     <div class="btn-group">
-                                        <a data-toggle="modal" data-target="#info1" type="button"
+                                        <a data-toggle="modal" data-target="#info{{propuesta.getCodigo()}}" type="button"
                                            class="btn btn-social btn-bitbucket "><p class="fa fa-edit"></p>Ver info</a>
                                         <button type="button" class="btn btn-bitbucket dropdown-toggle"
                                                 data-toggle="dropdown">
@@ -190,17 +191,23 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a href="#"><p class="fa fa-download"></p> Descargar
                                                 Propuesta</a></li>
-                                            <li><a href="/secretaria/modificarEstado_propuesta/{{propuesta.getCodigo()}}"><p
-                                                    class="fa fa-download"></p> Modificar Estado </a></li>
-                                            <li><a href="/secretaria/agregarFechas_propuesta/{{propuesta.getCodigo()}}"><p
-                                                    class="fa fa-download"></p> Agregar Fechas </a></li>
-                                            <li><a href="/secretaria/habilitarEntregables_propuesta/{{propuesta.getCodigo()}}"><p
-                                                    class="fa fa-download"></p> Habilitar Envio Entregables</a></li>
+                                            <li>
+                                                <a href="/secretaria/modificarEstado_propuesta/{{propuesta.getCodigo()}}">
+                                                    <p
+                                                            class="fa fa-download"></p> Modificar Estado </a></li>
+                                            <li><a href="/secretaria/agregarFechas_propuesta/{{propuesta.getCodigo()}}">
+                                                <p
+                                                        class="fa fa-download"></p> Agregar Fechas </a></li>
+                                            <li>
+                                                <a href="/secretaria/habilitarEntregables_propuesta/{{propuesta.getCodigo()}}">
+                                                    <p
+                                                            class="fa fa-download"></p> Habilitar Envio Entregables</a>
+                                            </li>
                                         </ul>
                                     </div>
 
 
-                                    <div class="modal fade" id="info1" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="info{{propuesta.getCodigo()}}" tabindex="-1" role="dialog"
                                          aria-labelledby="myModalLabel">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -274,27 +281,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="panel box box-success">
-                                                                            <div class="box-header with-border">
-                                                                                <h4 class="box-title">
-                                                                                    <a data-toggle="collapse"
-                                                                                       data-parent="#accordion"
-                                                                                       href="#collapseThree">
-                                                                                        Estudiantes
-                                                                                    </a>
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div id="collapseThree"
-                                                                                 class="panel-collapse collapse in">
-                                                                                <div class="box-body">
-                                                                                    {{getCod_estudiante1}} <br>
-                                                                                    {{getCod_estudiante2}} <br>
-                                                                                    {{getCod_estudiante3}} <br>
-                                                                                    {{getCod_estudiante4}}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
                                                                     </div>
                                                                 </div>
                                                                 <!-- /.box-body -->
@@ -391,7 +377,8 @@
                     </div>
                 </div>
                 {% endif %}
-
+            </div>
+        </div>
 
     </section>
 

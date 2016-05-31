@@ -1,5 +1,5 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}CTG |Modificar Estado Propuesta{% endblock %}
+{% block titulo %}CTG | Agregar Jurados Propuesta{% endblock %}
 {% block username %}{{usuario.getNombres()}}{% endblock %}
 {% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
@@ -26,9 +26,9 @@
         <span class="label label-primary pull-right"></span>
     </a>
     <ul class="treeview-menu">
-        <li class="active"><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
+        <li><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
         </li>
-        <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
+        <li class="active"><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
             Propuesta</a></li>
     </ul>
 </li>
@@ -87,12 +87,12 @@
 {% block header %}
 <h1>
     Gestion de Propuesta
-    <small>Modificar Estado</small>
+    <small>Asignar Jurado a Propuesta</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Gestion de Propuesta</a></li>
-    <li class="active">Consultar Propuesta</li>
-    <li class="active">Modificar Estado</li>
+    <li class="active">Asignar Jurado a Propuesta</li>
+
 </ol>
 {% endblock %}
 
@@ -111,53 +111,75 @@
     <section class="col-lg-12 connectedSortable">
 
         <div class="box box-primary">
-            <form action="/secretaria/modificarEstado_propuesta/{{propuesta.getCodigo()}}" method="POST">
+
+            <form action="/secretaria/asignar_jurado_propuesta" method="POST">
                 <div class="box-body">
-
-
-                    <div class="col-md-6">
-                        <div class="box box-solid">
-                            <div class="box-header with-border">
-                                <i class="fa fa-text-width"></i>
-
-                                <h3 class="box-title">Propuesta Seleccionada</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <dl class="dl-horizontal">
-                                    <dt>Titulo</dt>
-                                    <dd>{{propuesta.getTitulo()}}</dd>
-                                    <dt>Codigo</dt>
-                                    <dd>{{propuesta.getCodigo()}}</dd>
-
-                                </dl>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-
-                    <br>
-
 
                     <div class="row">
 
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label> Nuevo Estado:</label>
-                                <select class="form-control" id="estado" name="estado">
+                                <br><br>
+                                <label> Propuestas SIN Jurados:</label>
+                                <select class="form-control" name="propuesta">
                                     <option><-- No Selected --></option>
-                                    <option>Activa</option>
-                                    <option>Vencida</option>
-                                    <option>En espera</option>
-                                    <option>Cancelada</option>
+                                    {% for propuesta in propuestas %}
+                                    <option>{{propuesta.getTitulo()}}-{{propuesta.getCodigo()}}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+
+
+
+                        <br>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> Jurado 1:</label>
+                                <select class="form-control" name="jurado1">
+                                    <option><-- No Selected --></option>
+                                    {% for jurado in jurados %}
+                                    <option>{{jurado.getNombres()}}-{{jurado.getCodigo()}}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> Jurado 2:</label>
+                                <select class="form-control" name="jurado2">
+                                    <option><-- No Selected --></option>
+                                    {% for jurado in jurados %}
+                                    <option>{{jurado.getNombres()}}-{{jurado.getCodigo()}}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> Jurado 2:</label>
+                                <select class="form-control" name="jurado3">
+                                    <option><-- No Selected --></option>
+                                    {% for jurado in jurados %}
+                                    <option>{{jurado.getNombres()}}-{{jurado.getCodigo()}}</option>
+                                    {% endfor %}
+
                                 </select>
                             </div>
                         </div>
 
 
                     </div>
-
 
                     <br>
                     <br>
@@ -173,6 +195,9 @@
 
     </section>
 </div>
+
+<br><br><br>
+
 {% endblock%}
 
 

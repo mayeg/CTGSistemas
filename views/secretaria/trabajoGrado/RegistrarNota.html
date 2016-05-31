@@ -1,5 +1,5 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}CTG |Modificar Estado Propuesta{% endblock %}
+{% block titulo %}CTG | Registrar Nota{% endblock %}
 {% block username %}{{usuario.getNombres()}}{% endblock %}
 {% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
@@ -19,27 +19,27 @@
         <li><a href="/secretaria/consultar_acta"><i class="fa fa-circle-o"></i> Consultar Acta</a></li>
     </ul>
 </li>
-<li class="treeview">
+<li class=" treeview">
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Gestión Propuesta</span>
         <span class="label label-primary pull-right"></span>
     </a>
     <ul class="treeview-menu">
-        <li class="active"><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
+        <li><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
         </li>
         <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
             Propuesta</a></li>
     </ul>
 </li>
-<li class="treeview">
+<li class="active treeview">
     <a href="#">
         <i class="fa fa-pie-chart"></i>
         <span>Gestión Trabajo de Grado</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="/secretaria/consultar_trabajo_de_grado"><i class="fa fa-circle-o"></i> Consultar Trabajo de
+        <li class="active"><a href="/secretaria/consultar_trabajo_de_grado"><i class="fa fa-circle-o"></i> Consultar Trabajo de
             Grado</a></li>
         <li><a href="/secretaria/agregar_datos_sustentacion"><i class="fa fa-circle-o"></i> Agregar datos
             Sustentación</a></li>
@@ -86,13 +86,13 @@
 
 {% block header %}
 <h1>
-    Gestion de Propuesta
-    <small>Modificar Estado</small>
+    Gestion de Trabajo de Grado
+    <small>Registrar Nota</small>
 </h1>
 <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Gestion de Propuesta</a></li>
+    <li><a href="#"><i class="fa fa-dashboard"></i> Gestion de Trabajo de Grado</a></li>
     <li class="active">Consultar Propuesta</li>
-    <li class="active">Modificar Estado</li>
+    <li class="active">Registrar Nota</li>
 </ol>
 {% endblock %}
 
@@ -111,7 +111,7 @@
     <section class="col-lg-12 connectedSortable">
 
         <div class="box box-primary">
-            <form action="/secretaria/modificarEstado_propuesta/{{propuesta.getCodigo()}}" method="POST">
+            <form action="/secretaria/registrar_nota/{{trabajo.getCodigo()}}" method="POST">
                 <div class="box-body">
 
 
@@ -120,15 +120,15 @@
                             <div class="box-header with-border">
                                 <i class="fa fa-text-width"></i>
 
-                                <h3 class="box-title">Propuesta Seleccionada</h3>
+                                <h3 class="box-title">Trabajo de Grado Seleccionado</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <dl class="dl-horizontal">
                                     <dt>Titulo</dt>
-                                    <dd>{{propuesta.getTitulo()}}</dd>
+                                    <dd>{{trabajo.getTitulo()}}</dd>
                                     <dt>Codigo</dt>
-                                    <dd>{{propuesta.getCodigo()}}</dd>
+                                    <dd>{{trabajo.getCodigo()}}</dd>
 
                                 </dl>
                             </div>
@@ -141,21 +141,13 @@
 
 
                     <div class="row">
-
                         <div class="col-lg-5">
-                            <div class="form-group">
-                                <label> Nuevo Estado:</label>
-                                <select class="form-control" id="estado" name="estado">
-                                    <option><-- No Selected --></option>
-                                    <option>Activa</option>
-                                    <option>Vencida</option>
-                                    <option>En espera</option>
-                                    <option>Cancelada</option>
-                                </select>
+                            <label>Nueva Nota:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                <input type="text" class="form-control" placeholder="Nota" name="nota" id="nota">
                             </div>
                         </div>
-
-
                     </div>
 
 

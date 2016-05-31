@@ -4,6 +4,7 @@ import hashlib
 from flask import session, render_template, redirect, url_for
 from flask.helpers import flash
 
+from controllers.secretaria import SecretariaController
 from controllers.emails import EmailController
 from controllers.estudiante import EstudianteController
 from dao.tipo_usuario_dao import TipoUsuarioDao
@@ -24,8 +25,9 @@ class Login:
             usuario = UsuarioDao().get_usuario_por_codigo(
                 Usuario(codigo=session['usuario']['codigo']))
             if tipoU == 2:
+                actas = SecretariaController().get_actas()
                 return render_template('secretaria/home.html', titulo="Inicio",
-                                       usuario=usuario)
+                                       usuario=usuario,actas=actas)
             elif tipoU == 3:
                 return render_template('coordinador/home.html', titulo="Inicio",
                                        usuario=usuario)

@@ -1,5 +1,6 @@
 class Propuesta:
 
+<<<<<<< HEAD
     def __init__(self, id=0, titulo="", director_trabajo="",
                  cod_jurado1="", cod_jurado2="", cod_jurado3="", comentario="",
                  entegrables="", estado="", documentacion="", modalidad="",
@@ -10,6 +11,17 @@ class Propuesta:
         self.__id = id
         self.__titulo = titulo
         self.__director_trabajo = director_trabajo
+=======
+    def __init__(self, codigo="", titulo="", director_propuesta="",
+                 cod_jurado1="", cod_jurado2="", cod_jurado3="", comentario="", entegrables="",
+                 estado="", documentacion="", modalidad="", solicitud_retiro="",
+                 solicitud_sustentacion="", solicitud_prorroga="", fecha_comentario="",fecha_correcciones="",
+                 fecha_entregables="", fecha=""):
+
+        self.__codigo = codigo
+        self.__titulo = titulo
+        self.__director_propuesta = director_propuesta
+>>>>>>> 8530f3dd1150652b41fb9b542c07a81c120fe30c
         self.__cod_jurado1 = cod_jurado1
         self.__cod_jurado2 = cod_jurado2
         self.__cod_jurado3 = cod_jurado3
@@ -42,8 +54,13 @@ class Propuesta:
     def getDirector_trabajo(self):
         return self.__director_trabajo
 
+<<<<<<< HEAD
     def setDirector_trabajo(self, director_trabajo):
         self.__director_trabajo = director_trabajo
+=======
+    def setDirector_proyecto(self, director_proyecto):
+        self.__director_proyecto = director_proyecto
+>>>>>>> 8530f3dd1150652b41fb9b542c07a81c120fe30c
 
     def getCod_jurado1(self):
         return self.__cod_jurado1
@@ -134,8 +151,4 @@ class Propuesta:
 
     def setFecha(self, fecha):
         self.__fecha = fecha
-
-
-
-
 

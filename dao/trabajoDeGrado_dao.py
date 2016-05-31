@@ -9,15 +9,14 @@ class TrabajoGradoDao:
 
     def get_trabajo_titulo(self, trabajoG):
         try:
-            query = "SELECT * FROM 'trabajo de grado'  WHERE titulo = %s"
+            query = "SELECT * FROM trabajo_de_grado  WHERE titulo = %s"
             param = (trabajoG.getTitulo(),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return trabajoG(codigo=data[0], titulo=data[1], estudiante1=data[3], estudiante2=data[4],
-                            estudiante3=data[5], estudiante4=data[6], jurado1=data[7], jurado2=data[8], jurado3=data[9],
-                            modalidad=[10], estado=data[13])
+            return TrabajoGrado(codigo=data[0], titulo=data[1],fecha_sustentacion=data[12],lugar_sustentacion=data[13],
+                                   hora_sustentacion=data[17],nota=data[16],fecha=data[15])
         except Exception as e:
             print e.message
             return None
@@ -25,7 +24,7 @@ class TrabajoGradoDao:
     def consultar_trabajos(self, trabaj):
         if (trabaj.getTitulo() == "" and trabaj.getCodigo() != ""):
             try:
-                query = "SELECT * FROM `trabajo de grado` WHERE codigo LIKE %s or codigo LIKE %s or codigo LIKE %s"
+                query = "SELECT * FROM trabajo_de_grado WHERE codigo LIKE %s or codigo LIKE %s or codigo LIKE %s"
                 param = (trabaj.getCodigo() + "%", "%" + trabaj.getCodigo() + "%", "%" + trabaj.getCodigo())
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
@@ -33,8 +32,8 @@ class TrabajoGradoDao:
                 if data is None:
                     return []
                 for trabajo in data:
-                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1], fecha_correcciones=trabajo[17],
-                                       nota=trabajo[19])
+                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha_sustentacion=trabajo[12],lugar_sustentacion=trabajo[13],
+                                   hora_sustentacion=trabajo[17],nota=trabajo[16],fecha=trabajo[15],fecha_correcciones=trabajo[14])
                     resultado.append(tra)
                 return resultado
             except Exception as e:
@@ -42,19 +41,59 @@ class TrabajoGradoDao:
                 return []
 
         if (trabaj.getTitulo() != "" and trabaj.getCodigo() == ""):
-            return None
+            try:
+                query = "SELECT * FROM trabajo_de_grado WHERE titulo LIKE %s or titulo LIKE %s or titulo LIKE %s"
+                param = (trabaj.getTitulo() + "%", "%" + trabaj.getTitulo() + "%", "%" + trabaj.getTitulo())
+                self.__cur.execute(query, param)
+                data = self.__cur.fetchall()
+                resultado = list()
+                if data is None:
+                    return []
+                for trabajo in data:
+                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha_sustentacion=trabajo[12],lugar_sustentacion=trabajo[13],
+                                   hora_sustentacion=trabajo[17],nota=trabajo[16],fecha=trabajo[15],fecha_correcciones=trabajo[14])
+                    resultado.append(tra)
+                return resultado
+            except Exception as e:
+                print e.message
+                return []
+
         if (trabaj.getTitulo() != "" and trabaj.getCodigo() != ""):
-            return None
+            try:
+                query = "SELECT * FROM trabajo_de_grado WHERE titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
+                        "titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
+                        "titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
+                        "titulo LIKE %s AND codigo LIKE %s"
+                param = (trabaj.getTitulo() + "%",trabaj.getCodigo() + "%",trabaj.getTitulo() + "%", "%" + trabaj.getCodigo() + "%",
+                         trabaj.getTitulo() + "%","%" + trabaj.getCodigo(),"%" + trabaj.getTitulo() + "%",trabaj.getCodigo() + "%",
+                         "%" + trabaj.getTitulo() + "%","%" + trabaj.getCodigo() + "%","%" + trabaj.getTitulo() + "%","%" + trabaj.getCodigo(),
+                         "%" + trabaj.getTitulo(),trabaj.getCodigo() + "%","%" + trabaj.getTitulo(),"%" + trabaj.getCodigo() + "%",
+                         "%" + trabaj.getTitulo(),"%" + trabaj.getCodigo())
+                self.__cur.execute(query, param)
+                data = self.__cur.fetchall()
+                resultado = list()
+                if data is None:
+                    return []
+                for trabajo in data:
+                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha_sustentacion=trabajo[12],
+                                       lugar_sustentacion=trabajo[13],hora_sustentacion=trabajo[17],nota=trabajo[16],
+                                       fecha=trabajo[15],fecha_correcciones=trabajo[14])
+                    resultado.append(tra)
+                return resultado
+            except Exception as e:
+                print e.message
+                return []
 
     def get_trabajo_codigo(self, codigo):
         try:
-            query = "SELECT * FROM `trabajo de grado`  WHERE codigo = %s"
+            query = "SELECT * FROM trabajo_de_grado  WHERE codigo = %s"
             param = (codigo,)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return TrabajoGrado(codigo=data[0], titulo=data[1])
+            return TrabajoGrado(codigo=data[0], titulo=data[1],fecha_sustentacion=data[12],lugar_sustentacion=data[13],
+                                   hora_sustentacion=data[17],nota=data[16],fecha=data[15],fecha_correcciones=data[14])
         except Exception as e:
             print e.message
             return None
@@ -62,7 +101,7 @@ class TrabajoGradoDao:
 
     def registrar_nota(self,trabajo):
         try:
-            query = "UPDATE `trabajo de grado` SET nota= %s WHERE codigo=%s "
+            query = "UPDATE trabajo_de_grado SET nota= %s WHERE codigo=%s "
 
             param = (trabajo.getNota(), trabajo.getCodigo())
             self.__cur.execute(query, param)
@@ -75,7 +114,7 @@ class TrabajoGradoDao:
 
     def agregar_fechas_correcciones(self,trabajo):
         try:
-            query = "UPDATE `trabajo de grado` SET fecha_correcciones= %s WHERE codigo=%s "
+            query = "UPDATE trabajo_de_grado SET fecha_correcciones= %s WHERE codigo=%s "
 
             param = (trabajo.getFecha_Correcciones(), trabajo.getCodigo())
             self.__cur.execute(query, param)
@@ -86,9 +125,78 @@ class TrabajoGradoDao:
             print e.message
             return False
 
+
+    def get_trabajos_sin_sustentacion(self):
+        try:
+            query = "SELECT * FROM  trabajo_de_grado WHERE  fecha_sustentacion IS NULL AND  lugar_sustentacion IS NULL " \
+                    "AND  hora_sustentacion IS NULL"
+            param = ()
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for trabajo in data:
+                tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha_sustentacion=trabajo[12],lugar_sustentacion=trabajo[13],
+                                   hora_sustentacion=trabajo[17],nota=trabajo[16],fecha=trabajo[15],fecha_correcciones=trabajo[14])
+                resultado.append(tra)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
+
+
+    def agregar_datos_sustentacion(self,trabajo):
+        try:
+            query = "UPDATE trabajo_de_grado SET fecha_sustentacion= %s, lugar_sustentacion= %s, hora_sustentacion= %s" \
+                    "WHERE codigo=%s"
+
+            param = (trabajo.getFecha_Sustentacion(),trabajo.getLugar_Sustentacion(),trabajo.getHora_Sustentacion(),
+                     trabajo.getCodigo())
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
+
+
+    def get_trabajos_sin_jurados(self):
+        try:
+            query = "SELECT * FROM  trabajo_de_grado WHERE cod_jurado1 IS NULL AND cod_jurado2 IS NULL AND cod_jurado3 IS NULL "
+            param = ()
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for trabajo in data:
+                tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha_sustentacion=trabajo[12],lugar_sustentacion=trabajo[13],
+                                   hora_sustentacion=trabajo[17],nota=trabajo[16],fecha=trabajo[15],fecha_correcciones=trabajo[14])
+                resultado.append(tra)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
+
+    def asignar_jurados_trabajo(self, trabajo, jurado1, jurado2, jurado3):
+        try:
+            query = "UPDATE trabajo_de_grado SET cod_jurado1= %s, cod_jurado2= %s, cod_jurado3= %s WHERE titulo=%s "
+
+            param = (jurado1, jurado2, jurado3, trabajo)
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
+
+
     def get_trabajo_consulta_jurado(self,jurado):
         try:
-            query = "SELECT * FROM `trabajo de grado`  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
+            query = "SELECT * FROM trabajo_de_grado  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
             param = (jurado.getCodigo(),jurado.getCodigo(),jurado.getCodigo())
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
@@ -96,14 +204,11 @@ class TrabajoGradoDao:
             if data is None:
                 return []
             for trabajoG in data:
-                pro = TrabajoGrado(codigo=trabajoG[0], titulo=trabajoG[1], cod_estudiante1=trabajoG[3],
-                                   cod_estudiante2=trabajoG[4],cod_estudiante3=trabajoG[5], cod_estudiante4=trabajoG[6],
-                                   cod_jurado1=trabajoG[7], cod_jurado2=trabajoG[8], cod_jurado3=trabajoG[9],
-                                   modalidad=[10], correciones=trabajoG[11],documentacion=trabajoG[12],
-                                   estado=trabajoG[13], protocolo=trabajoG[14],fecha_sustentacion=trabajoG[15],
-                                   lugar_sustentacion=trabajoG[16],fecha_correcciones=trabajoG[17],
-                                   fecha=trabajoG[18],nota=trabajoG[19],hora_sustentacion=trabajoG[20])
-                resultado.append(pro)
+                for trabajo in data:
+                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1], fecha_sustentacion=trabajo[12],
+                                       lugar_sustentacion=trabajo[13],fecha_correcciones=trabajo[14],
+                                       hora_sustentacion=trabajo[17], nota=trabajo[16], fecha=trabajo[15])
+                    resultado.append(tra)
             return resultado
         except Exception as e:
             print e.message

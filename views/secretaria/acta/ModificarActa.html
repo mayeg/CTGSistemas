@@ -1,16 +1,19 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block nombreU %}{% endblock %}
-{% block username %}{% endblock %}
+{% block titulo %}CTG | Descargar-Modificar Acta{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block menu %}
-<li class="treeview">
+<li class="active treeview">
     <a href="#">
         <i class="fa fa-dashboard"></i> <span>Gestión Acta</span> <i
             class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li class="active"><a href="/secretaria/descargar-modificar_acta"><i class="fa fa-circle-o"></i>
-            Descargar/Modificiar Acta</a>
+        <li class="active"><a href="/secretaria/descargar-modificar_acta"><i class="fa fa-circle-o"></i> Descargar/Modificiar Acta</a>
         </li>
         <li><a href="/secretaria/registrar_acta"><i class="fa fa-circle-o"></i> Registrar Acta</a></li>
         <li><a href="/secretaria/consultar_acta"><i class="fa fa-circle-o"></i> Consultar Acta</a></li>
@@ -20,12 +23,12 @@
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Gestión Propuesta</span>
-        <span class="label label-primary pull-right">4</span>
+        <span class="label label-primary pull-right"></span>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
+        <li><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
         </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado en
+        <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
             Propuesta</a></li>
     </ul>
 </li>
@@ -36,14 +39,11 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Trabajo de
+        <li><a href="/secretaria/consultar_trabajo_de_grado"><i class="fa fa-circle-o"></i> Consultar Trabajo de
             Grado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Agregar datos
+        <li><a href="/secretaria/agregar_datos_sustentacion"><i class="fa fa-circle-o"></i> Agregar datos
             Sustentación</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Correción
-            ,selecciona el trabajo de grado y le asigna las correcciones</a>
-        </li>
+        <li><a href="/secretaria/asignar_jurados_trabajo"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
     </ul>
 </li>
 <li class="treeview">
@@ -53,7 +53,7 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
+        <li><a href="/secretaria/registrar_protocolo"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
     </ul>
 </li>
 <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
@@ -87,12 +87,11 @@
 {% block header %}
 <h1>
     Gestion de Acta
-    <small>Modificar Acta</small>
+    <small>Descarga/Modificar Acta</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Gestion de Acta</a></li>
     <li class="active">Descargar/Modificar Acta</li>
-    <li class="active">Modificar Acta</li>
 </ol>
 {% endblock %}
 
@@ -107,122 +106,142 @@
 
 
 <div class="row">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Consultas</h3>
+        </div>
+
+            <div class="box-body">
+                <form action="/secretaria/descargar-modificar_acta" method="POST">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                            <input type="text" class="form-control" placeholder="Titulo" name="titulo" id="titulo">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label>Tipo:</label>
+                            <select class="form-control" name="tipo" id="tipo" name="tipo">
+                                <option><-- No Selected --></option>
+                                <option>Comite</option>
+                                <option>Sustentacion</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Fecha:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="fecha" name="fecha">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-social btn-bitbucket "><p class="fa fa-search"></p>Consultar
+                </button>
+                </form>
+            </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<div class="row">
 
     <section class="col-lg-12 connectedSortable">
 
-        <div class="box box-primary">
-
-            <form action="/secretaria/modificar/{{acta[0].getTitulo()}}" method="POST">
-
-                <div class="box-body">
-
-
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                <input type="text" class="form-control" placeholder="Titulo" name="titulo" id="titulo"
-                                       value="{{acta[0].getTitulo()}}">
-
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-creative-commons"></i></span>
-                                <input type="text" class="form-control" placeholder="Codigo" name="codigo" id="codigo"
-                                       value="{{acta[0].getCodigo()}}">
-                            </div>
-                        </div>
+        {% if actas %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Actas</h3>
                     </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Codigo</th>
+                                <th>Fecha</th>
+                                <th>Opciones</th>
 
-
-                    <div class="row">
-
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <label>Tipo:</label>
-                                <select class="form-control">
-                                    <option><-- No Selected --></option>
-                                    <option>Comite</option>
-                                    <option>Sustentacion</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label>Fecha:</label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="fecha" name="fecha"
-                                               value="{{acta[0].getFecha()}}">
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for acta in actas %}
+                            <tr>
+                                <td>{{acta.getTitulo()}}</td>
+                                <td>{{acta.getCodigo()}}</td>
+                                <td>{{acta.getFecha()}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="/secretaria/modificar/{{acta.getTitulo()}}" method="GET" type="button"
+                                           class="btn btn-social btn-bitbucket "><p class="fa fa-edit"></p>Modificar</a>
+                                        <button type="button" class="btn btn-bitbucket dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="/acta/descargar/{{acta.getTitulo()}}"><p
+                                                    class="fa fa-download"></p> Descargar</a></li>
+                                        </ul>
                                     </div>
-                                    <!-- /.input group -->
-                                </div>
-                            </div>
-                        </div>
+
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Codigo</th>
+                                <th>Fehca</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
-
-
-                    <!-- -------- BOX ------------------------------------------ -->
-
-
-                    <div class="box box-info">
-                        <div class="box-header">
-                            <h3 class="box-title">Descripcion
-                                <small>Simple and fast</small>
-                            </h3>
-                            <!-- tools box -->
-                            <div class="pull-right box-tools">
-                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse"
-                                        data-toggle="tooltip" title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-
-                            </div>
-                            <!-- /. tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body pad">
-                            <form>
-                            <textarea class="textarea" placeholder="Place some text here" name="descripcion"
-                                      id="descripcion"
-                                      style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{acta[0].getDescripcion()}}</textarea>
-                            </form>
-                        </div>
-                    </div>
-
-
-                    <!-- ------------------------------------------------------ -->
-                    <br>
-                    <div class="form-group">
-                        <label for="exampleInputFile">Archivo Acta</label>
-                        <input type="file" id="exampleInputFile" name="archivo"> Archivo Actual=
-                        {{acta[0].getArchivo()}}"
-
-                        <p class="help-block">Seleccione su archivo de acta para modificar</p>
-                    </div>
-
-                    <br>
-                    <!-- /input-group -->
-                    <div class="box-footer">
-                        <button type="#" class="btn btn-default">Cancelar</button>
-                        <button type="submit" class="btn btn-info pull-right">Modificar</button>
-                    </div>
-
+                    <!-- /.box-body -->
                 </div>
-            </form>
-
-            <!-- /.box-body -->
+                <!-- /.box -->
+            </div>
         </div>
+
+        {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                No se ha realizado ninguna consulta.
+            </div>
+        </div>
+        {% endif %}
 
     </section>
 
 
 </div>
+
 {% endblock%}
 
 
@@ -232,4 +251,3 @@
 {% block scripts %}
 
 {% endblock %}
-
