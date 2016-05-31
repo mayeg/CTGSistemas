@@ -50,7 +50,7 @@ class PropuestaDao:
                 return []
         elif(propuest.getCodigo != "" and propuest.getTitulo() == ""):
             try:
-                query = "SELECT * FROM propuesta WHERE codigo LIKE %s or codigo LIKE %s or codigo LIKE %s"
+                query = "SELECT * FROM propuesta WHERE id LIKE %s or id LIKE %s or id LIKE %s"
                 param = (propuest.getCodigo() + "%", "%" + propuest.getCodigo() + "%", "%" + propuest.getCodigo())
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
