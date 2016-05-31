@@ -5,10 +5,9 @@ class TrabajoGrado:
 
     def __init__(self, codigo="", titulo="", director_proyecto="", cod_estudiante1="",
                  cod_estudiante2="", cod_estudiante4="", cod_estudiante3="",
-                 cod_jurado1="", cod_jurado2="", cod_jurado3="", correciones="",
-                 protocolo="", estado="", documentacion="", modalidad="",
-                 fecha_correciones="", fecha_sustentacion="",
-                 lugar_sustentacion="", fecha=""):
+                 cod_jurado1="", cod_jurado2="", cod_jurado3="", correciones="", protocolo="",
+                 estado="", documentacion="", modalidad="", fecha_correcciones="",
+                 fecha_sustentacion="", lugar_sustentacion="", fecha="",nota="",hora_sustentacion=""):
 
         self.__codigo = codigo
         self.__titulo = titulo
@@ -25,10 +24,12 @@ class TrabajoGrado:
         self.__estado = estado
         self.__documentacion = documentacion
         self.__protocolo = protocolo
-        self.__fecha_correciones = fecha_correciones
+        self.__fecha_correcciones = fecha_correcciones
         self.__fecha_sustentacion = fecha_sustentacion
         self.__lugar_sustentacion = lugar_sustentacion
         self.__fecha = fecha
+        self.__nota = nota
+        self.__hora_sustentacion= hora_sustentacion
 
     def getCodigo(self):
         return self.__codigo
@@ -122,11 +123,11 @@ class TrabajoGrado:
     def setEstado(self, estado):
         self.__estado = estado
 
-    def getFecha_Correciones(self):
-        return self.__fecha_correciones
+    def getFecha_Correcciones(self):
+        return self.__fecha_correcciones
 
-    def setFecha_Correciones(self, fechaC):
-        self.__fecha_correciones = fechaC
+    def setFecha_Correcciones(self, fechaC):
+        self.__fecha_correcciones = fechaC
 
     def getFecha_Sustentacion(self):
         return self.__fecha_sustentacion
@@ -134,12 +135,26 @@ class TrabajoGrado:
     def setFecha_Sustentacion(self, fecha_sustentacion):
         self.__fecha_sustentacion = fecha_sustentacion
 
+    def getLugar_Sustentacion(self):
+        return self.__lugar_sustentacion
+
+    def setLugar_Sustentacion(self,lugar_sustentacion):
+        self.__lugar_sustentacion=lugar_sustentacion
+
     def getFecha(self):
         return self.__fecha
 
     def setFecha(self, fecha):
         self.__fecha = fecha
 
+    def getNota(self):
+        return self.__nota
 
+    def setNota(self,nota):
+        self.__nota = nota
 
+    def getHora_Sustentacion(self):
+        return self.__hora_sustentacion
 
+    def setHora_Sustentacion(self,hora_sustentacion):
+        self.__hora_sustentacion=hora_sustentacion

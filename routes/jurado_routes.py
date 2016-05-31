@@ -1,6 +1,7 @@
 from flask.blueprints import Blueprint
 from flask import request, session
 
+from controllers.jurado import JuradoController
 from controllers.login import Login
 from controllers.usuario import UsuarioController
 
@@ -19,3 +20,19 @@ def cambiar_contrasena():
     contrasena_nc = request.form.get('contrasena_nc', None)
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
+
+@jurado.route("/propuestas_cargo",methods=["GET"])
+def consultar_propuestas():
+    if request.method == "GET":
+        return JuradoController().get_view_consultar_propuesta()
+
+
+@jurado.route("/trabajos_cargo",methods=["GET"])
+def consultar_trabajos():
+    if request.method == "GET":
+        return JuradoController().get_view_consultar_trabajo()
+
+@jurado.route("/sustentaciones",methods=["GET"])
+def consultar_sustentacion():
+    if request.method == "GET":
+        return JuradoController().get_view_consultar_sustentaciones()

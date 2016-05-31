@@ -100,8 +100,7 @@ class SecretariaController:
 
     def crear_acta(self,titulo,tipo,fecha,archivo,descripcion):
 
-        acta = Acta("",titulo,tipo,fecha,archivo,descripcion)
-
+        acta = Acta(titulo=titulo, tipo=tipo, fecha=fecha,archivo=archivo,descripcion=descripcion)
         if(ActaDao().get_acta_titulo(acta)!= None):
             flash("Ya existe un acta con ese titulo {}.".format(
                 acta.getTitulo()), "error")
@@ -115,8 +114,7 @@ class SecretariaController:
 
     def modificar_acta(self,titulo_acta,codigo, titulo, tipo, fecha, archivo, descripcion):
 
-        acta = Acta(codigo, titulo, tipo, fecha, archivo, descripcion)
-
+        acta = Acta(codigo=codigo,titulo=titulo, tipo=tipo, fecha=fecha,archivo=archivo,descripcion=descripcion)
         if (ActaDao().modificar_acta(titulo_acta,acta)):
             flash("Se ha modificado correctamente.", "success")
             return render_template("secretaria/acta/Descargar-ModificarActa.html")
@@ -136,7 +134,7 @@ class SecretariaController:
 
 
     def get_consulta(self,titulo,tipo,fecha):
-        acta = Acta("",titulo,tipo,fecha,"","")
+        acta = Acta(titulo=titulo, tipo=tipo, fecha=fecha)
         actas = ActaDao().get_acta_consulta(acta)
         if(actas is not None):
             return render_template("secretaria/acta/ConsultarActa.html",actas=actas)
@@ -146,7 +144,7 @@ class SecretariaController:
 
 
     def get_consulta_descarga(self,titulo,tipo,fecha):
-        acta = Acta("", titulo, tipo, fecha, "", "")
+        acta = Acta(titulo=titulo,tipo=tipo, fecha=fecha)
         actas = ActaDao().get_acta_consulta(acta)
         if (actas is not None):
             return render_template("secretaria/acta/Descargar-ModificarActa.html",
@@ -160,7 +158,7 @@ class SecretariaController:
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
 
     def get_descarga(self, titulo, tipo, fecha):
-        acta = Acta(titulo, tipo, fecha, "", "")
+        acta = Acta(titulo=titulo, tipo=tipo, fecha=fecha)
         if (ActaDao.get_acta_consulta(acta) is not None):
             actas = ActaDao.get_acta_consulta(acta)
             return render_template("secretaria/acta/Descargar-ModificarActa.html",
@@ -170,15 +168,73 @@ class SecretariaController:
         return render_template("secretaria/acta/Descargar-ModificarActa.html")
 
 
+
+
+
+
     def get_view_consultar_propuesta(self):
         return render_template("secretaria/propuesta/ConsultarPropuesta.html")
 
+#CODIGO = ID
     def consultar_propuesta(self,titulo,codigo):
-        propuesta = Propuesta(codigo,titulo)
+        propuesta = Propuesta(codigo=codigo,titulo=titulo)
         propuestas= PropuestaDao().get_propuesta_consulta(propuesta)
         if(propuestas is not None):
             return render_template("secretaria/propuesta/ConsultarPropuesta.html",
                                    propuestas=propuestas)
         else:
             flash("No existen Propuestas con esos parametros.", "error")
+        return render_template("secretaria/propuesta/ConsultarPropuesta.html")
+
+
+
+
+
+
+    def get_modificar_estado_propuesta(self,codigo_propuesta):
+        propuest = Propuesta(codigo=codigo_propuesta)
+        propuesta= PropuestaDao().get_propuesta_codigo(propuest)
+        return render_template("secretaria/propuesta/ModificarEstado.html",propuesta=propuesta)
+
+    def modificar_estado_propuesta(self,codigo_propuesta,estado):
+        propuesta= Propuesta(codigo=codigo_propuesta,estado=estado)
+        if(PropuestaDao().modificar_estado(propuesta)):
+            flash("Se ha modificado exitosamente el estado.","success")
+            return render_template("secretaria/propuesta/ConsultarPropuesta.html")
+        else:
+            flash("No se ha podido modificar el estado.","error")
+        return render_template("secretaria/propuesta/ConsultarPropuesta.html")
+
+
+
+
+
+    def get_agregar_fechas_propuesta(self,codigo_propuesta):
+        propuest = Propuesta(codigo=codigo_propuesta)
+        propuesta = PropuestaDao().get_propuesta_codigo(propuest)
+        return render_template("secretaria/propuesta/AgregarFechas.html", propuesta=propuesta)
+
+    def modificar_fechas_propuesta(self,codigo_propuesta,fechaCorrecciones,fechaComentarios):
+        propuesta= Propuesta(codigo=codigo_propuesta,fecha_comentario=fechaComentarios,fecha_correcciones=fechaCorrecciones)
+        if(PropuestaDao().modificar_fechas(propuesta)):
+            flash("Se han modificado las fechas exitosamente.", "success")
+            return render_template("secretaria/propuesta/ConsultarPropuesta.html")
+        else:
+            flash("No se ha podido modificar las fechas.", "error")
+        return render_template("secretaria/propuesta/ConsultarPropuesta.html")
+
+
+    def get_habilitar_envio_entregables(self,codigo_propuesta):
+        propuest = Propuesta(codigo=codigo_propuesta)
+        propuesta = PropuestaDao().get_propuesta_codigo(propuest)
+        return render_template("secretaria/propuesta/HabilitarEnvioEntregables.html", propuesta=propuesta)
+
+
+    def habilitar_envio_entregables(self,codigo_propuesta,entregable):
+        propuesta=Propuesta(codigo=codigo_propuesta,entegrables=entregable)
+        if (PropuestaDao().habilitar_envio_entregables(propuesta)):
+            flash("Se han ingresado las fechas exitosamente.", "success")
+            return render_template("secretaria/propuesta/ConsultarPropuesta.html")
+        else:
+            flash("No se ha podido ingresar las fechas.", "error")
         return render_template("secretaria/propuesta/ConsultarPropuesta.html")

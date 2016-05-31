@@ -1,12 +1,11 @@
 class Propuesta:
 
-    def __init__(self, codigo="", titulo="", director_propuesta="",
-                 cod_estudiante1="", cod_estudiante2="",
-                 cod_estudiante4="", cod_estudiante3="",cod_jurado1="",
-                 cod_jurado2="", cod_jurado3="", comentario="", entegrables="",
+    def __init__(self, codigo="", titulo="", director_propuesta="", cod_estudiante1="",
+                 cod_estudiante2="", cod_estudiante4="", cod_estudiante3="",
+                 cod_jurado1="", cod_jurado2="", cod_jurado3="", comentario="", entegrables="",
                  estado="", documentacion="", modalidad="", solicitud_retiro="",
-                 solicitud_sustentacion="", solicitud_prorroga="",
-                 fecha_cometario="", fecha_entregables="", fecha=""):
+                 solicitud_sustentacion="", solicitud_prorroga="", fecha_comentario="",fecha_correcciones="",
+                 fecha_entregables="", fecha=""):
 
         self.__codigo = codigo
         self.__titulo = titulo
@@ -16,8 +15,8 @@ class Propuesta:
         self.__cod_estudiante3 = cod_estudiante3
         self.__cod_estudiante4 = cod_estudiante4
         self.__cod_jurado1 = cod_jurado1
-        self.__cod_jurado1 = cod_jurado2
-        self.__cod_jurado1 = cod_jurado3
+        self.__cod_jurado2 = cod_jurado2
+        self.__cod_jurado3 = cod_jurado3
         self.__comentario = comentario
         self.__entegrables = entegrables
         self.__estado = estado
@@ -26,7 +25,8 @@ class Propuesta:
         self.__solicitud_retiro = solicitud_retiro
         self.__solicitud_sustentacion = solicitud_sustentacion
         self.__solicitud_prorroga = solicitud_prorroga
-        self.__fecha_cometario = fecha_cometario
+        self.__fecha_comentario = fecha_comentario
+        self.__fecha_correcciones = fecha_correcciones
         self.__fecha_entregables = fecha_entregables
         self.__fecha = fecha
 
@@ -127,6 +127,12 @@ class Propuesta:
 
     def setFecha_Comentario(self, fechaComentario):
         self.__fecha_comentario = fechaComentario
+
+    def getFecha_Correcciones(self):
+        return self.__fecha_correcciones
+
+    def setFecha_Correcciones(self,fechaCorrecciones):
+        self.__fecha_correcciones = fechaCorrecciones
 
     def getFecha_Entregables(self):
         return self.__fecha_entregables
