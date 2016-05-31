@@ -1,0 +1,115 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}CTG|Home{% endblock %}
+{% block username %}{% endblock %}
+{% block nombreU %}{% endblock %}
+{% block informacionU %}
+
+{% endblock %}
+{% block header%}
+
+{% endblock %}
+{% block menu %}
+<li class="treeview">
+    <a href="/jurado/propuestas_cargo">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consultar Propuesta</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+<li class="treeview">
+    <a href="/jurado/trabajos_cargo">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consutar Trabajo de Grado</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+<li class="treeview">
+    <a href="jurado/sustentaciones">
+        <i class="fa fa-pie-cog" aria-hidden="true"></i>
+        <span>Consultar Sustentaciones</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+<li class="treeview">
+    <a href="/jurado/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    {% endblock %}
+    {% block contenido %}
+
+    <div class="row">
+
+        <section class="col-lg-12 connectedSortable">
+
+            <div class="box box-primary">
+
+                <form action="#" method="POST">
+
+                    <div class="box-body">
+
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                    <input type="text" class="form-control" placeholder="Titulo" name="titulo"
+                                           id="titulo">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- -------- BOX ------------------------------------------ -->
+
+
+                        <div class="box box-info">
+                            <div class="box-header">
+                                <h3 class="box-title">Descripcion
+                                    <small>Simple and fast</small>
+                                </h3>
+                                <!-- tools box -->
+                                <div class="pull-right box-tools">
+                                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse"
+                                            data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i></button>
+
+                                </div>
+                                <!-- /. tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body pad">
+                                <form>
+                                <textarea class="textarea" placeholder="Place some text here" name="descripcion"
+                                          id="descripcion"
+                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- ------------------------------------------------------ -->
+                        <br>
+
+                        <br>
+                        <!-- /input-group -->
+
+
+                        <div class="box-footer">
+                            <button href="#" type="submit" class="btn btn-default">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn btn-info pull-right">Enviar</button>
+                        </div>
+
+                    </div>
+
+                </form>
+                <!-- /.box-body -->
+            </div>
+
+        </section>
+
+
+    </div>
+    {% endblock %}
+
