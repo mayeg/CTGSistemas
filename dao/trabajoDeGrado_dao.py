@@ -128,8 +128,8 @@ class TrabajoGradoDao:
 
     def get_trabajos_sin_sustentacion(self):
         try:
-            query = "SELECT * FROM  trabajo_de_grado WHERE  fecha_sustentacion ='' AND  lugar_sustentacion ='' " \
-                    "AND  hora_sustentacion =''"
+            query = "SELECT * FROM  trabajo_de_grado WHERE  fecha_sustentacion IS NULL AND  lugar_sustentacion IS NULL " \
+                    "AND  hora_sustentacion IS NULL"
             param = ()
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
