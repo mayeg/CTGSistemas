@@ -1,11 +1,6 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}CTG|Configuracion{% endblock %}
-{% block username %}{{usuario.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
-{% block informacionU %}
-{{usuario.getNombres()}}
-{{usuario.getTipoUsuario().getNombre()}}
-{% endblock %}
+{% block titulo %}Titulo{% endblock %}
+{% block username %}{{titulo}}{% endblock %}
 {% block header%}
 {% endblock %}
 
@@ -26,12 +21,12 @@
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Gestión Propuesta</span>
-        <span class="label label-primary pull-right">4</span>
+        <span class="label label-primary pull-right"></span>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
+        <li><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
         </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado en
+        <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
             Propuesta</a></li>
     </ul>
 </li>
@@ -63,19 +58,6 @@
     </ul>
 </li>
 <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-</li>
-<li>
-    <a href="#"><i class="fa fa-book"></i>
-        <span>Registrar Jurados</span></a>
-    <ul class="treeview-menu">
-        <li><a href="/secretaria/registrar/jurado"><i class="fa fa-circle-o"></i>
-            Registrar Jurado</a>
-        </li>
-        <li><a href="/secretaria/editar/{{id}}"><i class="fa fa-circle-o"></i>
-            Editar Jurado</a></li>
-        <li><a href="/secretaria/listar_jurados"><i class="fa fa-circle-o"></i>
-            Listar Jurados</a></li>
-    </ul>
 </li>
 <li class=" activate treeview">
     <a href="/secretaria/configuracion">
