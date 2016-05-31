@@ -1,7 +1,6 @@
 class Propuesta:
 
-    def __init__(self, codigo="", titulo="", director_propuesta="", cod_estudiante1="",
-                 cod_estudiante2="", cod_estudiante4="", cod_estudiante3="",
+    def __init__(self, codigo="", titulo="", director_propuesta="",
                  cod_jurado1="", cod_jurado2="", cod_jurado3="", comentario="", entegrables="",
                  estado="", documentacion="", modalidad="", solicitud_retiro="",
                  solicitud_sustentacion="", solicitud_prorroga="", fecha_comentario="",fecha_correcciones="",
@@ -10,10 +9,6 @@ class Propuesta:
         self.__codigo = codigo
         self.__titulo = titulo
         self.__director_propuesta = director_propuesta
-        self.__cod_estudiante1 = cod_estudiante1
-        self.__cod_estudiante2 = cod_estudiante2
-        self.__cod_estudiante3 = cod_estudiante3
-        self.__cod_estudiante4 = cod_estudiante4
         self.__cod_jurado1 = cod_jurado1
         self.__cod_jurado2 = cod_jurado2
         self.__cod_jurado3 = cod_jurado3
@@ -48,30 +43,6 @@ class Propuesta:
 
     def setDirector_proyecto(self, director_proyecto):
         self.__director_proyecto = director_proyecto
-
-    def getCod_estudiante1(self):
-        return self.__cod_estudiante1
-
-    def setCod_estudiante1(self, cod_estudiante1):
-        self.__cod_estudiante1 = cod_estudiante1
-
-    def getCod_estudiante2(self):
-        return self.__cod_estudiante2
-
-    def setCod_estudiante2(self, cod_estudiante2):
-        self.__cod_estudiante2 = cod_estudiante2
-
-    def getCod_estudiante3(self):
-        return self.__cod_estudiante3
-
-    def setCod_estudiante3(self, cod_estudiante3):
-        self.__cod_estudiante3 = cod_estudiante3
-
-    def getCod_estudiante4(self):
-        return self.__cod_estudiante4
-
-    def setCod_estudiante4(self, cod_estudiante4):
-        self.__cod_estudiante4 = cod_estudiante4
 
     def getCod_jurado1(self):
         return self.__cod_jurado1
@@ -163,8 +134,3 @@ class Propuesta:
 
     def setFecha(self, fecha):
         self.__fecha = fecha
-
-
-
-
-
