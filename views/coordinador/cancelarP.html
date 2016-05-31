@@ -1,0 +1,90 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}Titulo{% endblock %}
+{% block username %}{{titulo}}{% endblock %}
+
+{% block menu %}
+
+<ul class="sidebar-menu">
+    <li >
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Trabajo De Grado</span> <i
+                class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class=" treeview-menu">
+            <li ><a href="/coordinador/nombreT"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li class><a href="/coordinador/modalidadT"><i class="fa fa-circle-o"></i> Modalidad </a></li>
+            <li><a href="/coordinador/juradoEstudiante"><i class="fa fa-circle-o"></i> Jurado o Estudiante </a></li>
+            <li><a href="/coordinador/estadoT"><i class="fa fa-circle-o"></i> Estado </a></li>
+
+
+        </ul>
+    </li>
+
+    <li class=" active  treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Propuesta</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class=" active treeview-menu">
+            <li><a href="/coordinador/nombreP"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li><a href="/coordinador/estadoP"><i class="fa fa-circle-o"></i> Estado </a></li>
+            <li class = "active"><a href="/coordinador/cancelarP"><i class="fa fa-circle-o"></i> Cancelar Propuesta </a></li>
+        </ul>
+    </li>
+
+
+    <li >
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span> Consultar Acta </span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="/coordinador/consultarA"><i class="fa fa-circle-o"></i> Acta Por Fecha</a></li>
+        </ul>
+    </li>
+</ul>
+
+
+<li>
+    <a href="/coordinador/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+</li>
+
+{% endblock %}
+
+{% block header %}
+
+<h1>
+    Cancelar Propuesta
+    <small>Coordinador</small>
+</h1>
+<ol class="breadcrumb">
+    <li><a href="/coordinador/home"><i class="fa fa-dashboard"></i> Perfil</a></li>
+    <li class="active">Cancelar Propuesta</li>
+</ol>
+
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+
+    <div class="col-xs-5">
+
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title"> Cancelar Propuesta </h3>
+<br> </div>
+                <form action="/coordinador/cancelarP" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nombreT" placeholder="Nombre..."
+                               name="nombreP_c">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cancelar<i class="fa fa-success"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
