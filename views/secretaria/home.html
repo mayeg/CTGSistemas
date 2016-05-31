@@ -1,11 +1,7 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}CTG | Home{% endblock %}
-{% block username %}{{usuario.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
-{% block informacionU %}
-{{usuario.getNombres()}}
-{{usuario.getTipoUsuario().getNombre()}}
-{% endblock %}
+{% block titulo %}Titulo{% endblock %}
+{% block nombreU %}{% endblock %}
+{% block username %}{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
@@ -82,7 +78,206 @@
 
 {% endblock %}
 {% block contenido %}
-<h1>Index</h1>
-<p class="important">
-    Iniciando
-    {% endblock%}
+
+<div class="row">
+
+    <section class="col-lg-12 connectedSortable">
+
+        {% if actas %}
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Tablas Actas</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Codigo</th>
+                                <th>Fecha</th>
+                                <th>Opciones</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for acta in actas %}
+                            <tr>
+                                <td>{{acta.getTitulo()}}</td>
+                                <td>{{acta.getCodigo()}}</td>
+                                <td>{{acta.getFecha()}}</td>
+                                <td>
+
+                                    <a data-toggle="modal" data-target="#info{{acta.getCodigo()}}" type="button"
+                                       class="btn btn-social btn-bitbucket "><p class="fa fa-edit"></p>Ver info</a>
+
+
+                                    <div class="modal fade" id="info{{acta.getCodigo()}}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">ACTA </h4>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="box box-solid">
+                                                                <div class="box-header with-border">
+                                                                    <h3 class="box-title">Consulta Acta</h3>
+                                                                </div>
+                                                                <!-- /.box-header -->
+                                                                <div class="box-body">
+                                                                    <div class="box-group" id="accordion">
+                                                                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                                                                        <div class="panel box box-primary">
+                                                                            <div class="box-header with-border">
+                                                                                <h4 class="box-title">
+                                                                                    <a data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseOne">
+                                                                                        Titulo
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div id="collapseOne"
+                                                                                 class="panel-collapse collapse in">
+                                                                                <div class="box-body">
+                                                                                    <a>{{acta.getTitulo()}}</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="panel box box-danger">
+                                                                            <div class="box-header with-border">
+                                                                                <h4 class="box-title">
+                                                                                    <a data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseTwo">
+                                                                                        Codigo
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div id="collapseTwo"
+                                                                                 class="panel-collapse collapse in">
+                                                                                <div class="box-body">
+                                                                                    <a>{{acta.getCodigo()}} </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="panel box box-success">
+                                                                            <div class="box-header with-border">
+                                                                                <h4 class="box-title">
+                                                                                    <a data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseThree">
+                                                                                        Fecha
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div id="collapseThree"
+                                                                                 class="panel-collapse collapse in">
+                                                                                <div class="box-body">
+                                                                                    {{acta.getFecha()}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="panel box box-success">
+                                                                            <div class="box-header with-border">
+                                                                                <h4 class="box-title">
+                                                                                    <a data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseThree">
+                                                                                        Tipo
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div id="collapseThree"
+                                                                                 class="panel-collapse collapse in">
+                                                                                <div class="box-body">
+                                                                                    {{acta.getTipo()}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="panel box box-primary">
+                                                                            <div class="box-header with-border">
+                                                                                <h4 class="box-title">
+                                                                                    <a data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseOne1">
+                                                                                        Descripcion
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div id="collapseOne1"
+                                                                                 class="panel-collapse collapse in">
+                                                                                <div class="box-body">
+                                                                                    <a>{{acta.getDescripcion()}}</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.box-body -->
+                                                            </div>
+                                                            <!-- /.box -->
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Codigo</th>
+                                <th>Fecha</th>
+                                <th>Opciones</th>
+
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+
+            </div>
+        </div>
+
+        {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                No se ha realizado ninguna consulta.
+            </div>
+        </div>
+        {% endif %}
+    </section>
+
+
+</div>
+
+{% endblock%}
