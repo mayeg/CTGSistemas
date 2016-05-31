@@ -60,7 +60,6 @@
                             <thead>
                             <tr>
                                 <th>Titulo</th>
-                                <th>Estudiante</th>
                                 <th>Modalidad</th>
                                 <th>Opciones</th>
 
@@ -70,7 +69,6 @@
                             {% for trabajo in trabajos %}
                             <tr>
                                 <td>{{trabajo.getTitulo()}}</td>
-                                <td>{{trabajo.getCod_estudiante1()}}</td>
                                 <td>{{trabajo.getModalidad()}}</td>
 
                                 <td>
@@ -126,23 +124,6 @@
                                                                                  class="panel-collapse collapse in">
                                                                                 <div class="box-body">
                                                                                     <a>{{trabajo.getTitulo()}}</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="panel box box-danger">
-                                                                            <div class="box-header with-border">
-                                                                                <h4 class="box-title">
-                                                                                    <a data-toggle="collapse"
-                                                                                       data-parent="#accordion"
-                                                                                       href="#collapseTwo">
-                                                                                        Estudiante
-                                                                                    </a>
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div id="collapseTwo"
-                                                                                 class="panel-collapse collapse in">
-                                                                                <div class="box-body">
-                                                                                    <a>{{trabajo.getCod_estudiante1()}} </a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
