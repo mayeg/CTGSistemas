@@ -108,7 +108,7 @@
 <div class="row">
 
     <section class="col-lg-12 connectedSortable">
-        <form action="/secretaria/habilitarEntregables_propuesta/{{propuesta.getCodigo()}}" method="POST">
+        <form action="/secretaria/habilitarEntregables_propuesta/{{propuesta.getId()}}" method="POST">
             <div class="box box-primary">
 
                 <div class="box-body">
@@ -127,7 +127,7 @@
                                     <dt>Titulo</dt>
                                     <dd>{{propuesta.getTitulo()}}</dd>
                                     <dt>Codigo</dt>
-                                    <dd>{{propuesta.getCodigo()}}</dd>
+                                    <dd>{{propuesta.getId()}}</dd>
 
                                 </dl>
                             </div>

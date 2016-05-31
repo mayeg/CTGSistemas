@@ -16,7 +16,7 @@ class PropuestaDao:
                      propuesta.getDocumentacion(), propuesta.getModalidad(),
                      propuesta.getFecha())
             self.__cur.execute(query, param)
-            self.__conn.commit
+            self.__conn.commit()
             return True
         except Exception as e:
             print e.__class__, e.message
@@ -26,23 +26,24 @@ class PropuestaDao:
 
     def get_propuesta_codigo(self,propuesta):
         try:
+            print "en dao:"+propuesta.getId()
             query = "SELECT * FROM propuesta WHERE id = %s"
-            param = (propuesta.getCodigo(),)
+            param = (propuesta.getId(),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return Propuesta(id=data[0], titulo=data[1], cod_jurado1=data[7],cod_jurado2=data[8],cod_jurado3=data[9],comentario=data[10],
-                             entegrables=data[11],estado=data[12],documentacion=data[13],modalidad=data[14],
-                             solicitud_retiro=data[15],solicitud_sustentacion=data[16],solicitud_prorroga=data[17],
-                             fecha_comentario=data[18],fecha_correcciones=data[19],fecha_entregables=data[20],
-                             fecha=data[21])
+            return Propuesta(id=data[0], titulo=data[1], cod_jurado1=data[3],cod_jurado2=data[4],cod_jurado3=data[5],comentario=data[6],
+                             entegrables=data[7],estado=data[8],documentacion=data[9],modalidad=data[10],
+                             solicitud_retiro=data[11],solicitud_sustentacion=data[12],solicitud_prorroga=data[13],
+                             fecha_comentario=data[14],fecha_correcciones=data[15],fecha_entregables=data[16],
+                             fecha=data[17])
         except Exception as e:
             print e.message
             return None
 
     def get_propuesta_consulta(self,propuest):
-        if(propuest.getCodigo() == "" and propuest.getTitulo() != ""):
+        if(propuest.getId() == "" and propuest.getTitulo() != ""):
             try:
                 query = "SELECT * FROM propuesta WHERE titulo LIKE %s or titulo LIKE %s or titulo LIKE %s"
                 param = (propuest.getTitulo()+"%","%"+propuest.getTitulo()+"%","%"+propuest.getTitulo())
@@ -52,7 +53,7 @@ class PropuestaDao:
                 if data is None:
                     return []
                 for propuesta in data:
-                    pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
+                    pro = Propuesta(id=propuesta[0], titulo=propuesta[1], director_trabajo=propuesta[2],
                              cod_jurado1=propuesta[3],cod_jurado2=propuesta[4],cod_jurado3=propuesta[5],comentario=propuesta[6],
                              entegrables=propuesta[7],estado=propuesta[8],documentacion=propuesta[9],modalidad=propuesta[10],
                              solicitud_retiro=propuesta[11],solicitud_sustentacion=propuesta[12],solicitud_prorroga=propuesta[13],
@@ -63,17 +64,17 @@ class PropuestaDao:
             except Exception as e:
                 print e.message
                 return []
-        elif propuest.getCodigo != "" and propuest.getTitulo() == ""x:
+        elif propuest.getId() != "" and propuest.getTitulo() == "":
             try:
                 query = "SELECT * FROM propuesta WHERE id LIKE %s or id LIKE %s or id LIKE %s"
-                param = (propuest.getCodigo() + "%", "%" + propuest.getCodigo() + "%", "%" + propuest.getCodigo())
+                param = (propuest.getId() + "%", "%" + propuest.getId() + "%", "%" + propuest.getCodigo())
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
                 resultado = list()
                 if data is None:
                     return []
                 for propuesta in data:
-                    pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
+                    pro = Propuesta(id=propuesta[0], titulo=propuesta[1], director_trabajo=propuesta[2],
                              cod_jurado1=propuesta[3],cod_jurado2=propuesta[4],cod_jurado3=propuesta[5],comentario=propuesta[6],
                              entegrables=propuesta[7],estado=propuesta[8],documentacion=propuesta[9],modalidad=propuesta[10],
                              solicitud_retiro=propuesta[11],solicitud_sustentacion=propuesta[12],solicitud_prorroga=propuesta[13],
@@ -84,18 +85,18 @@ class PropuestaDao:
             except Exception as e:
                 print e.message
                 return []
-        elif(propuest.getCodigo() != "" and propuest.getTitulo() != ""):
+        elif(propuest.getId() != "" and propuest.getTitulo() != ""):
             try:
                 print "entro "
                 query = "SELECT * FROM propuesta WHERE titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or " \
                         "titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or " \
                         "titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or " \
                         "titulo LIKE %s AND id LIKE %s"
-                param = (propuest.getTitulo() + "%",propuest.getCodigo() + "%",propuest.getTitulo() + "%", "%" + propuest.getCodigo() + "%",
-                         propuest.getTitulo() + "%","%" + propuest.getCodigo(),"%" + propuest.getTitulo() + "%",propuest.getCodigo() + "%",
-                         "%" + propuest.getTitulo() + "%","%" + propuest.getCodigo() + "%","%" + propuest.getTitulo() + "%","%" + propuest.getCodigo(),
-                         "%" + propuest.getTitulo(),propuest.getCodigo() + "%","%" + propuest.getTitulo(),"%" + propuest.getCodigo() + "%",
-                         "%" + propuest.getTitulo(),"%" + propuest.getCodigo())
+                param = (propuest.getTitulo() + "%",propuest.getId() + "%",propuest.getTitulo() + "%", "%" + propuest.getId() + "%",
+                         propuest.getTitulo() + "%","%" + propuest.getId(),"%" + propuest.getTitulo() + "%",propuest.getId() + "%",
+                         "%" + propuest.getTitulo() + "%","%" + propuest.getId() + "%","%" + propuest.getTitulo() + "%","%" + propuest.getId(),
+                         "%" + propuest.getTitulo(),propuest.getId() + "%","%" + propuest.getTitulo(),"%" + propuest.getId() + "%",
+                         "%" + propuest.getTitulo(),"%" + propuest.getId())
                 # propuest.getCodigo() + "%", "%" + propuest.getCodigo() + "%", "%" + propuest.getCodigo(),
                 # propuest.getTitulo() + "%", "%" + propuest.getTitulo() + "%", "%" + propuest.getTitulo()
 
@@ -105,8 +106,7 @@ class PropuestaDao:
                 if data is None:
                     return []
                 for propuesta in data:
-                    print "entra for"
-                    pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
+                    pro = Propuesta(id=propuesta[0], titulo=propuesta[1], director_trabajo=propuesta[2],
                              cod_jurado1=propuesta[3],cod_jurado2=propuesta[4],cod_jurado3=propuesta[5],comentario=propuesta[6],
                              entegrables=propuesta[7],estado=propuesta[8],documentacion=propuesta[9],modalidad=propuesta[10],
                              solicitud_retiro=propuesta[11],solicitud_sustentacion=propuesta[12],solicitud_prorroga=propuesta[13],
@@ -124,7 +124,7 @@ class PropuestaDao:
         try:
             query = "UPDATE propuesta SET estado= %s WHERE id=%s "
 
-            param = (propuesta.getEstado(),propuesta.getCodigo())
+            param = (propuesta.getEstado(),propuesta.getId())
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True
@@ -141,7 +141,7 @@ class PropuestaDao:
                 print "entro a la correcta"
                 query = "UPDATE propuesta SET fecha_correcciones= %s WHERE id=%s "
 
-                param = (propuesta.getFecha_Correcciones(), propuesta.getCodigo())
+                param = (propuesta.getFecha_Correcciones(), propuesta.getId())
                 self.__cur.execute(query, param)
                 self.__conn.commit()
                 return True
@@ -155,7 +155,7 @@ class PropuestaDao:
                 print "entro a la correcta"
                 query = "UPDATE propuesta SET fecha_correcciones= %s WHERE id=%s "
 
-                param = (propuesta.getFecha_Correcciones(), propuesta.getCodigo())
+                param = (propuesta.getFecha_Correcciones(), propuesta.getId())
                 self.__cur.execute(query, param)
                 self.__conn.commit()
                 return True
@@ -170,7 +170,7 @@ class PropuestaDao:
                 print "entro a la correcta"
                 query = "UPDATE propuesta SET fecha_comentario= %s WHERE id=%s "
 
-                param = (propuesta.getFecha_Comentario(), propuesta.getCodigo())
+                param = (propuesta.getFecha_Comentario(), propuesta.getId())
                 self.__cur.execute(query, param)
                 self.__conn.commit()
                 return True
@@ -185,7 +185,7 @@ class PropuestaDao:
                 print "entro a la correcta"
                 query = "UPDATE propuesta SET fecha_correcciones= %s, fecha_comentario= %s WHERE id=%s "
 
-                param = (propuesta.getFecha_Correcciones(),propuesta.getFecha_Comentario(), propuesta.getCodigo())
+                param = (propuesta.getFecha_Correcciones(),propuesta.getFecha_Comentario(), propuesta.getId())
                 self.__cur.execute(query, param)
                 self.__conn.commit()
                 return True
@@ -199,7 +199,7 @@ class PropuestaDao:
         try:
             query = "UPDATE propuesta SET entregables= %s WHERE id=%s "
 
-            param = (propuesta.getEntregables(), propuesta.getCodigo())
+            param = (propuesta.getEntregables(), propuesta.getId())
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True
@@ -220,7 +220,7 @@ class PropuestaDao:
             if data is None:
                 return []
             for propuesta in data:
-                pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
+                pro = Propuesta(id=propuesta[0], titulo=propuesta[1], director_trabajo=propuesta[2],
                              cod_jurado1=propuesta[3],cod_jurado2=propuesta[4],cod_jurado3=propuesta[5],comentario=propuesta[6],
                              entegrables=propuesta[7],estado=propuesta[8],documentacion=propuesta[9],modalidad=propuesta[10],
                              solicitud_retiro=propuesta[11],solicitud_sustentacion=propuesta[12],solicitud_prorroga=propuesta[13],
@@ -251,7 +251,6 @@ class PropuestaDao:
     
     def get_propuesta_consulta_jurado(self, jurado):
             try:
-                print jurado.getCodigo()
                 query = "SELECT * FROM  `propuesta` WHERE  `cod_jurado1` = %s OR  `cod_jurado2` =%s " \
                         "OR  `cod_jurado3` =%s"
                 param = (jurado.getCodigo(), jurado.getCodigo(), jurado.getCodigo())
@@ -261,7 +260,7 @@ class PropuestaDao:
                 if data is None:
                     return []
                 for propuesta in data:
-                    pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
+                    pro = Propuesta(id=propuesta[0], titulo=propuesta[1], director_trabajo=propuesta[2],
                                     cod_jurado1=propuesta[3], cod_jurado2=propuesta[4], cod_jurado3=propuesta[5],
                                     comentario=propuesta[6],
                                     entegrables=propuesta[7], estado=propuesta[8], documentacion=propuesta[9],
@@ -271,7 +270,6 @@ class PropuestaDao:
                                     fecha_comentario=propuesta[14], fecha_correcciones=propuesta[15],
                                     fecha_entregables=propuesta[16],
                                     fecha=propuesta[17])
-                    print pro.getCodigo()
                     resultado.append(pro)
                 return resultado
             except Exception as e:

@@ -174,14 +174,14 @@
                             {% for propuesta in propuestas %}
                             <tr>
                                 <td>{{propuesta.getTitulo()}}</td>
-                                <td>{{propuesta.getCodigo()}}</td>
+                                <td>{{propuesta.getId()}}</td>
                                 <td>{{propuesta.getFecha_Comentario()}}</td>
                                 <td>{{propuesta.getFecha_Correcciones()}}</td>
 
                                 <td>
 
                                     <div class="btn-group">
-                                        <a data-toggle="modal" data-target="#info{{propuesta.getCodigo()}}" type="button"
+                                        <a data-toggle="modal" data-target="#info{{propuesta.getId()}}" type="button"
                                            class="btn btn-social btn-bitbucket "><p class="fa fa-edit"></p>Ver info</a>
                                         <button type="button" class="btn btn-bitbucket dropdown-toggle"
                                                 data-toggle="dropdown">
@@ -192,14 +192,14 @@
                                             <li><a href="#"><p class="fa fa-download"></p> Descargar
                                                 Propuesta</a></li>
                                             <li>
-                                                <a href="/secretaria/modificarEstado_propuesta/{{propuesta.getCodigo()}}">
+                                                <a href="/secretaria/modificarEstado_propuesta/{{propuesta.getId()}}">
                                                     <p
                                                             class="fa fa-download"></p> Modificar Estado </a></li>
-                                            <li><a href="/secretaria/agregarFechas_propuesta/{{propuesta.getCodigo()}}">
+                                            <li><a href="/secretaria/agregarFechas_propuesta/{{propuesta.getId()}}">
                                                 <p
                                                         class="fa fa-download"></p> Agregar Fechas </a></li>
                                             <li>
-                                                <a href="/secretaria/habilitarEntregables_propuesta/{{propuesta.getCodigo()}}">
+                                                <a href="/secretaria/habilitarEntregables_propuesta/{{propuesta.getId()}}">
                                                     <p
                                                             class="fa fa-download"></p> Habilitar Envio Entregables</a>
                                             </li>
@@ -207,7 +207,7 @@
                                     </div>
 
 
-                                    <div class="modal fade" id="info{{propuesta.getCodigo()}}" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="info{{propuesta.getId()}}" tabindex="-1" role="dialog"
                                          aria-labelledby="myModalLabel">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -260,7 +260,7 @@
                                                                             <div id="collapseTwo"
                                                                                  class="panel-collapse collapse in">
                                                                                 <div class="box-body">
-                                                                                    <a>{{propuesta.getCodigo()}} </a>
+                                                                                    <a>{{propuesta.getId()}} </a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

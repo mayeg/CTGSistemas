@@ -124,7 +124,7 @@
                                 <select class="form-control" name="propuesta">
                                     <option><-- No Selected --></option>
                                     {% for propuesta in propuestas %}
-                                    <option>{{propuesta.getTitulo()}}-{{propuesta.getCodigo()}}</option>
+                                    <option>{{propuesta.getTitulo()}}-{{propuesta.getId()}}</option>
                                     {% endfor %}
 
                                 </select>

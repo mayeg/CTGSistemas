@@ -1,7 +1,7 @@
 from flask.globals import session
 from flask.helpers import flash
 from flask.templating import render_template
-
+from datetime import datetime
 from dao.propuesta_dao import PropuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.usuario_dao import UsuarioDao
@@ -40,9 +40,10 @@ class EstudianteController:
                                estudiante=propuesta)
 
     def registrar_propuesta(self, titulo, director, modalidad, documentos, id):
-
+        fecha = datetime.now()
         propuesta = Propuesta(titulo=titulo, director_trabajo=director,
-                              modalidad=modalidad, documentacion=documentos)
+                              modalidad=modalidad, documentacion=documentos,
+                              fecha=fecha)
         if PropuestaDao().crear_propuesta(propuesta):
             flash("")
 

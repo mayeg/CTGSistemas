@@ -26,7 +26,6 @@ def cambiar_contrasena():
 @secretaria.route("/registrar/jurado", methods=["GET", "POST"])
 def registrar_jurados():
     if request.method == "GET":
-<<<<<<< HEAD
         return SecretariaController().get_registrar_jurado()
     codigo = request.form.get('codigo', None)
     nombres = request.form.get('nombres', None)
@@ -68,9 +67,6 @@ def listar_jurados():
 def registrar_trabajo_grado():
     if request.method == "GET":
         return SecretariaController().get_registrar_jurado()
-=======
-        return UsuarioController().get_registrar_jurado()
->>>>>>> 8530f3dd1150652b41fb9b542c07a81c120fe30c
     codigo = request.form.get('codigo', None)
     nombres = request.form.get('nombres', None)
     apellidos = request.form.get('apellidos', None)
@@ -83,10 +79,6 @@ def registrar_trabajo_grado():
                                              contrasena, tipo_usuario)
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8530f3dd1150652b41fb9b542c07a81c120fe30c
 @secretaria.route("/consultar_acta", methods=["GET","POST"])
 def consultar_acta():
     if(request.method == "GET"):
@@ -144,33 +136,29 @@ def consultar_propuesta():
     return SecretariaController().consultar_propuesta(titulo, codigo)
 
 
-@secretaria.route("/modificarEstado_propuesta/<codigo_propuesta>",
+@secretaria.route("/modificarEstado_propuesta/<id_propuesta>",
                   methods=["GET", "POST"])
-def modificarEstado_propuesta(codigo_propuesta):
+def modificarEstado_propuesta(id_propuesta):
+    print "en rutas:"+id_propuesta
     if(request.method=="GET"):
-        return SecretariaController().get_modificar_estado_propuesta(codigo_propuesta)
+        return SecretariaController().get_modificar_estado_propuesta(id_propuesta)
     estado = request.form.get('estado',None)
-    return SecretariaController().modificar_estado_propuesta(codigo_propuesta,
+    return SecretariaController().modificar_estado_propuesta(id_propuesta,
                                                              estado)
 
 
-@secretaria.route("/agregarFechas_propuesta/<codigo_propuesta>",
+@secretaria.route("/agregarFechas_propuesta/<id_propuesta>",
                   methods=["GET", "POST"])
-def modificarFechas_propuesta(codigo_propuesta):
+def modificarFechas_propuesta(id_propuesta):
     if(request.method=="GET"):
-        return SecretariaController().get_agregar_fechas_propuesta(codigo_propuesta)
+        return SecretariaController().get_agregar_fechas_propuesta(id_propuesta)
     fechaCorrecciones = request.form.get('fechaCorrecciones',None)
     fechaComentarios = request.form.get('fechaComentarios',None)
-<<<<<<< HEAD
-    print "lo que recibe: "+fechaComentarios
-    return SecretariaController().modificar_fechas_propuesta(codigo_propuesta,
-                                                             fechaCorrecciones,
-                                                             fechaComentarios)
-
-=======
     fechaEntregables = request.form.get('fechaEntregables',None)
-    return SecretariaController().modificar_fechas_propuesta(codigo_propuesta,fechaCorrecciones,fechaComentarios,fechaEntregables)
->>>>>>> 8530f3dd1150652b41fb9b542c07a81c120fe30c
+    return SecretariaController().modificar_fechas_propuesta(id_propuesta,
+                                        fechaCorrecciones,fechaComentarios,
+                                        fechaEntregables)
+
 
 @secretaria.route("/habilitarEntregables_propuesta/<codigo_propuesta>",
                   methods = ["GET", "POST"])
