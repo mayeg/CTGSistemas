@@ -5,6 +5,7 @@ from flask import session, render_template, redirect, url_for
 from flask.helpers import flash
 
 from controllers.emails import EmailController
+from controllers.estudiante import EstudianteController
 from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.usuario_dao import UsuarioDao
 from dto.usuario import Usuario
@@ -32,8 +33,8 @@ class Login:
                 return render_template('jurado/home.html', titulo="Inicio",
                                       usuario=usuario)
             elif tipoU == 5:
-                return render_template('estudiante/home.html', titulo="Inicio",
-                                       usuario=usuario)
+                return EstudianteController().get_registrar_propuesta()
+
         return render_template('login/login.html', tipos=tipos)
 
     def get_cambiar_contrasena(self, token):
@@ -67,7 +68,6 @@ class Login:
         contrasena_c = hashlib.sha1(contrasena).hexdigest()
         usuario = Usuario(codigo=codigo, contrasena=contrasena_c)
         usuario_logueado = UsuarioDao().get_user_login(usuario)
-        print usuario_logueado.get_dict()
         if usuario_logueado is not None:
             session['usuario'] = usuario_logueado.get_dict()
         else:

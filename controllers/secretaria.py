@@ -63,9 +63,9 @@ class SecretariaController:
         return redirect(url_for("secretaria.listar_jurados"))
 
     def get_editar_jurado(self, id_usuario):
-        print "id", id_usuario
         usuario = Usuario(id=id_usuario)
         usuario_e = UsuarioDao().get_usuario_por_id(usuario)
+
         usuario_edit = {
             'nombres': usuario_e.getNombres(),
             'apellidos': usuario_e.getApellidos(),
@@ -86,7 +86,7 @@ class SecretariaController:
                        id):
 
         usuario_e = Usuario(nombres=nombres, apellidos=apellidos, cedula=cedula,
-                    email=email, tipo_usuario=tipo_usuario, id=id)
+                            email=email, tipo_usuario=tipo_usuario, id=id)
 
         if UsuarioDao().editar_usuario(usuario_e):
             flash("El usuario se edito correctamente.", "success")

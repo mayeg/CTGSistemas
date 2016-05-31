@@ -30,7 +30,7 @@ class UsuarioController:
             'codigo': "", 'nombres': "", 'apellidos': "", 'cedula': "",
             'contrasena': "", 'email': ""
         }
-        return render_template("registro.html", usuario=usuario)
+        return render_template("login/registro.html", usuario=usuario)
 
     def crear_usuario_estudiante(self, codigo, nombres, apellidos, cedula, email, contrasena,
                       tipo_usuario):
@@ -46,13 +46,13 @@ class UsuarioController:
             flash("Ya existe un usuario con el codigo {}.".format(
                 usuario.getCodigo()), "error")
             return render_template(
-                "/registro.html", usuario=usuario_error)
+                "login/registro.html", usuario=usuario_error)
 
         if UsuarioDao().crear_usuario(usuario):
             flash("El usuario se creo correctamente.", "success")
         else:
             flash("Error al registrar el usuario.", "error")
-        return redirect(url_for("login_r.get_home"))
+        return redirect(url_for("login.get_home"))
 
     def crear_usuario_jurado(self, codigo, nombres, apellidos, cedula, email,
                           contrasena,

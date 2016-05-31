@@ -7,7 +7,23 @@ class PropuestaDao:
         self.__conn = mysql.connect()
         self.__cur = self.__conn.cursor()
 
+
+    def crear_propuesta(self, propuesta):
+        try:
+            query = "INSERT INTO propuesta (titulo, director, documentacion," \
+                    "modalidad, fecha) VALUES(%s, %s, %s, %s, %s,)"
+            param = (propuesta.getTitulo(), propuesta.getDirector_trabajo(),
+                     propuesta.getDocumentacion(), propuesta.getModalidad(),
+                     propuesta.getFecha())
+            self.__cur.execute(query, param)
+            self.__conn.commit
+            return True
+        except Exception as e:
+            print e.__class__, e.message
+            return False
 #CODIGO = ID
+
+
     def get_propuesta_codigo(self,propuesta):
         try:
             query = "SELECT * FROM propuesta WHERE id = %s"
@@ -16,9 +32,7 @@ class PropuestaDao:
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return Propuesta(codigo=data[0], titulo=data[1], director_propuesta=data[2], cod_estudiante1=data[3],
-                             cod_estudiante2=data[4],cod_estudiante3=data[5],cod_estudiante4=data[6],
-                             cod_jurado1=data[7],cod_jurado2=data[8],cod_jurado3=data[9],comentario=data[10],
+            return Propuesta(id=data[0], titulo=data[1], cod_jurado1=data[7],cod_jurado2=data[8],cod_jurado3=data[9],comentario=data[10],
                              entegrables=data[11],estado=data[12],documentacion=data[13],modalidad=data[14],
                              solicitud_retiro=data[15],solicitud_sustentacion=data[16],solicitud_prorroga=data[17],
                              fecha_comentario=data[18],fecha_correcciones=data[19],fecha_entregables=data[20],

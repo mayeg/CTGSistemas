@@ -59,10 +59,6 @@ def cambiar_contrasena():
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
 
-@usuario.route("/registrar_propuesta", methods=["GET", "POST"])
-def registro_propuesta():
-    if request.method == "GET":
-        return UsuarioController().get_registro_propuesta()
-    titulo = request.form.get('titulo', None)
+
 
 

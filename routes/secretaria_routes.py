@@ -6,10 +6,11 @@ from controllers.usuario import UsuarioController
 
 secretaria = Blueprint("secretaria", __name__)
 
+
 @secretaria.route("/home", methods=["GET"])
 def home():
-
         return Login().get_home_usuario()
+
 
 @secretaria.route("/configuracion", methods=["GET", "POST"])
 def cambiar_contrasena():
@@ -20,6 +21,8 @@ def cambiar_contrasena():
     contrasena_nc = request.form.get('contrasena_nc', None)
     return UsuarioController().cambiar_contrasena(contrasena_a,
                                                   contrasena_n, contrasena_nc)
+
+
 @secretaria.route("/registrar/jurado", methods=["GET", "POST"])
 def registrar_jurados():
     if request.method == "GET":
@@ -34,6 +37,8 @@ def registrar_jurados():
     return SecretariaController().crear_jurado(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)
+
+
 @secretaria.route("/editar/<id_usuario>", methods=["GET", "POST"])
 def editar_usuario(id_usuario):
     if request.method == "GET":
@@ -73,6 +78,7 @@ def registrar_trabajo_grado():
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)
 
+
 @secretaria.route("/consultar_acta", methods=["GET","POST"])
 def consultar_acta():
     if(request.method == "GET"):
@@ -92,20 +98,23 @@ def registro_acta():
     fecha = request.form.get('fecha',None)
     archivo = request.form.get('archivo', None)
     descripcion = request.form.get('descripcion',None)
-    return SecretariaController().crear_acta(titulo,tipo,fecha,archivo,descripcion)
+    return SecretariaController().crear_acta(titulo, tipo, fecha, archivo,
+                                             descripcion)
 
-@secretaria.route("/descargar-modificar_acta",methods=["GET","POST"])
+
+@secretaria.route("/descargar-modificar_acta",methods=["GET", "POST"])
 def descargar_modificar_acta():
-    if(request.method == "GET"):
+    if request.method == "GET":
         return SecretariaController().get_view_descargar()
     titulo = request.form.get('titulo', None)
     tipo = request.form.get('tipo', None)
     fecha = request.form.get('fecha', None)
     return SecretariaController().get_consulta_descarga(titulo, tipo, fecha)
 
-@secretaria.route("/modificar/<titulo_acta>", methods=["GET","POST"])
+
+@secretaria.route("/modificar/<titulo_acta>", methods=["GET", "POST"])
 def modificar_acta(titulo_acta):
-    if(request.method== "GET"):
+    if request.method== "GET":
         return SecretariaController().get_modificar(titulo_acta)
     titulo = request.form.get('titulo', None)
     codigo = request.form.get('codigo',None)
@@ -113,35 +122,45 @@ def modificar_acta(titulo_acta):
     fecha = request.form.get('fecha', None)
     archivo = request.form.get('archivo', None)
     descripcion = request.form.get('descripcion', None)
-    return SecretariaController().modificar_acta(titulo_acta,codigo,titulo, tipo, fecha, archivo, descripcion)
+    return SecretariaController().modificar_acta(titulo_acta, codigo, titulo,
+                                                 tipo, fecha, archivo,
+                                                 descripcion)
 
 
-@secretaria.route("/consultar_propuesta",methods=["GET","POST"])
+@secretaria.route("/consultar_propuesta", methods=["GET", "POST"])
 def consultar_propuesta():
-    if(request.method == "GET"):
+    if request.method == "GET":
         return SecretariaController().get_view_consultar_propuesta()
     titulo = request.form.get('titulo',None)
     codigo = request.form.get('codigo',None)
-    return SecretariaController().consultar_propuesta(titulo,codigo)
+    return SecretariaController().consultar_propuesta(titulo, codigo)
 
 
-@secretaria.route("/modificarEstado_propuesta/<codigo_propuesta>", methods=["GET","POST"])
+@secretaria.route("/modificarEstado_propuesta/<codigo_propuesta>",
+                  methods=["GET", "POST"])
 def modificarEstado_propuesta(codigo_propuesta):
     if(request.method=="GET"):
         return SecretariaController().get_modificar_estado_propuesta(codigo_propuesta)
     estado = request.form.get('estado',None)
-    return SecretariaController().modificar_estado_propuesta(codigo_propuesta,estado)
+    return SecretariaController().modificar_estado_propuesta(codigo_propuesta,
+                                                             estado)
 
-@secretaria.route("/agregarFechas_propuesta/<codigo_propuesta>", methods=["GET","POST"])
+
+@secretaria.route("/agregarFechas_propuesta/<codigo_propuesta>",
+                  methods=["GET", "POST"])
 def modificarFechas_propuesta(codigo_propuesta):
     if(request.method=="GET"):
         return SecretariaController().get_agregar_fechas_propuesta(codigo_propuesta)
     fechaCorrecciones = request.form.get('fechaCorrecciones',None)
     fechaComentarios = request.form.get('fechaComentarios',None)
     print "lo que recibe: "+fechaComentarios
-    return SecretariaController().modificar_fechas_propuesta(codigo_propuesta,fechaCorrecciones,fechaComentarios)
+    return SecretariaController().modificar_fechas_propuesta(codigo_propuesta,
+                                                             fechaCorrecciones,
+                                                             fechaComentarios)
 
-@secretaria.route("/habilitarEntregables_propuesta/<codigo_propuesta>", methods = ["GET","POST"])
+
+@secretaria.route("/habilitarEntregables_propuesta/<codigo_propuesta>",
+                  methods = ["GET", "POST"])
 def habilitar_envios_entregables(codigo_propuesta):
     if(request.method=="GET"):
         return SecretariaController().get_habilitar_envio_entregables(codigo_propuesta)

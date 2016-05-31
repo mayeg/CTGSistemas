@@ -1,19 +1,15 @@
 class Propuesta:
 
-    def __init__(self, codigo="", titulo="", director_propuesta="", cod_estudiante1="",
-                 cod_estudiante2="", cod_estudiante4="", cod_estudiante3="",
-                 cod_jurado1="", cod_jurado2="", cod_jurado3="", comentario="", entegrables="",
-                 estado="", documentacion="", modalidad="", solicitud_retiro="",
-                 solicitud_sustentacion="", solicitud_prorroga="", fecha_comentario="",fecha_correcciones="",
-                 fecha_entregables="", fecha=""):
+    def __init__(self, id=0, titulo="", director_trabajo="",
+                 cod_jurado1="", cod_jurado2="", cod_jurado3="", comentario="",
+                 entegrables="", estado="", documentacion="", modalidad="",
+                 solicitud_retiro="", solicitud_sustentacion="",
+                 solicitud_prorroga="", fecha_comentario="",
+                 fecha_correcciones="", fecha_entregables="", fecha=""):
 
-        self.__codigo = codigo
+        self.__id = id
         self.__titulo = titulo
-        self.__director_propuesta = director_propuesta
-        self.__cod_estudiante1 = cod_estudiante1
-        self.__cod_estudiante2 = cod_estudiante2
-        self.__cod_estudiante3 = cod_estudiante3
-        self.__cod_estudiante4 = cod_estudiante4
+        self.__director_trabajo = director_trabajo
         self.__cod_jurado1 = cod_jurado1
         self.__cod_jurado2 = cod_jurado2
         self.__cod_jurado3 = cod_jurado3
@@ -31,11 +27,11 @@ class Propuesta:
         self.__fecha = fecha
 
 
-    def getCodigo(self):
-        return self.__codigo
+    def getId(self):
+        return self.__id
 
-    def setCodigo(self, codigo):
-        self.__codigo = codigo
+    def setId(self, id):
+        self.__id = id
 
     def getTitulo(self):
         return self.__titulo
@@ -43,35 +39,11 @@ class Propuesta:
     def setTitulo(self, titulo):
         self.__titulo = titulo
 
-    def getDirector_proyecto(self):
-        return self.__director_proyecto
+    def getDirector_trabajo(self):
+        return self.__director_trabajo
 
-    def setDirector_proyecto(self, director_proyecto):
-        self.__director_proyecto = director_proyecto
-
-    def getCod_estudiante1(self):
-        return self.__cod_estudiante1
-
-    def setCod_estudiante1(self, cod_estudiante1):
-        self.__cod_estudiante1 = cod_estudiante1
-
-    def getCod_estudiante2(self):
-        return self.__cod_estudiante2
-
-    def setCod_estudiante2(self, cod_estudiante2):
-        self.__cod_estudiante2 = cod_estudiante2
-
-    def getCod_estudiante3(self):
-        return self.__cod_estudiante3
-
-    def setCod_estudiante3(self, cod_estudiante3):
-        self.__cod_estudiante3 = cod_estudiante3
-
-    def getCod_estudiante4(self):
-        return self.__cod_estudiante4
-
-    def setCod_estudiante4(self, cod_estudiante4):
-        self.__cod_estudiante4 = cod_estudiante4
+    def setDirector_trabajo(self, director_trabajo):
+        self.__director_trabajo = director_trabajo
 
     def getCod_jurado1(self):
         return self.__cod_jurado1
@@ -108,7 +80,6 @@ class Propuesta:
 
     def setComentario(self, comentario):
         self.__comentario = comentario
-
 
     def getDocumentacion(self):
         return self.__documentacion

@@ -49,6 +49,7 @@ def recordar_contrasena(token=None):
             Login().recordar_contrasena(codigo)
             return redirect(url_for("login.get_home"))
 
+
 @login_r.route("/registrar", methods=["GET", "POST"])
 def registro_estudiante():
     if request.method == "GET":
@@ -60,6 +61,6 @@ def registro_estudiante():
     email = request.form.get('email', None)
     contrasena = request.form.get('contrasena', None)
     tipo_usuario = "5"
-    return UsuarioController().crear_usuario(codigo,
+    return UsuarioController().crear_usuario_estudiante(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)

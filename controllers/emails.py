@@ -7,8 +7,8 @@ from email.mime.text import MIMEText
 class EmailController():
 
     def __init__(self):
-        self.__dir_email = 'corroe@gmail.com'
-        self.__contrasena_email = ''
+        self.__dir_email = 'ctgsistemas.ufps@gmail.com'
+        self.__contrasena_email = 'sistemas123'
 
     def enviar_email(self, para, mensaje, asunto):
         try:
