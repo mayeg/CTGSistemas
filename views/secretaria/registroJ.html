@@ -1,10 +1,9 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}Registro de Usuario{% endblock %}
-{% block username %}{{usuario_u.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario_u.getNombres()}}{% endblock %}
-{% block informacionU %}
-{{usuario_u.getNombres()}}
-{{tipoU.getLabel()}}
+{% block username %}{% endblock %}
+{% block header%}
+
+
 {% endblock %}
 {% block menu %}
 <li class="treeview">
@@ -23,12 +22,12 @@
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Gestión Propuesta</span>
-        <span class="label label-primary pull-right">4</span>
+        <span class="label label-primary pull-right"></span>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
+        <li><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
         </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado en
+        <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
             Propuesta</a></li>
     </ul>
 </li>
@@ -60,18 +59,7 @@
     </ul>
 </li>
 <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-<li>
-    <a href="#"><i class="fa fa-book"></i>
-        <span>Registrar Jurados</span></a>
-    <ul class="treeview-menu">
-        <li><a href="/secretaria/registrar/jurado"><i class="fa fa-circle-o"></i>
-            Registrar Jurado</a>
-        </li>
-        <li><a href="/secretaria/editar/{{id}}"><i class="fa fa-circle-o"></i>
-            Editar Jurado</a></li>
-        <li><a href="/secretaria/listar_jurados"><i class="fa fa-circle-o"></i>
-            Listar Jurados</a></li>
-    </ul>
+<li><a href="#"><i class="fa fa-book"></i> <span>Registrar Jurados</span></a>
 </li>
 <li class="treeview">
     <a href="/secretaria/configuracion">
@@ -155,6 +143,19 @@
                            placeholder="Contraseña" name="contrasena">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="tipo_usuario">Tipo de Usuario: </label>
+                <div class="col-md-5 col-xs-12">
+                    <select id="tipo_usuario" name="tipo_usuario" class="form-control">
+                        {% for tipo in tipos %}
+                            <option value="{{tipo.getId()}}">{{tipo.getLabel()}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </div>
+
         </div>
         <div class="box-footer">
             <a class="btn btn-default" href="/secretaria/home">Volver</a>
