@@ -31,7 +31,7 @@ def registro_propuesta():
     titulo = request.form.get('titulo', None)
     director = request.form.get('director', None)
     modalidad = request.form.get('modalidad', None)
-    documentos = request.form.get('docuementos', None)
+    documentos = request.form.get('documentos', None)
     id = session['usuario']['id']
 
     return EstudianteController().registrar_propuesta(titulo, director,

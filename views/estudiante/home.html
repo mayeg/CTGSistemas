@@ -50,27 +50,27 @@
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title"> Mi Propuesta</h3>
+        <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+        </button>
     </div>
+    </div>
+
     <div class="box-body">
         {% if propuesta %}
                 <!-- /.box-header -->
             <div class="box-body">
                 <strong><i class="fa fa-book margin-r-5"></i> TITULO</strong>
-
                 <p class="text-muted">
                     {{propuesta.getId_propuesta().getTitulo()}}
                 </p>
-
                 <hr>
-
                 <strong><i class="fa fa-map-marker margin-r-5"></i>
                     Director</strong>
 
                 <p class="text-muted">
                     {{propuesta.getId_propuesta().getDirector_trabajo()}}</p>
-
                 <hr>
-
                 <strong><i class="fa fa-pencil margin-r-5"></i>
                     Estudiante</strong>
 
@@ -78,18 +78,19 @@
                     {{estudiante.getId_estudiante().getNombres()}}</p>
 
                 <hr>
-
-
                 <strong><i class="fa fa-file-text-o margin-r-5"></i>
                     Fecha</strong>
 
                 <p>{{propuesta.getId_propuesta().getFecha()}}</p>
             </div>
-            <div class="form-group has-feedback">
-
-                <a href="estudiante/agregar_estudiante" type=""
-                   class="btn btn-block btn-primary btn-flat btn-xs">Agregar Estudiante
+            <div class="row ">
+                <div class="col-md-6 text-right">
+                  <a href="estudiante/agregar_estudiante" type=""
+                   class="btn btn-block btn-primary btn-flat">
+                    Agregar Estudiante
                 </a>
+                </div>
+
             </div>
             <!-- /.box-body -->
         {% else %}
@@ -99,7 +100,7 @@
             </div>
 
             <div class="row" style="margin-bottom: 15px">
-                <div class="col-md-12 text-right">
+                <div class=" text-right">
                     <a href="/estudiante/registro_propuesta" class="btn btn-primary">
                         <i class="fa fa-plus"></i> Registrar Propuesta
                     </a>

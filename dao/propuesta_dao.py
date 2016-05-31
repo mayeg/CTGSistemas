@@ -10,19 +10,38 @@ class PropuestaDao:
 
     def crear_propuesta(self, propuesta):
         try:
-            query = "INSERT INTO propuesta (titulo, director, documentacion," \
-                    "modalidad, fecha) VALUES(%s, %s, %s, %s, %s,)"
+            query = "INSERT INTO propuesta (titulo, director_trabajo, " \
+                    "documentacion, modalidad, fecha) VALUES (%s, %s, %s, %s," \
+                    " %s)"
             param = (propuesta.getTitulo(), propuesta.getDirector_trabajo(),
                      propuesta.getDocumentacion(), propuesta.getModalidad(),
-                     propuesta.getFecha())
+                     str(propuesta.getFecha()))
+
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True
         except Exception as e:
             print e.__class__, e.message
             return False
-#CODIGO = ID
 
+    def get_propuesta_titulo(self, propuesta):
+        try:
+            query = "SELECT * FROM propuesta WHERE titulo = %s"
+            param = (propuesta.getTitulo(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchone()
+            if data is None:
+                return None
+            propuest = Propuesta(id=data[0], titulo=data[1], estado=data[8],
+                             documentacion=data[9], modalidad=data[10],
+                             fecha=data[17])
+            return propuest
+
+        except Exception as e:
+            print e.__class__, e.message
+            return None
+
+#CODIGO = ID
 
     def get_propuesta_codigo(self,propuesta):
         try:

@@ -40,12 +40,28 @@ class EstudianteController:
                                estudiante=propuesta)
 
     def registrar_propuesta(self, titulo, director, modalidad, documentos, id):
-        fecha = datetime.now()
+        fecha = datetime.now().date()
         propuesta = Propuesta(titulo=titulo, director_trabajo=director,
                               modalidad=modalidad, documentacion=documentos,
                               fecha=fecha)
+
+        propuest = PropuestaDao().get_propuesta_titulo(propuesta)
+        if propuest is not None:
+            flash("Ya existe una propuesta con ese titulo", "error")
+            return self.get_registro_propuesta()
+
         if PropuestaDao().crear_propuesta(propuesta):
-            flash("")
+            pro = PropuestaDao().get_propuesta_titulo(propuesta)
+            if Propuesta_UsuarioDao().crear_propuesta_usuario(pro, id):
+                flash("se creo la propuesta exitosamente.", "success")
+                return self.get_registrar_propuesta()
+        else:
+                flash("error al crear la propuesta", "error")
+        return self.get_registro_propuesta()
+
+
+
+
 
 
 

@@ -40,7 +40,6 @@ class Propuesta_UsuarioDao:
             data = self.__cur.fetchone()
             if data is None:
                 return None
-
             user = UsuarioPropuesta(id_estudiante=data[1], id_propuesta=data[2],
                                     estado=data[3])
 
@@ -52,3 +51,17 @@ class Propuesta_UsuarioDao:
         except Exception as e:
             print e.__class__, e.message
             return None
+
+    def crear_propuesta_usuario(self, propuest, id):
+        try:
+            query = "INSERT INTO usuario_propuesta " \
+                    "(id_estudiante, id_propuesta, estado) " \
+                    "VALUES (%s, %s, %s)"
+            param = (id, propuest.getId(), "Activo")
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
