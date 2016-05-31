@@ -134,3 +134,4 @@ class Propuesta:
 
     def setFecha(self, fecha):
         self.__fecha = fecha
+
