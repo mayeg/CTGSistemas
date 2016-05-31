@@ -32,20 +32,11 @@ class PropuestaDao:
             data = self.__cur.fetchone()
             if data is None:
                 return None
-<<<<<<< HEAD
             return Propuesta(id=data[0], titulo=data[1], cod_jurado1=data[7],cod_jurado2=data[8],cod_jurado3=data[9],comentario=data[10],
                              entegrables=data[11],estado=data[12],documentacion=data[13],modalidad=data[14],
                              solicitud_retiro=data[15],solicitud_sustentacion=data[16],solicitud_prorroga=data[17],
                              fecha_comentario=data[18],fecha_correcciones=data[19],fecha_entregables=data[20],
                              fecha=data[21])
-=======
-            return Propuesta(codigo=data[0], titulo=data[1], director_propuesta=data[2],
-                             cod_jurado1=data[3],cod_jurado2=data[4],cod_jurado3=data[5],comentario=data[6],
-                             entegrables=data[7],estado=data[8],documentacion=data[9],modalidad=data[10],
-                             solicitud_retiro=data[11],solicitud_sustentacion=data[12],solicitud_prorroga=data[13],
-                             fecha_comentario=data[14],fecha_correcciones=data[15],fecha_entregables=data[16],
-                             fecha=data[17])
->>>>>>> 8530f3dd1150652b41fb9b542c07a81c120fe30c
         except Exception as e:
             print e.message
             return None
@@ -72,7 +63,7 @@ class PropuestaDao:
             except Exception as e:
                 print e.message
                 return []
-        elif(propuest.getCodigo != "" and propuest.getTitulo() == ""):
+        elif propuest.getCodigo != "" and propuest.getTitulo() == ""x:
             try:
                 query = "SELECT * FROM propuesta WHERE id LIKE %s or id LIKE %s or id LIKE %s"
                 param = (propuest.getCodigo() + "%", "%" + propuest.getCodigo() + "%", "%" + propuest.getCodigo())
