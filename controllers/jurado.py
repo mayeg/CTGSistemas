@@ -21,6 +21,7 @@ class JuradoController:
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
         propuestas = PropuestaDao().get_propuesta_consulta_jurado(usuario)
         if (propuestas != ""):
+            print"hay algo"
             return render_template("jurado/consulta_propuesta.html", usuario=usuario, propuestas=propuestas)
         else:
          flash("No existen Propuestas a cargo.", "error")
@@ -47,3 +48,7 @@ class JuradoController:
         else:
             flash("No existen Trabajos a cargo.", "error")
             return render_template("jurado/consulta_sustentacion.html", usuario=usuario)
+
+    def get_view_enviar_comentario(self,id_propuesta):
+        propuesta = PropuestaDao().get_propuesta_id(id_propuesta)
+        return render_template("jurado/comentario.html",propuesta=propuesta)
