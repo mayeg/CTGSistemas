@@ -1,7 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block nombreU %}{% endblock %}
-{% block username %}{% endblock %}
+{% block titulo %}CTG | Home{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
