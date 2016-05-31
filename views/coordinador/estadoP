@@ -1,0 +1,150 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}Titulo{% endblock %}
+{% block username %}{{titulo}}{% endblock %}
+
+{% block menu %}
+
+<ul class="sidebar-menu">
+    <li>
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Trabajo De Grado</span> <i
+                class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class=" treeview-menu">
+            <li><a href="/coordinador/nombreT"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li><a href="/coordinador/modalidadT"><i class="fa fa-circle-o"></i> Modalidad </a></li>
+            <li ><a href="/coordinador/juradoEstudiante"><i class="fa fa-circle-o"></i> Jurado o Estudiante </a></li>
+            <li><a href="/coordinador/estadoT"><i class="fa fa-circle-o"></i> Estado </a></li>
+
+
+        </ul>
+    </li>
+
+    <li class=" active treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Propuesta</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class=" treeview-menu">
+             <li><a href="/coordinador/nombreP"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li  class = "active" ><a href="/coordinador/estadoP"><i class="fa fa-circle-o"></i> Estado </a></li>
+            <li><a href="/coordinador/cancelarP"><i class="fa fa-circle-o"></i> Cancelar Propuesta </a></li>
+        </ul>
+    </li>
+
+
+    <li >
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Acta</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="/coordinador/consultarA"><i class="fa fa-circle-o"></i> Acta Por Fecha</a></li>
+        </ul>
+    </li>
+</ul>
+
+<li>
+    <a href="/coordinador/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+</li>
+
+{% endblock %}
+
+{% block header %}
+
+<h1>
+    Consultar Propuesta
+    <small>Coordinador</small>
+</h1>
+<ol class="breadcrumb">
+    <li><a href="/coordinador/home"><i class="fa fa-dashboard"></i> Perfil</a></li>
+    <li class="active">Consultas</li>
+</ol>
+
+{% endblock %}
+
+
+{% block contenido %}
+
+<div class="row">
+    <div class="col-xs-5">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title"> Estado
+                </h3>
+
+                <br> </br>
+                 <form action="/coordinador/estadoP" method="POST">
+                <div class="form-group">
+
+                    <select id="tipo_estado" name="estado" class="form-control">
+                        <option value="" selected disabled> Estado... </option>
+                        <option>Activa</option>
+                        <option>Vencida</option>
+                        <option>Proxima a Vencer</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Consultar<i class="fa fa-success"></i></button>
+                     </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+
+    {% if propuestas %}
+    <div class="box-header with-border">
+        <div class="box-header with-border">
+
+
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <h3 class="box-title">Propuestas Encontradas</h3>
+                        </div>
+                        <div class="box-body">
+                             <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Titulo</th>
+                                    <th>Director</th>
+                                    <th>Modalidad</th>
+                                    <th>Estado</th>
+                                    <th>Comentarios</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for propuesta in propuestas %}
+                                <tr>
+                                    <td>{{propuesta.getTitulo()}}</td>
+                                    <td>{{propuesta.getDirector_trabajo()}}</td>
+                                    <td>{{propuesta.getModalidad()}}</td>
+                                    <td>{{propuesta.getEstado()}}</td>
+                                    <td>{{propuesta.getComentario()}}</td>
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            No se ha realizado ninguna consulta.
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+{% endblock%}
