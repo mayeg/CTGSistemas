@@ -164,7 +164,7 @@ class TrabajoGradoDao:
 
     def get_trabajos_sin_jurados(self):
         try:
-            query = "SELECT * FROM  trabajo_de_grado WHERE cod_jurado1 =  '' AND cod_jurado2 =  '' AND cod_jurado3 =  '' "
+            query = "SELECT * FROM  trabajo_de_grado WHERE cod_jurado1 IS NULL AND cod_jurado2 IS NULL AND cod_jurado3 IS NULL "
             param = ()
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
