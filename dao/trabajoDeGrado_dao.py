@@ -9,7 +9,7 @@ class TrabajoGradoDao:
 
     def get_trabajo_titulo(self, trabajoG):
         try:
-            query = "SELECT * FROM 'trabajo de grado'  WHERE titulo = %s"
+            query = "SELECT * FROM trabajo_de_grado  WHERE titulo = %s"
             param = (trabajoG.getTitulo(),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
@@ -24,7 +24,7 @@ class TrabajoGradoDao:
     def consultar_trabajos(self, trabaj):
         if (trabaj.getTitulo() == "" and trabaj.getCodigo() != ""):
             try:
-                query = "SELECT * FROM `trabajo de grado` WHERE codigo LIKE %s or codigo LIKE %s or codigo LIKE %s"
+                query = "SELECT * FROM trabajo_de_grado WHERE codigo LIKE %s or codigo LIKE %s or codigo LIKE %s"
                 param = (trabaj.getCodigo() + "%", "%" + trabaj.getCodigo() + "%", "%" + trabaj.getCodigo())
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
@@ -42,7 +42,7 @@ class TrabajoGradoDao:
 
         if (trabaj.getTitulo() != "" and trabaj.getCodigo() == ""):
             try:
-                query = "SELECT * FROM `trabajo de grado` WHERE titulo LIKE %s or titulo LIKE %s or titulo LIKE %s"
+                query = "SELECT * FROM trabajo_de_grado WHERE titulo LIKE %s or titulo LIKE %s or titulo LIKE %s"
                 param = (trabaj.getTitulo() + "%", "%" + trabaj.getTitulo() + "%", "%" + trabaj.getTitulo())
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
@@ -60,7 +60,7 @@ class TrabajoGradoDao:
 
         if (trabaj.getTitulo() != "" and trabaj.getCodigo() != ""):
             try:
-                query = "SELECT * FROM `trabajo de grado` WHERE titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
+                query = "SELECT * FROM trabajo_de_grado WHERE titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
                         "titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
                         "titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or titulo LIKE %s AND codigo LIKE %s or " \
                         "titulo LIKE %s AND codigo LIKE %s"
@@ -86,7 +86,7 @@ class TrabajoGradoDao:
 
     def get_trabajo_codigo(self, codigo):
         try:
-            query = "SELECT * FROM `trabajo de grado`  WHERE codigo = %s"
+            query = "SELECT * FROM trabajo_de_grado  WHERE codigo = %s"
             param = (codigo,)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
@@ -101,7 +101,7 @@ class TrabajoGradoDao:
 
     def registrar_nota(self,trabajo):
         try:
-            query = "UPDATE `trabajo de grado` SET nota= %s WHERE codigo=%s "
+            query = "UPDATE trabajo_de_grado SET nota= %s WHERE codigo=%s "
 
             param = (trabajo.getNota(), trabajo.getCodigo())
             self.__cur.execute(query, param)
@@ -114,7 +114,7 @@ class TrabajoGradoDao:
 
     def agregar_fechas_correcciones(self,trabajo):
         try:
-            query = "UPDATE `trabajo de grado` SET fecha_correcciones= %s WHERE codigo=%s "
+            query = "UPDATE trabajo_de_grado SET fecha_correcciones= %s WHERE codigo=%s "
 
             param = (trabajo.getFecha_Correcciones(), trabajo.getCodigo())
             self.__cur.execute(query, param)
@@ -128,7 +128,7 @@ class TrabajoGradoDao:
 
     def get_trabajos_sin_sustentacion(self):
         try:
-            query = "SELECT * FROM  `trabajo de grado` WHERE  fecha_sustentacion ='' AND  lugar_sustentacion ='' " \
+            query = "SELECT * FROM  trabajo_de_grado WHERE  fecha_sustentacion ='' AND  lugar_sustentacion ='' " \
                     "AND  hora_sustentacion =''"
             param = ()
             self.__cur.execute(query, param)
@@ -148,7 +148,7 @@ class TrabajoGradoDao:
 
     def agregar_datos_sustentacion(self,trabajo):
         try:
-            query = "UPDATE `trabajo de grado` SET fecha_sustentacion= %s, lugar_sustentacion= %s, hora_sustentacion= %s" \
+            query = "UPDATE trabajo_de_grado SET fecha_sustentacion= %s, lugar_sustentacion= %s, hora_sustentacion= %s" \
                     "WHERE codigo=%s"
 
             param = (trabajo.getFecha_Sustentacion(),trabajo.getLugar_Sustentacion(),trabajo.getHora_Sustentacion(),
@@ -164,7 +164,7 @@ class TrabajoGradoDao:
 
     def get_trabajos_sin_jurados(self):
         try:
-            query = "SELECT * FROM  `trabajo de grado` WHERE cod_jurado1 =  '' AND cod_jurado2 =  '' AND cod_jurado3 =  '' "
+            query = "SELECT * FROM  trabajo_de_grado WHERE cod_jurado1 =  '' AND cod_jurado2 =  '' AND cod_jurado3 =  '' "
             param = ()
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
@@ -182,7 +182,7 @@ class TrabajoGradoDao:
 
     def asignar_jurados_trabajo(self, trabajo, jurado1, jurado2, jurado3):
         try:
-            query = "UPDATE `trabajo de grado` SET cod_jurado1= %s, cod_jurado2= %s, cod_jurado3= %s WHERE titulo=%s "
+            query = "UPDATE trabajo_de_grado SET cod_jurado1= %s, cod_jurado2= %s, cod_jurado3= %s WHERE titulo=%s "
 
             param = (jurado1, jurado2, jurado3, trabajo)
             self.__cur.execute(query, param)
