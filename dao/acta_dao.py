@@ -75,10 +75,9 @@ class ActaDao:
 
         # SOLO TITULO
         elif (acta.getTitulo() != "" and acta.getTipo() == "<-- No Selected -->" and acta.getFecha() == ""):
-
             try:
-                query = "SELECT * FROM acta WHERE titulo = %s"
-                param = (acta.getTitulo(),)
+                query = "SELECT * FROM acta WHERE titulo LIKE %s or titulo LIKE %s or titulo LIKE %s"
+                param = ("%"+acta.getTitulo(),"%"+acta.getTitulo()+"%",acta.getTitulo()+"%")
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
                 resultado = list()
@@ -92,6 +91,7 @@ class ActaDao:
             except Exception as e:
                 print e.message
                 return []
+
 
         elif (acta.getTitulo() == "" and acta.getTipo() != "" and acta.getFecha() == ""):
             try:
