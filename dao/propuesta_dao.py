@@ -72,10 +72,18 @@ class PropuestaDao:
         elif(propuest.getCodigo() != "" and propuest.getTitulo() != ""):
             try:
                 print "entro "
-                query = "SELECT * FROM propuesta WHERE id  LIKE %s or id  LIKE %s or id  LIKE %s" \
-                        "AND titulo LIKE %s or titulo LIKE %s or titulo LIKE %s"
-                param = (propuest.getCodigo() + "%", "%" + propuest.getCodigo() + "%", "%" + propuest.getCodigo(),
-                         propuest.getTitulo() + "%", "%" + propuest.getTitulo() + "%", "%" + propuest.getTitulo())
+                query = "SELECT * FROM propuesta WHERE titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or " \
+                        "titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or " \
+                        "titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or titulo LIKE %s AND id LIKE %s or " \
+                        "titulo LIKE %s AND id LIKE %s"
+                param = (propuest.getTitulo() + "%",propuest.getCodigo() + "%",propuest.getTitulo() + "%", "%" + propuest.getCodigo() + "%",
+                         propuest.getTitulo() + "%","%" + propuest.getCodigo(),"%" + propuest.getTitulo() + "%",propuest.getCodigo() + "%",
+                         "%" + propuest.getTitulo() + "%","%" + propuest.getCodigo() + "%","%" + propuest.getTitulo() + "%","%" + propuest.getCodigo(),
+                         "%" + propuest.getTitulo(),propuest.getCodigo() + "%","%" + propuest.getTitulo(),"%" + propuest.getCodigo() + "%",
+                         "%" + propuest.getTitulo(),"%" + propuest.getCodigo())
+                # propuest.getCodigo() + "%", "%" + propuest.getCodigo() + "%", "%" + propuest.getCodigo(),
+                # propuest.getTitulo() + "%", "%" + propuest.getTitulo() + "%", "%" + propuest.getTitulo()
+
                 self.__cur.execute(query, param)
                 data = self.__cur.fetchall()
                 resultado = list()
@@ -223,6 +231,8 @@ class PropuestaDao:
             print e.__class__
             print e.message
             return False
+
+
     
     def get_propuesta_consulta_jurado(self, jurado):
             try:
