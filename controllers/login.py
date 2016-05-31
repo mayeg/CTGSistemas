@@ -20,22 +20,20 @@ class Login:
         tipos = TipoUsuarioDao().listar_tipo_usuario()
         if 'usuario' in session:
             tipoU = session['usuario']['tipo']
-            usuario_tipo = Usuario(tipo_usuario=tipoU)
-            usuario = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
-
-            if usuario.getTipoUsuario().getId() == 2:
+            usuario = UsuarioDao().get_usuario_por_codigo(
+                Usuario(codigo=session['usuario']['codigo']))
+            if tipoU == 2:
                 return render_template('secretaria/home.html', titulo="Inicio",
                                        usuario=usuario)
-            elif usuario.getTipoUsuario().getId() == 3:
+            elif tipoU == 3:
                 return render_template('coordinador/home.html', titulo="Inicio",
                                        usuario=usuario)
-            elif usuario.getTipoUsuario().getId() == 4:
+            elif tipoU == 4:
                 return render_template('jurado/home.html', titulo="Inicio",
                                       usuario=usuario)
-            elif usuario.getTipoUsuario().getId() == 5:
+            elif tipoU == 5:
                 return render_template('estudiante/home.html', titulo="Inicio",
                                        usuario=usuario)
-
         return render_template('login/login.html', tipos=tipos)
 
     def get_cambiar_contrasena(self, token):
