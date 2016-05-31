@@ -196,7 +196,7 @@ class TrabajoGradoDao:
 
     def get_trabajo_consulta_jurado(self,jurado):
         try:
-            query = "SELECT * FROM `trabajo de grado`  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
+            query = "SELECT * FROM trabajo_de_grado  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
             param = (jurado.getCodigo(),jurado.getCodigo(),jurado.getCodigo())
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
