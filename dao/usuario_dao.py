@@ -225,3 +225,23 @@ class UsuarioDao:
         except Exception as e:
             print e.__class__
             return False
+    
+    def get_jurados(self, usuario_tipo):
+        try:
+            print "entro a get_jurados"
+            query = "SELECT * FROM usuario WHERE tipo_usuario = %s"
+            param = (usuario_tipo,)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for usuario in data:
+                user = Usuario(id=usuario[0], codigo=usuario[1], cedula=usuario[2],
+                               contrasena=usuario[3], nombres=usuario[4],
+                               apellidos=usuario[5], email=usuario[6])
+                resultado.append(user)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []        
