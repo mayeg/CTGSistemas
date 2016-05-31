@@ -186,3 +186,20 @@ class ActaDao:
                 print e.message
                 return []
 
+    def get_actas(self):
+        try:
+            query = "SELECT * FROM acta"
+            param = ()
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for acta in data:
+                act = Acta(codigo=acta[0], titulo=acta[1], tipo=acta[2], fecha=acta[3], archivo=acta[4],
+                           descripcion=acta[5])
+                resultado.append(act)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
