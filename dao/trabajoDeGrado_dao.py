@@ -190,25 +190,31 @@ class TrabajoGradoDao:
             return False
 
 
-    def get_trabajo_consulta_jurado(self,jurado):
-        try:
-            query = "SELECT * FROM `trabajo de grado`  WHERE cod_jurado1 = %s or cod_jurado2 =%s or cod_jurado3 =%s"
-            param = (jurado.getCodigo(),jurado.getCodigo(),jurado.getCodigo())
-            self.__cur.execute(query, param)
-            data = self.__cur.fetchall()
-            resultado = list()
-            if data is None:
+    def get_propuesta_consulta_jurado(self, jurado):
+            try:
+                print jurado.getCodigo()
+                query = "SELECT * FROM  `propuesta` WHERE  `cod_jurado1` = %s OR  `cod_jurado2` =%s " \
+                        "OR  `cod_jurado3` =%s"
+                param = (jurado.getCodigo(), jurado.getCodigo(), jurado.getCodigo())
+                self.__cur.execute(query, param)
+                data = self.__cur.fetchall()
+                resultado = list()
+                if data is None:
+                    return []
+                for propuesta in data:
+                    pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
+                                    cod_jurado1=propuesta[3], cod_jurado2=propuesta[4], cod_jurado3=propuesta[5],
+                                    comentario=propuesta[6],
+                                    entegrables=propuesta[7], estado=propuesta[8], documentacion=propuesta[9],
+                                    modalidad=propuesta[10],
+                                    solicitud_retiro=propuesta[11], solicitud_sustentacion=propuesta[12],
+                                    solicitud_prorroga=propuesta[13],
+                                    fecha_comentario=propuesta[14], fecha_correcciones=propuesta[15],
+                                    fecha_entregables=propuesta[16],
+                                    fecha=propuesta[17])
+                    print pro.getCodigo()
+                    resultado.append(pro)
+                return resultado
+            except Exception as e:
+                print e.message
                 return []
-            for trabajoG in data:
-                pro = TrabajoGrado(codigo=trabajoG[0], titulo=trabajoG[1], cod_estudiante1=trabajoG[3],
-                                   cod_estudiante2=trabajoG[4],cod_estudiante3=trabajoG[5], cod_estudiante4=trabajoG[6],
-                                   cod_jurado1=trabajoG[7], cod_jurado2=trabajoG[8], cod_jurado3=trabajoG[9],
-                                   modalidad=[10], correciones=trabajoG[11],documentacion=trabajoG[12],
-                                   estado=trabajoG[13], protocolo=trabajoG[14],fecha_sustentacion=trabajoG[15],
-                                   lugar_sustentacion=trabajoG[16],fecha_correcciones=trabajoG[17],
-                                   fecha=trabajoG[18],nota=trabajoG[19],hora_sustentacion=trabajoG[20])
-                resultado.append(pro)
-            return resultado
-        except Exception as e:
-            print e.message
-            return []
