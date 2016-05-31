@@ -8,7 +8,6 @@ secretaria = Blueprint("secretaria", __name__)
 
 @secretaria.route("/home", methods=["GET"])
 def home():
-
         return Login().get_home_usuario()
 
 @secretaria.route("/configuracion", methods=["GET", "POST"])
@@ -23,45 +22,7 @@ def cambiar_contrasena():
 @secretaria.route("/registrar/jurado", methods=["GET", "POST"])
 def registrar_jurados():
     if request.method == "GET":
-        return SecretariaController().get_registrar_jurado()
-    codigo = request.form.get('codigo', None)
-    nombres = request.form.get('nombres', None)
-    apellidos = request.form.get('apellidos', None)
-    cedula = request.form.get('cedula', None)
-    email = request.form.get('email', None)
-    contrasena = request.form.get('contrasena', None)
-    tipo_usuario = "4"
-    return SecretariaController().crear_jurado(codigo,
-                                             nombres, apellidos, cedula, email,
-                                             contrasena, tipo_usuario)
-@secretaria.route("/editar/<id_usuario>", methods=["GET", "POST"])
-def editar_usuario(id_usuario):
-    if request.method == "GET":
-        return SecretariaController().get_editar_jurado(id_usuario)
-    nombres = request.form.get('nombres', None)
-    apellidos = request.form.get('apellidos', None)
-    cedula = request.form.get('cedula', None)
-    email = request.form.get('email', None)
-    tipo_usuario = request.form.get('tipo_usuario', 0)
-    id = id_usuario
-    return SecretariaController().editar_usuario(nombres, apellidos, cedula,
-                                                 email, tipo_usuario, id)
-
-@secretaria.route("/listar_jurado", methods=["GET"])
-def listar_jurados():
-    pagina = request.args.get('pagina', 1)
-    codigo = request.args.get('codigo', "")
-    nombre = request.args.get('nombres', "")
-    cedula = request.args.get('cedula', "")
-    apellidos = request.args.get('apellidos', "")
-    return SecretariaController().get_lista_jurados(
-        pagina, codigo, nombre, cedula, apellidos)
-
-
-@secretaria.route("/registrar/trabajo_grado", methods=["GET", "POST"])
-def registrar_trabajo_grado():
-    if request.method == "GET":
-        return SecretariaController().get_registrar_jurado()
+        return UsuarioController().get_registrar_jurado()
     codigo = request.form.get('codigo', None)
     nombres = request.form.get('nombres', None)
     apellidos = request.form.get('apellidos', None)
@@ -72,6 +33,8 @@ def registrar_trabajo_grado():
     return UsuarioController().crear_usuario(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)
+
+
 
 @secretaria.route("/consultar_acta", methods=["GET","POST"])
 def consultar_acta():
@@ -138,8 +101,8 @@ def modificarFechas_propuesta(codigo_propuesta):
         return SecretariaController().get_agregar_fechas_propuesta(codigo_propuesta)
     fechaCorrecciones = request.form.get('fechaCorrecciones',None)
     fechaComentarios = request.form.get('fechaComentarios',None)
-    print "lo que recibe: "+fechaComentarios
-    return SecretariaController().modificar_fechas_propuesta(codigo_propuesta,fechaCorrecciones,fechaComentarios)
+    fechaEntregables = request.form.get('fechaEntregables',None)
+    return SecretariaController().modificar_fechas_propuesta(codigo_propuesta,fechaCorrecciones,fechaComentarios,fechaEntregables)
 
 @secretaria.route("/habilitarEntregables_propuesta/<codigo_propuesta>", methods = ["GET","POST"])
 def habilitar_envios_entregables(codigo_propuesta):
@@ -147,3 +110,65 @@ def habilitar_envios_entregables(codigo_propuesta):
         return SecretariaController().get_habilitar_envio_entregables(codigo_propuesta)
     entregable = request.form.get('entregable',None)
     return SecretariaController().habilitar_envio_entregables(codigo_propuesta,entregable)
+
+
+@secretaria.route("/asignar_jurado_propuesta", methods = ["GET","POST"])
+def asignar_jurados_propuesta():
+    if(request.method=="GET"):
+        return SecretariaController().get_view_asignar_jurado_propuesta()
+    propuesta = request.form.get('propuesta',None)
+    jurado1 = request.form.get('jurado1',None)
+    jurado2 = request.form.get('jurado2',None)
+    jurado3 = request.form.get('jurado3',None)
+    return SecretariaController().asignar_jurado_propuesta(propuesta,jurado1,jurado2,jurado3)
+
+
+@secretaria.route("/consultar_trabajo_de_grado", methods=["GET","POST"])
+def consultar_trabajo_de_grado():
+    if(request.method=="GET"):
+        return SecretariaController().get_view_consultar_trabajo_de_grado()
+    titulo = request.form.get('titulo',None)
+    codigo = request.form.get('codigo',None)
+    return SecretariaController().consultar_trabajo_de_grado(titulo,codigo)
+
+
+@secretaria.route("/registrar_nota/<codigo_trabajo>",methods=["GET","POST"])
+def registrar_nota(codigo_trabajo):
+    if(request.method=="GET"):
+        return SecretariaController().get_view_registrar_nota(codigo_trabajo)
+    nota = request.form.get('nota',None)
+    return SecretariaController().registrar_nota(codigo_trabajo,nota)
+
+@secretaria.route("/agregar_fechas_trabajo_de_grado/<codigo_trabajo>",methods=["GET","POST"])
+def agregar_fechas_trabajo(codigo_trabajo):
+    if(request.method=="GET"):
+        return SecretariaController().get_view_agregar_fechas_trabajo(codigo_trabajo)
+    fechaCorrecciones = request.form.get('fechaCorrecciones',None)
+    return SecretariaController().agregar_fechas_trabajo(codigo_trabajo,fechaCorrecciones)
+
+
+@secretaria.route("/agregar_datos_sustentacion",methods=["GET","POST"])
+def agregar_datos_sustentacion():
+    if(request.method=="GET"):
+        return SecretariaController().get_view_agregar_datos_sustentacion()
+    trabajo = request.form.get('trabajo',None)
+    lugar = request.form.get('lugar',None)
+    fecha = request.form.get('fecha',None)
+    hora = request.form.get('hora',None)
+    return SecretariaController().agregar_datos_sustentacion(trabajo,lugar,fecha,hora)
+
+
+@secretaria.route("/asignar_jurados_trabajo",methods=["GET","POST"])
+def asignar_jurados_trabajo():
+    if(request.method=="GET"):
+        return SecretariaController().get_view_asignar_jurado_trabajo()
+    trabajo = request.form.get('trabajo', None)
+    jurado1 = request.form.get('jurado1', None)
+    jurado2 = request.form.get('jurado2', None)
+    jurado3 = request.form.get('jurado3', None)
+    return SecretariaController().asignar_jurado_trabajo(trabajo, jurado1, jurado2, jurado3)
+
+@secretaria.route("/registrar_protocolo",methods=["GET","POST"])
+def registrar_protocolo():
+    if(request.method=="GET"):
+        return SecretariaController().get_view_registrar_protocolo()
