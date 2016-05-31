@@ -1,127 +1,176 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}Titulo{% endblock %}
 {% block username %}{{titulo}}{% endblock %}
-{% block header%}
-{% endblock %}
+
 {% block menu %}
 
 <ul class="sidebar-menu">
-        <li class="header">MENU PRINCIPAL</li>
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Consultar Trabajo De Grado</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li ><a href="nombreT.html"><i class="fa fa-circle-o"></i>  Nombre </a></li>
-            <li ><a href="modalidadT.html"><i class="fa fa-circle-o"></i>  Modalidad </a></li>
-            <li><a href="juradoEstudiante.html"><i class="fa fa-circle-o"></i>  Jurado o Estudiante </a></li>
-            <li ><a href="estado.html"><i class="fa fa-circle-o"></i> Estado </a></li>
+    <li class=" active treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Trabajo De Grado</span> <i
+                class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class=" treeview-menu">
+            <li><a href="/coordinador/nombreT"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li><a href="/coordinador/modalidadT"><i class="fa fa-circle-o"></i> Modalidad </a></li>
+            <li ><a href="/coordinador/juradoEstudiante"><i class="fa fa-circle-o"></i> Jurado o Estudiante </a></li>
+            <li class = "active"><a href="/coordinador/estadoT"><i class="fa fa-circle-o"></i> Estado </a></li>
 
 
-          </ul>
-        </li>
+        </ul>
+    </li>
 
- <li class="  treeview">
-          <a href="#">
+    <li >
+        <a href="#">
             <i class="fa fa-dashboard"></i> <span>Consultar Propuesta</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li ><a href="nombreP.html"><i class="fa fa-circle-o"></i>  Nombre </a></li>
-            <li><a href="estadoP.html"><i class="fa fa-circle-o"></i> Estado </a></li>
-            <li><a href="cancelarP.html"><i class="fa fa-circle-o"></i> Cancelar  Propuesta </a></li>
-          </ul>
-        </li>
+        </a>
+        <ul class="treeview-menu">
+              <li><a href="/coordinador/nombreP"><i class="fa fa-circle-o"></i> Nombre </a></li>
+            <li><a href="/coordinador/estadoP"><i class="fa fa-circle-o"></i> Estado </a></li>
+            <li><a href="/coordinador/cancelarP"><i class="fa fa-circle-o"></i> Cancelar Propuesta </a></li>
+        </ul>
+    </li>
 
 
-         <li class=" treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Otras Consultas</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li ><a href="estudiantesM.html"><i class="fa fa-circle-o"></i> Estudiantes Por Modalidad</a></li>
-            <li><a href="consultaA.html"><i class="fa fa-circle-o"></i> Acta Por Fecha</a></li>
-          </ul>
-        </li>
+    <li >
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Consultar Acta</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="/coordinador/consultarA"><i class="fa fa-circle-o"></i> Acta Por Fecha</a></li>
+        </ul>
+    </li>
 </ul>
+</li>
+<li>
+    <a href="/coordinador/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+</li>
 {% endblock %}
+
+{% block header %}
+
+
+<h1>
+    Consultar Trabajo de Grado
+    <small>Coordinador</small>
+</h1>
+<ol class="breadcrumb">
+    <li><a href="/coordinador/home"><i class="fa fa-dashboard"></i> Perfil</a></li>
+    <li class="active">Consultas</li>
+</ol>
+
+{% endblock %}
+
 {% block contenido %}
-
-<div class="content-wrapper" >
- <section class="content-header">
-      <h1>
-        Consultar Trabajo de Grado
-        <small>Coordinador</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="principal.html"><i class="fa fa-dashboard"></i> Perfil</a></li>
-        <li class="active">Consultas</li>
-      </ol>
-    </section>
-
-    <section class= "content-header">
-       <div class = "row">
-          <div class= "col-xs-5">
-             <div class = "box box-info">
-               <div class="box-header with-border">
-               <label> Estado </label>
+<div class="row">
+    <div class="col-xs-5">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title"> Consultar Estado </h3>
+<br> </div>
+            <form action="/coordinador/estadoT" method="POST">
                 <div class="form-group">
-                  <select class="form-control">
-                    <option>Sustentados</option>
-                    <option>Aprobados</option>
+                  <select id="estado" name="estado" class="form-control"> >
+                      <option value="" selected disabled> Estado ... </option>
+                    <option>Activo</option>
+                    <option>Aprobado</option>
+                      <option>Correciones</option>
+
                   </select>
                 </div>
 
-                  <label> Año </label>
-                   <div class="form-group">
-
-                  <select class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+                <div class="form-group">
+                  <select id="año" name="trabajo_a" class="form-control"> >
+                      <option value="" selected disabled> Año.... </option>
+                    <option>2000</option>
+                    <option>2001</option>
+                    <option>2002</option>
+                    <option>2003</option>
+                    <option>2004</option>
+                    <option>2005</option>
+                    <option>2006</option>
+                    <option>2007</option>
+                    <option>2008</option>
+                    <option>2009</option>
+                    <option>2010</option>
+                    <option>2011</option>
+                    <option>2012</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
                   </select>
-                  </div>
+                </div>
 
-            <button type="submit" class="btn btn-primary">Consultar<i class="fa fa-success"></i></button>
-      </div>
-   </div>
-</div>
- </div>
- </section>
+                    <button type="submit" class="btn btn-primary">Consultar<i class="fa fa-success"></i></button>
 
-
- <section class="content-header">
-
-     <div class="box-header with-border">
-      <div class="box-header with-border">
-      <div class = "row">
-      <div class="col-xs-10">
-          <div class="box box-info">
-            <div class="box-body">
-              <h3 class="box-title">Trabajos Encontrados</h3>
+                </form>
             </div>
-               <div class="box-body">
-              <table id="trabajoGradoN" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Codigo</th>
-                  <th>Titulo</th>
-                  <th>Modalidad</th>
-                  <th>Estado</th>
-                  <th>Estudiantes</th>
-                  <th>Jurados</th>
-                </tr>
-                </thead>
-                </table>
-              </div>
-             </div>
+        </div>
+    </div>
+
+
+<section class="content">
+
+    {% if trabajos %}
+    <div class="box-header with-border">
+        <div class="box-header with-border">
+
+
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <h3 class="box-title">Trabajos Encontrados</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>Titulo</th>
+                                    <th>Director</th>
+                                    <th>Modalidad</th>
+                                    <th>Estado</th>
+                                    <th>Nota</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for trabajo in trabajos %}
+                                <tr>
+
+                                    <td>{{trabajo.getTitulo()}}</td>
+                                    <td>{{trabajo.getDirector_proyecto()}}</td>
+                                    <td>{{trabajo.getModalidad()}}</td>
+                                    <td>{{trabajo.getEstado()}}</td>
+                                     <td>{{trabajo.getNota()}}</td>
+
+
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-           </div>
-          </div>
-         </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            No se ha realizado  ninguna consulta.
+        </div>
+    </div>
+    {% endif %}
+</section>
 
-      </section>
 
 
-</div>
+
+{% endblock%}
