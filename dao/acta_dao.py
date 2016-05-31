@@ -111,11 +111,78 @@ class ActaDao:
                 print e.message
                 return []
         elif (acta.getTitulo() == "" and acta.getTipo() != "" and acta.getFecha() != ""):
-            return None
+            try:
+                query = "SELECT * FROM acta WHERE tipo = %s AND fecha = %s"
+                param = (acta.getTipo(),acta.getFecha())
+                self.__cur.execute(query, param)
+                data = self.__cur.fetchall()
+                resultado = list()
+                if data is None:
+                    return []
+                for acta in data:
+                    act = Acta(codigo=acta[0], titulo=acta[1], tipo=acta[2], fecha=acta[3], archivo=acta[4],
+                               descripcion=acta[5])
+                    resultado.append(act)
+                return resultado
+            except Exception as e:
+                print e.message
+                return []
 
-        elif (acta.getTitulo() != "" and acta.getTipo() == "" and acta.getFecha() != ""):
-            return None
+        elif (acta.getTitulo() != "" and acta.getTipo() == "<-- No Selected -->" and acta.getFecha() != ""):
+            try:
+                query = "SELECT * FROM acta WHERE titulo LIKE %s AND fecha = %s or titulo LIKE %s AND fecha = %s" \
+                        "or titulo LIKE %s AND fecha = %s"
+                param = ("%"+acta.getTitulo(), acta.getFecha(),"%"+acta.getTitulo()+"%", acta.getFecha(),
+                         acta.getTitulo()+"%", acta.getFecha())
+                self.__cur.execute(query, param)
+                data = self.__cur.fetchall()
+                resultado = list()
+                if data is None:
+                    return []
+                for acta in data:
+                    act = Acta(codigo=acta[0], titulo=acta[1], tipo=acta[2], fecha=acta[3], archivo=acta[4],
+                               descripcion=acta[5])
+                    resultado.append(act)
+                return resultado
+            except Exception as e:
+                print e.message
+                return []
         elif (acta.getTitulo() != "" and acta.getTipo() != "" and acta.getFecha() == ""):
-            return None
+            try:
+                query = "SELECT * FROM acta WHERE titulo LIKE %s AND tipo = %s or titulo LIKE %s AND tipo = %s" \
+                        "or titulo LIKE %s AND tipo = %s"
+                param = ("%" + acta.getTitulo(), acta.getTipo(), "%" + acta.getTitulo() + "%", acta.getTipo(),
+                         acta.getTitulo() + "%", acta.getTipo())
+                self.__cur.execute(query, param)
+                data = self.__cur.fetchall()
+                resultado = list()
+                if data is None:
+                    return []
+                for acta in data:
+                    act = Acta(codigo=acta[0], titulo=acta[1], tipo=acta[2], fecha=acta[3], archivo=acta[4],
+                               descripcion=acta[5])
+                    resultado.append(act)
+                return resultado
+            except Exception as e:
+                print e.message
+                return []
         elif (acta.getTitulo() != "" and acta.getTipo() != "" and acta.getFecha() != ""):
-            return None
+            try:
+                query = "SELECT * FROM acta WHERE titulo LIKE %s AND tipo = %s AND fecha = %s or titulo LIKE %s AND tipo = %s" \
+                        "AND fecha = %s or titulo LIKE %s AND tipo = %s AND fecha = %s"
+                param = ("%" + acta.getTitulo(), acta.getTipo(),acta.getFecha(), "%" + acta.getTitulo() + "%", acta.getTipo(),
+                         acta.getFecha(), acta.getTitulo() + "%", acta.getTipo(),acta.getFecha())
+                self.__cur.execute(query, param)
+                data = self.__cur.fetchall()
+                resultado = list()
+                if data is None:
+                    return []
+                for acta in data:
+                    act = Acta(codigo=acta[0], titulo=acta[1], tipo=acta[2], fecha=acta[3], archivo=acta[4],
+                               descripcion=acta[5])
+                    resultado.append(act)
+                return resultado
+            except Exception as e:
+                print e.message
+                return []
+
