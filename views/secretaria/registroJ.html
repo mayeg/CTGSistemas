@@ -1,6 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Registro de Usuario{% endblock %}
-{% block username %}{% endblock %}
+{% block titulo %}CTG | Registro {% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block header%}
 
 
