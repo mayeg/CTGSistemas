@@ -236,20 +236,16 @@ class PropuestaDao:
                 if data is None:
                     return []
                 for propuesta in data:
-
                     pro = Propuesta(codigo=propuesta[0], titulo=propuesta[1], director_propuesta=propuesta[2],
-                                    cod_estudiante1=propuesta[3],
-                                    cod_estudiante2=propuesta[4], cod_estudiante3=propuesta[5],
-                                    cod_estudiante4=propuesta[6],
-                                    cod_jurado1=propuesta[7], cod_jurado2=propuesta[8], cod_jurado3=propuesta[9],
-                                    comentario=propuesta[10],
-                                    entegrables=propuesta[11], estado=propuesta[12], documentacion=propuesta[13],
-                                    modalidad=propuesta[14],
-                                    solicitud_retiro=propuesta[15], solicitud_sustentacion=propuesta[16],
-                                    solicitud_prorroga=propuesta[17],
-                                    fecha_comentario=propuesta[18], fecha_correcciones=propuesta[19],
-                                    fecha_entregables=propuesta[20],
-                                    fecha=propuesta[21])
+                                    cod_jurado1=propuesta[3], cod_jurado2=propuesta[4], cod_jurado3=propuesta[5],
+                                    comentario=propuesta[6],
+                                    entegrables=propuesta[7], estado=propuesta[8], documentacion=propuesta[9],
+                                    modalidad=propuesta[10],
+                                    solicitud_retiro=propuesta[11], solicitud_sustentacion=propuesta[12],
+                                    solicitud_prorroga=propuesta[13],
+                                    fecha_comentario=propuesta[14], fecha_correcciones=propuesta[15],
+                                    fecha_entregables=propuesta[16],
+                                    fecha=propuesta[17])
                     print pro.getCodigo()
                     resultado.append(pro)
                 return resultado
