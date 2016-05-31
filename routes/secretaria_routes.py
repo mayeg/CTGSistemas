@@ -30,7 +30,7 @@ def registrar_jurados():
     cedula = request.form.get('cedula', None)
     email = request.form.get('email', None)
     contrasena = request.form.get('contrasena', None)
-    tipo_usuario = request.form.get('tipo_usuario', 0)
+    tipo_usuario = "4"
     return SecretariaController().crear_jurado(codigo,
                                              nombres, apellidos, cedula, email,
                                              contrasena, tipo_usuario)

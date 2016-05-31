@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CTG Sistemas| Registro</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+          name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet"
+          href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/AdminLTE.min.css') }}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="notificacion">
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">×
+        </button>
+        {{message}}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith
+%}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Registro de Usuario</h3>
+    </div>
+    <form class="form-horizontal" action="/usuarios/registro" method="POST"
+          id="form-registro">
+        <div class="box-body">
+            <p>En esté formulario, usted podra registrar los usuarios del
+                sistema.</p>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="codigo">Codigo: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="codigo"
+                           placeholder="Codigo" name="codigo"
+                           value="{{usuario['codigo']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="nombres">Nombres: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="nombres"
+                           placeholder="Nombres" name="nombres"
+                           value="{{usuario['nombres']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="apellidos">Apellidos: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="apellidos"
+                           placeholder="Apellidos" name="apellidos"
+                           value="{{usuario['apellidos']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="cedula">Cedula: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="cedula"
+                           placeholder="Cedula" name="cedula"
+                           value="{{usuario['cedula']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="email">Email: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="text" class="form-control" id="email"
+                           placeholder="Email" name="email"
+                           value="{{usuario['email']}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-12"
+                       for="contrasena">Contraseña: </label>
+                <div class="col-md-5 col-xs-12">
+                    <input type="password" class="form-control" id="contrasena"
+                           placeholder="Contraseña" name="contrasena">
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default" href="/">Volver</a>
+            <button type="submit" class="btn btn-info pull-right">Registrar
+            </button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

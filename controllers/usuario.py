@@ -30,11 +30,9 @@ class UsuarioController:
             'codigo': "", 'nombres': "", 'apellidos': "", 'cedula': "",
             'contrasena': "", 'email': ""
         }
-        tipos = TipoUsuarioDao().listar_tipo_usuario()
-        return render_template("usuarios/registro.html", usuario=usuario,
-                               tipos=tipos)
+        return render_template("registro.html", usuario=usuario)
 
-    def crear_usuario(self, codigo, nombres, apellidos, cedula, email, contrasena,
+    def crear_usuario_estudiante(self, codigo, nombres, apellidos, cedula, email, contrasena,
                       tipo_usuario):
         contrasena = hashlib.sha1(contrasena).hexdigest()
         usuario = Usuario(codigo=codigo, cedula=cedula, contrasena=contrasena,
@@ -47,15 +45,39 @@ class UsuarioController:
         if UsuarioDao().get_usuario_por_codigo(usuario) is not None:
             flash("Ya existe un usuario con el codigo {}.".format(
                 usuario.getCodigo()), "error")
-            tipos = TipoUsuarioDao().listar_tipo_usuario()
             return render_template(
-                "usuarios/registro.html", usuario=usuario_error, tipos=tipos)
+                "/registro.html", usuario=usuario_error)
 
         if UsuarioDao().crear_usuario(usuario):
             flash("El usuario se creo correctamente.", "success")
         else:
             flash("Error al registrar el usuario.", "error")
-        return redirect(url_for("usuarios.listar_usuarios"))
+        return redirect(url_for("login_r.get_home"))
+
+    def crear_usuario_jurado(self, codigo, nombres, apellidos, cedula, email,
+                          contrasena,
+                          tipo_usuario):
+
+        contrasena = hashlib.sha1(contrasena).hexdigest()
+        usuario = Usuario(codigo=codigo, cedula=cedula, contrasena=contrasena,
+                          nombres=nombres, apellidos=apellidos, email=email,
+                          tipo_usuario=tipo_usuario)
+        usuario_error = {
+            'codigo': codigo, 'cedula': cedula, 'nombres': nombres,
+            'apellidos': apellidos, 'email': email
+        }
+        if UsuarioDao().get_usuario_por_codigo(usuario) is not None:
+            flash("Ya existe un usuario con el codigo {}.".format(
+                usuario.getCodigo()), "error")
+            return render_template(
+                "secretaria/registroJ.html", usuario=usuario_error)
+
+        if UsuarioDao().crear_usuario(usuario):
+            flash("El usuario se creo correctamente.", "success")
+        else:
+            flash("Error al registrar el usuario.", "error")
+        return redirect(url_for("secretaria.home"))
+
 
     def eliminar_usuario(self, id_usuario):
         usuario = Usuario(id=id_usuario)
