@@ -1,3 +1,5 @@
+import os
+
 from flask.globals import session
 from flask.helpers import flash
 from flask import render_template, redirect, url_for, session
@@ -8,6 +10,7 @@ from dao.usuario_dao import UsuarioDao
 from dto.propuesta import Propuesta
 from dto.usuario import Usuario
 from dto.usuario_propuesta import UsuarioPropuesta
+from werkzeug.utils import secure_filename
 
 
 class EstudianteController:
@@ -33,13 +36,14 @@ class EstudianteController:
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
                     id_propuesta=propuesta.getId_propuesta().getId()))
 
-
         return render_template("estudiante/home.html", propuesta=pro,
                                estudiante=propuesta)
 
     def registrar_propuesta(self, titulo, director, modalidad, file, id):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        from proyecto import UPLOAD_FOLDER
+
+        filename = str(datetime.now().microsecond) + secure_filename(file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
         fecha = datetime.now().date()
         propuesta = Propuesta(titulo=titulo, director_trabajo=director,
                               modalidad=modalidad, documentacion=filename,
