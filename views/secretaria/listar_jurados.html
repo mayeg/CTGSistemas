@@ -1,0 +1,125 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}CTG | Home{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
+{% block menu %}
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Gestión Acta</span> <i
+            class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="/secretaria/descargar-modificar_acta"><i class="fa fa-circle-o"></i> Descargar/Modificiar Acta</a>
+        </li>
+        <li><a href="/secretaria/registrar_acta"><i class="fa fa-circle-o"></i> Registrar Acta</a></li>
+        <li><a href="/secretaria/consultar_acta"><i class="fa fa-circle-o"></i> Consultar Acta</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-files-o"></i>
+        <span>Gestión Propuesta</span>
+        <span class="label label-primary pull-right"></span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="/secretaria/consultar_propuesta"><i class="fa fa-circle-o"></i> Consultar Propuestas</a>
+        </li>
+        <li><a href="/secretaria/asignar_jurado_propuesta"><i class="fa fa-circle-o"></i> Asignar Jurado en
+            Propuesta</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-pie-chart"></i>
+        <span>Gestión Trabajo de Grado</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="/secretaria/consultar_trabajo_de_grado"><i class="fa fa-circle-o"></i> Consultar Trabajo de
+            Grado</a></li>
+        <li><a href="/secretaria/agregar_datos_sustentacion"><i class="fa fa-circle-o"></i> Agregar datos
+            Sustentación</a></li>
+        <li><a href="/secretaria/asignar_jurados_trabajo"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-laptop"></i>
+        <span>Protocolos</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="/secretaria/registrar_protocolo"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
+    </ul>
+</li>
+<li><a href="/secretaria/listar_jurados"><i class="fa fa-book"></i> <span>Registrar Jurados</span></a>
+
+</li>
+<li class="treeview">
+    <a href="/secretaria/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+{% endblock %}
+
+{% block contenido %}
+    <div class="row" style="margin-bottom: 15px">
+    <div class="col-md-12 text-right">
+        <a href="/secretaria/registro/jurado" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Registrar Jurado
+        </a>
+    </div>
+</div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Lista de Jurados</h3>
+    </div>
+    <div class="box-body">
+        {% if usuarios %}
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Codigo</th>
+                <th class="text-center">Nombres</th>
+                <th class="text-center">Apellidos</th>
+                <th class="text-center">Cedula</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Tipo</th>
+                <th class="text-center">Opciones</th>
+            </tr>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{usuario.getId()}}</td>
+                <td>{{usuario.getCodigo()}}</td>
+                <td>{{usuario.getNombres()}}</td>
+                <td>{{usuario.getApellidos()}}</td>
+                <td>{{usuario.getCedula()}}</td>
+                <td>{{usuario.getEmail()}}</td>
+                <td class="text-center">
+                    <a href="/usuarios/editar/{{usuario.getId()}}"
+                       class="btn btn-default"><i class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                No existen usuarios registrados en el sistema.
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        Total de usuarios {{total_usuarios}}.
+    </div>
+    <!-- /.box-footer-->
+</div>
+{% endblock %}
+

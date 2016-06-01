@@ -18,10 +18,9 @@ class SecretariaController:
     def __init__(self):
         pass
 
-    def get_lista_jurados(self, pagina, codigo, nombres, cedula, apellidos,
-                          tipoU):
+    def get_lista_jurados(self, pagina, codigo, nombres, cedula, apellidos):
         usuarios = UsuarioDao().get_lista_usuarios(
-            pagina, codigo, nombres, cedula, apellidos, tipoU)
+            pagina, codigo, nombres, cedula, apellidos)
         total_usuarios = UsuarioDao().get_total_usuarios(
             pagina, codigo, nombres, cedula, apellidos)
         total_paginas = (total_usuarios / 10) + 1

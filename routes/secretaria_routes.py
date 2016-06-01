@@ -52,6 +52,7 @@ def editar_usuario(id_usuario):
     return SecretariaController().editar_usuario(nombres, apellidos, cedula,
                                                  email, tipo_usuario, id)
 
+
 @secretaria.route("/listar_jurado", methods=["GET"])
 def listar_jurados():
     pagina = request.args.get('pagina', 1)
@@ -61,22 +62,6 @@ def listar_jurados():
     apellidos = request.args.get('apellidos', "")
     return SecretariaController().get_lista_jurados(
         pagina, codigo, nombre, cedula, apellidos)
-
-
-@secretaria.route("/registrar/trabajo_grado", methods=["GET", "POST"])
-def registrar_trabajo_grado():
-    if request.method == "GET":
-        return SecretariaController().get_registrar_jurado()
-    codigo = request.form.get('codigo', None)
-    nombres = request.form.get('nombres', None)
-    apellidos = request.form.get('apellidos', None)
-    cedula = request.form.get('cedula', None)
-    email = request.form.get('email', None)
-    contrasena = request.form.get('contrasena', None)
-    tipo_usuario = request.form.get('tipo_usuario', 0)
-    return UsuarioController().crear_usuario(codigo,
-                                             nombres, apellidos, cedula, email,
-                                             contrasena, tipo_usuario)
 
 
 @secretaria.route("/consultar_acta", methods=["GET","POST"])

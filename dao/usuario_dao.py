@@ -34,7 +34,7 @@ class UsuarioDao:
                     "WHERE tipo_usuario = %s AND codigo LIKE %s AND nombres " \
                     "LIKE %s AND cedula LIKE %s AND apellidos LIKE %s LIMIT %s " \
                     "OFFSET %s"
-            param = (tipoU, "%"+codigo+"%", "%"+nombres+"%", "%"+cedula+"%",
+            param = (4, "%"+codigo+"%", "%"+nombres+"%", "%"+cedula+"%",
                      "%"+apellidos+"%", limit, offset)
             self.__cur.execute(query, param)
             data = self.__cur.fetchall()
