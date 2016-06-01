@@ -12,8 +12,11 @@ from routes.secretaria_routes import secretaria
 from routes.usuario_routes import usuario
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'views')
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             'uploads')
 app = Flask(__name__, template_folder=tmpl_dir)
 app.secret_key = 'proyecto_ufps'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 mysql = MySQL()
 
 # import routes

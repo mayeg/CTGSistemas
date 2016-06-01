@@ -1,5 +1,5 @@
 from flask.blueprints import Blueprint
-from flask import request, redirect, url_for
+from flask import request, redirect, url_for, send_from_directory
 from flask.globals import session
 from controllers.login import Login
 from controllers.usuario import UsuarioController
@@ -48,6 +48,13 @@ def recordar_contrasena(token=None):
             codigo = request.form.get('codigo', None)
             Login().recordar_contrasena(codigo)
             return redirect(url_for("login.get_home"))
+
+
+@login_r.route("/descargar/<archivo>/", methods=['GET'])
+def descargar_archivo(archivo):
+    from proyecto import UPLOAD_FOLDER
+
+    return send_from_directory(UPLOAD_FOLDER, archivo)
 
 
 @login_r.route("/registrar", methods=["GET", "POST"])
