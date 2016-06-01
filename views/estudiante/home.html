@@ -1,7 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block nombreU %}{% endblock %}
-{% block username %}{% endblock %}
+{% block titulo %}GTG| Home {% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 {% block header%}
 {% endblock %}
 {% block menu %}
@@ -267,14 +271,12 @@
                 <i class="fa fa-plus"></i> Subir Enregable
             </a>
         </div>
-        {% if correciones %}
         <div class=" text-right">
             <a href="/estudiante/subir/correcciones"
                class="btn btn-primary">
                 <i class="fa fa-plus"></i> Subir Correciones
             </a>
         </div>
-        {% endif %}
     </div>
 </div>
 

@@ -59,3 +59,14 @@ def subir_entregables():
         flash('No selecciono el archivo', 'Error')
         return redirect(request.url)
     return EstudianteController().subir_entregable(file, id)
+
+@estudiante.route("/subir/correcciones", methods=["GET", "POST"])
+def subir_correcciones():
+    if request.method == "GET":
+        return EstudianteController().get_subir_correciones()
+    file = request.files['documento']
+    id = session['usuario']['id']
+    if file.filename == '':
+        flash('No selecciono el archivo', 'Error')
+        return redirect(request.url)
+    return EstudianteController().subir_correcciones(file, id)

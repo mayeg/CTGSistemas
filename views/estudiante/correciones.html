@@ -1,5 +1,5 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}GTG| Entegrables {% endblock %}
+{% block titulo %}GTG| Correcciones {% endblock %}
 {% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block username %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
@@ -60,7 +60,7 @@
 
     <div class="box-body">
         <div class="form-group">
-            <form action="/estudiante/subir/entregables" method="post"
+            <form action="/estudiante/subir/correcciones" method="post"
                   enctype="multipart/form-data">
                 <div class="">
                     <label for="exampleInputFile">Documentos</label>

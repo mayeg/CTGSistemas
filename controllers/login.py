@@ -8,6 +8,7 @@ from controllers.secretaria import SecretariaController
 from controllers.emails import EmailController
 from controllers.estudiante import EstudianteController
 from dao.tipo_usuario_dao import TipoUsuarioDao
+from dao.trabajoDeGrado_dao import TrabajoGradoDao
 from dao.usuario_dao import UsuarioDao
 from dto.usuario import Usuario
 
