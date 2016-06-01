@@ -1,6 +1,11 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %}Titulo{% endblock %}
-{% block username %}{{titulo}}{% endblock %}
+{% block titulo %}CTG | Consulta Estado Propuesta {% endblock %}
+{% block username %}{{usuario_u.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario_u.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
 
 {% block menu %}
 
