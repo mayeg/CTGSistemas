@@ -228,7 +228,6 @@ class UsuarioDao:
     
     def get_jurados(self, usuario_tipo):
         try:
-            print "entro a get_jurados"
             query = "SELECT * FROM usuario WHERE tipo_usuario = %s"
             param = (usuario_tipo,)
             self.__cur.execute(query, param)

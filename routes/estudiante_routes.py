@@ -1,5 +1,7 @@
 from flask.blueprints import Blueprint
 from flask import request, session
+from flask.helpers import flash
+from werkzeug.utils import redirect
 
 from controllers.estudiante import EstudianteController
 from controllers.login import Login
@@ -45,3 +47,15 @@ def asignar_estudiante():
     if request.method == "POST":
         codigo = request.form.get('codigo', None)
         return EstudianteController().asignar_propuesta(codigo)
+
+
+@estudiante.route("/subir/entregables", methods=["GET", "POST"])
+def subir_entregables():
+    if request.method == "GET":
+        return EstudianteController().get_subir_entregable()
+    file = request.files['documento']
+    id = session['usuario']['id']
+    if file.filename == '':
+        flash('No selecciono el archivo', 'Error')
+        return redirect(request.url)
+    return EstudianteController().subir_entregable(file, id)

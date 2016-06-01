@@ -47,7 +47,7 @@ def editar_usuario(id_usuario):
     apellidos = request.form.get('apellidos', None)
     cedula = request.form.get('cedula', None)
     email = request.form.get('email', None)
-    tipo_usuario = request.form.get('tipo_usuario', 0)
+    tipo_usuario = 4
     id = id_usuario
     return SecretariaController().editar_usuario(nombres, apellidos, cedula,
                                                  email, tipo_usuario, id)

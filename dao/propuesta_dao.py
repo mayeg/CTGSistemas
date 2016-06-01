@@ -41,6 +41,20 @@ class PropuestaDao:
             print e.__class__, e.message
             return None
 
+    def subir_entregable(self, prop):
+        try:
+            query = "UPDATE propuesta SET entregables= %s " \
+                    "WHERE id=%s"
+            param = (prop.getId_propuesta().getEntregables(),
+                     prop.getId_propuesta().getId())
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__, e.message
+            return False
+
+
 #CODIGO = ID
 
     def get_propuesta_codigo(self,propuesta):

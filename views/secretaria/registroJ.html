@@ -1,10 +1,10 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}CTG | Registro {% endblock %}
-{% block username %}{{usuario.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block username %}{{usuario_u.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario_u.getNombres()}}{% endblock %}
 {% block informacionU %}
-{{usuario.getNombres()}}
-{{usuario.getTipoUsuario().getNombre()}}
+{{usuario_u.getNombres()}}
+{{usuario_u.getTipoUsuario().getNombre()}}
 {% endblock %}
 {% block header%}
 
@@ -78,12 +78,12 @@
 {% block contenido %}
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Registro de Usuario</h3>
+        <h3 class="box-title">Registro de Jurado</h3>
     </div>
     <form class="form-horizontal" action="/secretaria/registrar/jurado" method="POST"
           id="form-registro">
         <div class="box-body">
-            <p>En esté formulario, usted podra registrar los usuarios del
+            <p>En esté formulario, usted podra registrar jurados en el
                 sistema.</p>
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-12"
@@ -137,18 +137,6 @@
                     <input type="password" class="form-control" id="contrasena"
                            placeholder="Contraseña" name="contrasena">
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-xs-12"
-                       for="tipo_usuario">Tipo de Usuario: </label>
-                <div class="col-md-5 col-xs-12">
-                    <select id="tipo_usuario" name="tipo_usuario" class="form-control">
-                        {% for tipo in tipos %}
-                            <option value="{{tipo.getId()}}">{{tipo.getLabel()}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
             </div>
 
         </div>

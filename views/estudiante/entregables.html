@@ -1,0 +1,81 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}Titulo{% endblock %}
+{% block nombreU %}{% endblock %}
+{% block username %}{% endblock %}
+{% block header%}
+{% endblock %}
+{% block menu %}
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Propuesta</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+
+</li>
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Solicitudes
+    </span> <i
+            class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="estudiantesM.html"><i class="fa fa-circle-o"></i>
+            Retiro de la propuesta</a></li>
+        <li><a href="estudiantesM.html"><i class="fa fa-circle-o"></i>
+            Prorroga</a></li>
+    </ul>
+</li>
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Descargas</span> <i
+            class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="estudiantesM.html"><i class="fa fa-circle-o"></i>
+            Protocolos</a></li>
+    </ul>
+</li>
+<li>
+    <a href="/coordinador/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+</li>
+{% endblock %}
+{% block contenido %}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title"> Mi Propuesta</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool"
+                    data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="box-body">
+        <div class="form-group">
+            <form action="/estudiante/subir/entregables" method="post"
+                  enctype="multipart/form-data">
+                <div class="">
+                    <label for="exampleInputFile">Documentos</label>
+                    <input type="file" id="exampleInputFile" name="documento">
+                    <p class="help-block">Seleccione el documento de la
+                        propuesta
+                        .</p>
+                </div>
+                <div class="box-footer">
+                    <a class="btn btn-default"
+                       href="/estudiante/home">Volver</a>
+                    <button type="submit" class="btn btn-info pull-right">
+                        Subir
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

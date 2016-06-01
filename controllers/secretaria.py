@@ -19,13 +19,14 @@ class SecretariaController:
         pass
 
     def get_lista_jurados(self, pagina, codigo, nombres, cedula, apellidos):
-        usuarios = UsuarioDao().get_lista_usuarios(
-            pagina, codigo, nombres, cedula, apellidos)
+        usuarios = UsuarioDao().get_jurados(4)
+        cod = session['usuario']['codigo']
+        usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
         total_usuarios = UsuarioDao().get_total_usuarios(
             pagina, codigo, nombres, cedula, apellidos)
         total_paginas = (total_usuarios / 10) + 1
-        return render_template("secretaria/listar.html", usuarios=usuarios,
-                               total_paginas=total_paginas,
+        return render_template("secretaria/listar_jurados.html", usuarios=usuarios,
+                               total_paginas=total_paginas, usuario_u=usuario,
                                total_usuarios=total_usuarios)
 
     def get_registrar_jurado(self):

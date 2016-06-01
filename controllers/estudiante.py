@@ -41,7 +41,6 @@ class EstudianteController:
 
     def registrar_propuesta(self, titulo, director, modalidad, file, id):
         from proyecto import UPLOAD_FOLDER
-
         filename = str(datetime.now().microsecond) + secure_filename(file.filename)
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         fecha = datetime.now().date()
@@ -75,7 +74,25 @@ class EstudianteController:
             return redirect(url_for("estudiante.home"))
 
 
+    def subir_entregable(self, file, id):
+        from proyecto import UPLOAD_FOLDER
+        filename = str(datetime.now().microsecond) + secure_filename(
+            file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
+            UsuarioPropuesta(id_estudiante=id))
+        if propuesta_e is None:
+            flash("La propuesta no existe", "error")
+            return redirect(url_for("estudiante.home"))
+        pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
+            id_propuesta=propuesta_e.getId_propuesta().getId()))
+        pro.getId_propuesta().setEntregables(filename)
+        if PropuestaDao().subir_entregable(pro):
+            flash("se subio correctamente el archivo", "success")
+            return redirect(url_for("estudiante.home"))
 
+    def get_subir_entregable(self):
+        return render_template("/estudiante/entregables.html")
 
 
 

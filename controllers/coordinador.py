@@ -3,6 +3,7 @@ from flask.helpers import flash
 
 from dao.acta_dao import ActaDao
 from dao.propuesta_dao import PropuestaDao
+from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.trabajoDeGrado_dao import TrabajoGradoDao
 from dto.propuesta import Propuesta
@@ -17,7 +18,7 @@ from flask import session, render_template, redirect, url_for
 from dao.trabajoDeGrado_dao import TrabajoGradoDao
 from dao.usuario_dao import UsuarioDao
 from dto.usuario import Usuario
-
+from dto.usuario_propuesta import UsuarioPropuesta
 
 
 class CoordinadorController:
@@ -149,7 +150,7 @@ class CoordinadorController:
             return render_template("/coordinador/juradoEstudiante.html",usuario=usuario_u,
                                    usuario_u=usuario_u, tipoU=tipoU)
 
-     def consulta_estudiante(self, codigo_e):
+    def consulta_estudiante(self, codigo_e):
         usuario = Usuario(codigo=codigo_e)
         usuario_e = UsuarioDao().get_usuario_por_codigo(usuario)
         if usuario_e is None:
@@ -183,7 +184,7 @@ class CoordinadorController:
                                    usuario_u=usuario_u, tipoU=tipoU)
         else:
             flash("No existen Trabajos con esos parametros.", "error")
-           tipoU = session['usuario']['tipo']
+            tipoU = session['usuario']['tipo']
             usuario_tipo = Usuario(tipo_usuario=tipoU)
             usuario_u = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
             return render_template("/coordinador/juradoEstudiante.html",usuario=usuario_u,

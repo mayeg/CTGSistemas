@@ -1,10 +1,9 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}CTG | Home{% endblock %}
-{% block username %}{{usuario.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block username %}{{usuario_u.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario_u.getNombres()}}{% endblock %}
 {% block informacionU %}
-{{usuario.getNombres()}}
-{{usuario.getTipoUsuario().getNombre()}}
+{{usuario_u.getNombres()}}
 {% endblock %}
 {% block menu %}
 <li class="treeview">
@@ -89,7 +88,6 @@
                 <th class="text-center">Apellidos</th>
                 <th class="text-center">Cedula</th>
                 <th class="text-center">Email</th>
-                <th class="text-center">Tipo</th>
                 <th class="text-center">Opciones</th>
             </tr>
             {% for usuario in usuarios %}
@@ -101,7 +99,7 @@
                 <td>{{usuario.getCedula()}}</td>
                 <td>{{usuario.getEmail()}}</td>
                 <td class="text-center">
-                    <a href="/usuarios/editar/{{usuario.getId()}}"
+                    <a href="/secretaria/editar/{{usuario.getId()}}"
                        class="btn btn-default"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>

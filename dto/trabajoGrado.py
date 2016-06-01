@@ -6,7 +6,8 @@ class TrabajoGrado:
     def __init__(self, codigo="", titulo="", director_proyecto="", id_propuesta=0,
                  cod_jurado1="", cod_jurado2="", cod_jurado3="", correciones="", protocolo="",
                  estado="", documentacion="", modalidad="", fecha_correcciones="",
-                 fecha_sustentacion="", lugar_sustentacion="", fecha="",nota="",hora_sustentacion=""):
+                 fecha_sustentacion="", lugar_sustentacion="", fecha="",nota="",
+                 hora_sustentacion="", documento_correcciones=""):
 
         self.__codigo = codigo
         self.__titulo = titulo
@@ -26,6 +27,7 @@ class TrabajoGrado:
         self.__fecha = fecha
         self.__nota = nota
         self.__hora_sustentacion= hora_sustentacion
+        self.__documento_correcciones = documento_correcciones
 
     def getCodigo(self):
         return self.__codigo
@@ -136,6 +138,12 @@ class TrabajoGrado:
 
     def setHora_Sustentacion(self,hora_sustentacion):
         self.__hora_sustentacion=hora_sustentacion
+
+    def getDocumento_correcciones(self):
+            return self.__documento_corecciones
+
+    def setDocumento_correcciones(self, documento):
+            self.__documento_corecciones = documento
 
 
 

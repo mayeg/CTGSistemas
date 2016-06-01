@@ -119,19 +119,6 @@
                            value="{{usuario_edit['email']}}">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-xs-12"
-                       for="tipo_usuario">Tipo de Usuario: </label>
-                <div class="col-md-5 col-xs-12">
-                    <select id="tipo_usuario" name="tipo_usuario" class="form-control">
-                        {% for tipo in tipos %}
-                            <option value="{{tipo.getId()}}">{{tipo.getLabel()}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-            </div>
-
         </div>
         <div class="box-footer">
             <a class="btn btn-default" href="/secretaria/home">Volver</a>

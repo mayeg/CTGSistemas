@@ -5,7 +5,8 @@ class Propuesta:
                  entegrables="", estado="", documentacion="", modalidad="",
                  solicitud_retiro="", solicitud_sustentacion="",
                  solicitud_prorroga="", fecha_comentario="",
-                 fecha_correcciones="", fecha_entregables="", fecha=""):
+                 fecha_correcciones="", fecha_entregables="", fecha="",
+                 documento_corecciones=""):
 
         self.__id = id
         self.__titulo = titulo
@@ -25,6 +26,7 @@ class Propuesta:
         self.__fecha_correcciones = fecha_correcciones
         self.__fecha_entregables = fecha_entregables
         self.__fecha = fecha
+        self.__documento_correcciones = documento_corecciones
 
 
     def getId(self):
@@ -135,3 +137,8 @@ class Propuesta:
     def setFecha(self, fecha):
         self.__fecha = fecha
 
+    def getDocumento_correcciones(self):
+        return self.__documento_corecciones
+
+    def setDocumento_correcciones(self, documento):
+        self.__documento_corecciones = documento
