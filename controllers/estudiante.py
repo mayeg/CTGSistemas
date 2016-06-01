@@ -37,12 +37,13 @@ class EstudianteController:
         return render_template("estudiante/home.html", propuesta=pro,
                                estudiante=propuesta)
 
-    def registrar_propuesta(self, titulo, director, modalidad, documentos, id):
+    def registrar_propuesta(self, titulo, director, modalidad, file, id):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         fecha = datetime.now().date()
         propuesta = Propuesta(titulo=titulo, director_trabajo=director,
-                              modalidad=modalidad, documentacion=documentos,
+                              modalidad=modalidad, documentacion=filename,
                               fecha=fecha)
-
         propuest = PropuestaDao().get_propuesta_titulo(propuesta)
         if propuest is not None:
             flash("Ya existe una propuesta con ese titulo", "error")
