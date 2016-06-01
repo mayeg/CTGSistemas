@@ -149,18 +149,41 @@ class CoordinadorController:
             return render_template("/coordinador/juradoEstudiante.html",usuario=usuario_u,
                                    usuario_u=usuario_u, tipoU=tipoU)
 
-    def consulta_estudiante(self, cod_jurado1):
-        trabajoG = TrabajoGrado(cod_jurado1=cod_jurado1)
-        if (TrabajoGradoDao().get_trabajo_Estudiante(trabajoG)):
+     def consulta_estudiante(self, codigo_e):
+        usuario = Usuario(codigo=codigo_e)
+        usuario_e = UsuarioDao().get_usuario_por_codigo(usuario)
+        if usuario_e is None:
+            flash("El codigo del estudiante no existe.", "error")
+            
+            tipoU = session['usuario']['tipo']
+            usuario_tipo = Usuario(tipo_usuario=tipoU)
+            usuario_u = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
+            return render_template("/coordinador/juradoEstudiante.html",usuario=usuario_u,
+                                   usuario_u=usuario_u, tipoU=tipoU)
+                                   
+        usuario_p = Propuesta_UsuarioDao().get_propuesta_usuario(UsuarioPropuesta(id_estudiante=usuario_e.getId()))
+        if usuario_p is None:
+            flash("El estudiante no tiene trabajos.", "error")
+            
+            tipoU = session['usuario']['tipo']
+            usuario_tipo = Usuario(tipo_usuario=tipoU)
+            usuario_u = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
+            return render_template("/coordinador/juradoEstudiante.html",usuario=usuario_u,
+                                   usuario_u=usuario_u, tipoU=tipoU)
+
+        trabajoG = TrabajoGrado(id_propuesta=usuario_p.getId_propuesta().getId())
+        print trabajoG.getId_propuesta().getId()
+        if TrabajoGradoDao().get_trabajo_Estudiante(trabajoG):
             trabajos = TrabajoGradoDao().get_trabajo_Estudiante(trabajoG)
             tipoU = session['usuario']['tipo']
             usuario_tipo = Usuario(tipo_usuario=tipoU)
             usuario_u = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
-            return render_template("/coordinador/juradoEstudiante.html", trabajos=trabajos,usuario=usuario_u,
+            
+            return render_template("/coordinador/juradoEstudiante.html", trabajos=trabajos, usuario=usuario_u,
                                    usuario_u=usuario_u, tipoU=tipoU)
         else:
             flash("No existen Trabajos con esos parametros.", "error")
-            tipoU = session['usuario']['tipo']
+           tipoU = session['usuario']['tipo']
             usuario_tipo = Usuario(tipo_usuario=tipoU)
             usuario_u = UsuarioDao().get_usuario_por_tipo(usuario_tipo)
             return render_template("/coordinador/juradoEstudiante.html",usuario=usuario_u,
