@@ -16,10 +16,10 @@
             class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Descargar/Modificiar Acta</a>
+        <li><a href="/secretaria/descargar-modificar_acta"><i class="fa fa-circle-o"></i> Descargar/Modificiar Acta</a>
         </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Acta</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Acta</a></li>
+        <li><a href="/secretaria/registrar_acta"><i class="fa fa-circle-o"></i> Registrar Acta</a></li>
+        <li><a href="/secretaria/consultar_acta"><i class="fa fa-circle-o"></i> Consultar Acta</a></li>
     </ul>
 </li>
 <li class="treeview">
@@ -35,21 +35,18 @@
             Propuesta</a></li>
     </ul>
 </li>
-<li class="treeview">
+<li class="active treeview">
     <a href="#">
         <i class="fa fa-pie-chart"></i>
         <span>Gestión Trabajo de Grado</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Trabajo de
+        <li><a href="/secretaria/consultar_trabajo_de_grado"><i class="fa fa-circle-o"></i> Consultar Trabajo de
             Grado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Agregar datos
+        <li><a href="/secretaria/agregar_datos_sustentacion"><i class="fa fa-circle-o"></i> Agregar datos
             Sustentación</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Correción
-            ,selecciona el trabajo de grado y le asigna las correcciones</a>
-        </li>
+        <li class="active"><a href="/secretaria/asignar_jurados_trabajo"><i class="fa fa-circle-o"></i> Asignar Jurado</a></li>
     </ul>
 </li>
 <li class="treeview">
@@ -59,8 +56,10 @@
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-       <li><a href="/secretaria/registar/trabajo_grado"><i class="fa fa-book"></i> <span>Registrar Trabajo de Grado</span></a>
+        <li><a href="/secretaria/registrar_protocolo"><i class="fa fa-circle-o"></i> Subir Archivo</a></li>
+    </ul>
 </li>
+
 <li><a href="/secretaria/registrar/jurado"><i class="fa fa-book"></i> <span>Registrar Jurados</span></a>
 
 </li>
@@ -70,7 +69,7 @@
         <span>Configuracion</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
-    {% endblock %}
+{% endblock %}
 
     {% block contenido %}
 
