@@ -29,8 +29,9 @@ class Login:
                 return render_template('secretaria/home.html', titulo="Inicio",
                                        usuario=usuario,actas=actas)
             elif tipoU == 3:
+                trabajos = TrabajoGradoDao().get_trabajos()
                 return render_template('coordinador/home.html', titulo="Inicio",
-                                       usuario=usuario)
+                                       usuario=usuario, trabajos=trabajos)
             elif tipoU == 4:
                 return render_template('jurado/home.html', titulo="Inicio",
                                       usuario=usuario)
