@@ -60,7 +60,7 @@ class CoordinadorController:
 
     def consulta_nombreP(self, nombre):
         propuesta = Propuesta(titulo=nombre)
-        if (PropuestaDao().get_propuesta_consultaN):
+        if (PropuestaDao().get_propuesta_consultaN(propuesta)):
             propuestas = PropuestaDao().get_propuesta_consultaN(propuesta)
             tipoU = session['usuario']['tipo']
             usuario_tipo = Usuario(tipo_usuario=tipoU)
