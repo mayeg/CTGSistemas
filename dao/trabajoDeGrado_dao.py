@@ -213,3 +213,123 @@ class TrabajoGradoDao:
         except Exception as e:
             print e.message
             return []
+    
+    def get_trabajo_tituloT(self, trabajoG):
+        try:
+            query = "SELECT * FROM `trabajo_de_grado` WHERE titulo LIKE  %s or titulo LIKE %s or titulo LIKE %s"
+            param = (trabajoG.getTitulo() + "%", "%" + trabajoG.getTitulo() + "%", "%" + trabajoG.getTitulo())
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+
+            if data is None:
+                return None
+            for trabajo in data:
+                pro = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],director_proyecto=trabajo[2],modalidad=trabajo[7],
+                                estado=trabajo[10], nota = trabajo[16])
+                resultado.append(pro)
+            print "holaaa por aca"
+            return resultado
+
+        except Exception as e:
+            print e.message
+            return None
+
+    def get_trabajo_modalidadT(self, trabajoG, trabajo_a):
+
+        try:
+            query = "SELECT * FROM `trabajo_de_grado` WHERE modalidad = %s AND fecha LIKE %s"
+            param = (trabajoG.getModalidad(), trabajo_a+"%")
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for trabajo in data:
+                act = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],director_proyecto=trabajo[2],modalidad=trabajo[7],
+                                estado=trabajo[10], nota = trabajo[16])
+                resultado.append(act)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
+
+    def get_trabajo_estadoT(self, trabajoG, trabajo_a):
+
+        try:
+            query = "SELECT * FROM `trabajo_de_grado` WHERE estado = %s AND fecha LIKE %s"
+            param = (trabajoG.getEstado(), trabajo_a + "%")
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for trabajo in data:
+                act = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],director_proyecto=trabajo[2],modalidad=trabajo[7],
+                                estado=trabajo[10], nota = trabajo[16])
+                resultado.append(act)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
+
+
+
+    def get_trabajo_Jurado(self, trabajoG):
+        try:
+            query = "SELECT * FROM `trabajo_de_grado` WHERE  cod_jurado1 = %s or cod_jurado2 = %s or cod_jurado3 = %s"
+            param = (trabajoG.getCod_jurado1(), trabajoG.getCod_jurado1(), trabajoG.getCod_jurado1(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for trabajo in data:
+                act = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],director_proyecto=trabajo[2],modalidad=trabajo[7],
+                                estado=trabajo[10], nota = trabajo[16])
+                resultado.append(act)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
+
+    def get_trabajo_Estudiante(self, trabajoG):
+        try:
+            query = "SELECT * FROM trabajo_de_grado WHERE id_propuesta =%s"
+            param = (trabajoG.getId_propuesta().getId(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return None
+            for trabajo in data:
+                trabajos = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],director_proyecto=trabajo[2],modalidad=trabajo[7],
+                                        estado=trabajo[10], nota = trabajo[16])
+            resultado.append(trabajos)
+            return resultado
+        except Exception as e:
+            print e.message
+            return None
+
+
+
+    def get_trabajos(self):
+        try:
+            query = "SELECT * FROM trabajo_de_grado "
+            param = ()
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+
+            if data is None:
+                return None
+            for trabajo in data:
+                pro = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1], director_proyecto=trabajo[2],
+                                   modalidad=trabajo[7],
+                                   estado=trabajo[10], nota=trabajo[16])
+                resultado.append(pro)
+            return resultado
+
+        except Exception as e:
+            print e.message
+            return None
