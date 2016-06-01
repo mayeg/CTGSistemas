@@ -1,6 +1,6 @@
 from flask.globals import session
 from flask.helpers import flash
-from flask.templating import render_template
+from flask import render_template, redirect, url_for, session
 from datetime import datetime
 from dao.propuesta_dao import PropuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
@@ -33,8 +33,6 @@ class EstudianteController:
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
                     id_propuesta=propuesta.getId_propuesta().getId()))
 
-        print pro.getId_propuesta().getDirector_trabajo()
-        print pro.getId_propuesta().getTitulo()
 
         return render_template("estudiante/home.html", propuesta=pro,
                                estudiante=propuesta)
@@ -59,6 +57,17 @@ class EstudianteController:
                 flash("error al crear la propuesta", "error")
         return self.get_registro_propuesta()
 
+    def asignar_propuesta(self, codigo):
+        usuario = Usuario(codigo=codigo)
+        usuario_e = UsuarioDao().get_usuario_por_codigo(usuario)
+        if usuario_e is None:
+            flash("El codigo del estudiante no existe", "error")
+            return redirect(url_for("estudiante.home"))
+        usuario_p = Propuesta_UsuarioDao().get_propuesta_codigo(
+            UsuarioPropuesta(id_estudiante=usuario_e.getId()))
+        if usuario_p is not None:
+            flash("El estudiante ya esta asignado a una propuesta", "error")
+            return redirect(url_for("estudiante.home"))
 
 
 

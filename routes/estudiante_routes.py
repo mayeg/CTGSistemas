@@ -38,4 +38,8 @@ def registro_propuesta():
                                                       modalidad, documentos, id)
 
 
-
+@estudiante.route("/asignar_estudiante", methods=["POST"])
+def asignar_estudiante():
+    if request.method == "POST":
+        codigo = request.form.get('codigo', None)
+        return EstudianteController().asignar_propuesta(codigo)
