@@ -51,48 +51,106 @@
     <div class="box-header with-border">
         <h3 class="box-title"> Mi Propuesta</h3>
         <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-        </button>
-    </div>
+            <button type="button" class="btn btn-box-tool"
+                    data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+        </div>
     </div>
 
     <div class="box-body">
         {% if propuesta %}
-                <!-- /.box-header -->
-            <div class="box-body">
-                <strong><i class="fa fa-book margin-r-5"></i> TITULO</strong>
-                <p class="text-muted">
-                    {{propuesta.getId_propuesta().getTitulo()}}
-                </p>
-                <hr>
-                <strong><i class="fa fa-map-marker margin-r-5"></i>
-                    Director</strong>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <strong><i class="fa fa-book margin-r-5"></i> TITULO</strong>
+            <p class="text-muted">
+                {{propuesta.getId_propuesta().getTitulo()}}
+            </p>
+            <hr>
+            <strong><i class="fa fa-map-marker margin-r-5"></i>
+                Director</strong>
 
-                <p class="text-muted">
-                    {{propuesta.getId_propuesta().getDirector_trabajo()}}</p>
-                <hr>
-                <strong><i class="fa fa-pencil margin-r-5"></i>
-                    Estudiante</strong>
+            <p class="text-muted">
+                {{propuesta.getId_propuesta().getDirector_trabajo()}}</p>
+            <hr>
+            <strong><i class="fa fa-pencil margin-r-5"></i>
+                Estudiante</strong>
 
-               <p class="text-muted">
-                    {{estudiante.getId_estudiante().getNombres()}}</p>
+            <p class="text-muted">
+                {{estudiante.getId_estudiante().getNombres()}}</p>
 
-                <hr>
-                <strong><i class="fa fa-file-text-o margin-r-5"></i>
-                    Fecha</strong>
+            <hr>
+            <strong><i class="fa fa-file-text-o margin-r-5"></i>
+                Fecha</strong>
 
-                <p>{{propuesta.getId_propuesta().getFecha()}}</p>
+            <p>{{propuesta.getId_propuesta().getFecha()}}</p>
+        </div>
+        <div class="row ">
+            <div class="col-md-6 text-right">
+                <a data-toggle="modal" data-target="#info"
+                   type="button"
+                   class="btn btn-social btn-bitbucket "><p
+                        class="fa fa-edit"></p>Agregar Estudiante</a>
             </div>
-            <div class="row ">
-                <div class="col-md-6 text-right">
-                  <a href="estudiante/agregar_estudiante" type=""
-                   class="btn btn-block btn-primary btn-flat">
-                    Agregar Estudiante
-                </a>
+
+        </div>
+        <div class="modal fade" id="info" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">BUENAS </h4>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="box box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">BUENAS</h3>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <div class="col-lg-5">
+                                                <div class="input-group">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-book"></i></span>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           placeholder="Titulo"
+                                                           name="titulo"
+                                                           id="titulo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+
+                            </div>
+                            <div class="box-footer">
+                                <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit"
+                                        class="btn btn-info pull-right"><p
+                                        class="fa fa-search"></p>Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
             </div>
-            <!-- /.box-body -->
+        </div>
+
+
+        <!-- /.box-body -->
         {% else %}
         <div class="col-md-12">
             <div class="alert alert-info">
@@ -101,7 +159,8 @@
 
             <div class="row" style="margin-bottom: 15px">
                 <div class=" text-right">
-                    <a href="/estudiante/registro_propuesta" class="btn btn-primary">
+                    <a href="/estudiante/registro_propuesta"
+                       class="btn btn-primary">
                         <i class="fa fa-plus"></i> Registrar Propuesta
                     </a>
                 </div>
