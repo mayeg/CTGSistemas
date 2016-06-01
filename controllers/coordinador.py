@@ -21,7 +21,7 @@ class CoordinadorController:
         return render_template("/coordinador/nombreT.html")
 
     def consulta_nombreT(self, nombre):
-        trabajoG = TrabajoGrado (titulo=nombre)
+        trabajoG = TrabajoGrado(titulo=nombre)
         if (TrabajoGradoDao().get_trabajo_tituloT(trabajoG) is not None):
          trabajos = TrabajoGradoDao().get_trabajo_tituloT(trabajoG)
          return render_template("/coordinador/nombreT.html", trabajos=trabajos)
