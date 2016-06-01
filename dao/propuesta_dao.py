@@ -56,9 +56,9 @@ class PropuestaDao:
 
     def subir_correcciones(self, prop):
         try:
-            query = "UPDATE propuesta SET correcciones=%s " \
+            query = "UPDATE propuesta SET documento_correcciones=%s " \
                     "WHERE id=%s"
-            param = (prop.getId_propuesta().getCorrecciones(),
+            param = (prop.getId_propuesta().getDocumento_correcciones(),
                      prop.getId_propuesta().getId())
             self.__cur.execute(query, param)
             self.__conn.commit()
@@ -67,6 +67,31 @@ class PropuestaDao:
             print e.__class__, e.message
             return False
 
+    def solicitar_sustentacion(self, prop):
+        try:
+            query = "UPDATE propuesta SET solicitud_sustentacion=%s " \
+                    "WHERE id=%s"
+            param = (prop.getId_propuesta().getSolicitud_Sustentacion(),
+                     prop.getId_propuesta().getId())
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__, e.message
+            return False
+
+    def solicitar_retiro_propuesta(self, prop):
+        try:
+            query = "UPDATE propuesta SET solicitud_retiro=%s " \
+                    "WHERE id=%s"
+            param = (prop.getId_propuesta().getSolicitud_retiro(),
+                     prop.getId_propuesta().getId())
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__, e.message
+            return False
 
 #CODIGO = ID
 

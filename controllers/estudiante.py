@@ -97,6 +97,7 @@ class EstudianteController:
         from proyecto import UPLOAD_FOLDER
         filename = str(datetime.now().microsecond) + secure_filename(
             file.filename)
+        print filename, "filename"
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
             UsuarioPropuesta(id_estudiante=id))
@@ -106,6 +107,7 @@ class EstudianteController:
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
         pro.getId_propuesta().setEntregables(filename)
+        print pro.getId_propuesta().getEntregables()
         if PropuestaDao().subir_entregable(pro):
             flash("se subio correctamente el archivo", "success")
             return redirect(url_for("estudiante.home"))
@@ -120,6 +122,7 @@ class EstudianteController:
         from proyecto import UPLOAD_FOLDER
         filename = str(datetime.now().microsecond) + secure_filename(
             file.filename)
+        print filename, "ad"
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
             UsuarioPropuesta(id_estudiante=id))
@@ -128,7 +131,8 @@ class EstudianteController:
             return redirect(url_for("estudiante.home"))
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
-        pro.getId_propuesta().setEntregables(filename)
+        pro.getId_propuesta().setDocumento_correcciones(filename)
+        print pro.getId_propuesta().getDocumento_correcciones()
         if PropuestaDao().subir_correcciones(pro):
             flash("se subio correctamente el archivo", "success")
             return redirect(url_for("estudiante.home"))
@@ -139,6 +143,52 @@ class EstudianteController:
                           tipo_usuario=tipo)
         return render_template("/estudiante/entregables.html", usuario=usuario)
 
+    def get_solicitar_sustentacion(self):
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("/estudiante/solicitud_sustentacion.html", usuario=usuario)
+
+    def solicitar_sustentacion(self, file, id):
+        from proyecto import UPLOAD_FOLDER
+        filename = str(datetime.now().microsecond) + secure_filename(
+            file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
+            UsuarioPropuesta(id_estudiante=id))
+        if propuesta_e is None:
+            flash("La propuesta no existe", "error")
+            return redirect(url_for("estudiante.home"))
+        pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
+            id_propuesta=propuesta_e.getId_propuesta().getId()))
+        pro.getId_propuesta().setSolicitud_Sustentacion(filename)
+        if PropuestaDao().solicitar_sustentacion(pro):
+            flash("se subio correctamente el archivo", "success")
+            return redirect(url_for("estudiante.home"))
+
+    def get_solicitar_retiro_propuesta(self):
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("/estudiante/solicitud_retiro.html",
+                               usuario=usuario)
+
+    def solicitar_retiro(self, file, id):
+        from proyecto import UPLOAD_FOLDER
+        filename = str(datetime.now().microsecond) + secure_filename(
+            file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
+            UsuarioPropuesta(id_estudiante=id))
+        if propuesta_e is None:
+            flash("La propuesta no existe", "error")
+            return redirect(url_for("estudiante.home"))
+        pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
+            id_propuesta=propuesta_e.getId_propuesta().getId()))
+        pro.getId_propuesta().setSolicitud_retiro(filename)
+        if PropuestaDao().solicitar_retiro_propuesta(pro):
+            flash("se subio correctamente el archivo", "success")
+            return redirect(url_for("estudiante.home"))
 
 
 

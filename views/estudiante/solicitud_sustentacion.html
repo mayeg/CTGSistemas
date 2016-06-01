@@ -1,5 +1,5 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %} GTG| Correcciones {% endblock %}
+{% block titulo %}GTG| Sustentacion {% endblock %}
 {% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block username %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
@@ -61,14 +61,13 @@
 
     <div class="box-body">
         <div class="form-group">
-            <form action="/estudiante/subir/correcciones" method="post"
+            <form action="/estudiante/solicitud/sustentacion" method="post"
                   enctype="multipart/form-data">
                 <div class="">
-                    <label for="exampleInputFile">Documentos</label>
+                    <label for="exampleInputFile">Solicitud de Sustentacion</label>
                     <input type="file" id="exampleInputFile" name="documento">
-                    <p class="help-block">Seleccione el documento de la
-                        propuesta
-                        .</p>
+                    <p class="help-block">Seleccione el documento del trabajo
+                       de grado.</p>
                 </div>
                 <div class="box-footer">
                     <a class="btn btn-default"

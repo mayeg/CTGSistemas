@@ -70,3 +70,26 @@ def subir_correcciones():
         flash('No selecciono el archivo', 'Error')
         return redirect(request.url)
     return EstudianteController().subir_correcciones(file, id)
+
+@estudiante.route("/solicitud/sustentacion", methods=["GET", "POST"])
+def solicitar_sustentacion():
+    if request.method == "GET":
+        return EstudianteController().get_solicitar_sustentacion()
+    file = request.files['documento']
+    id = session['usuario']['id']
+    if file.filename == '':
+        flash('No selecciono el archivo', 'Error')
+        return redirect(request.url)
+    return EstudianteController().solicitar_sustentacion(file, id)
+
+@estudiante.route("/solicitud/retiro_propuesta", methods=["GET", "POST"])
+def solicitar_retiro_propuesta():
+    if request.method == "GET":
+        return EstudianteController().get_solicitar_retiro_propuesta()
+    file = request.files['documento']
+    id = session['usuario']['id']
+    if file.filename == '':
+        flash('No selecciono el archivo', 'Error')
+        return redirect(request.url)
+    return EstudianteController().solicitar_retiro(file, id)
+

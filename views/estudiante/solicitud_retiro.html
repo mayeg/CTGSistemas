@@ -1,5 +1,5 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %} GTG| Correcciones {% endblock %}
+{% block titulo %}GTG| Retiro {% endblock %}
 {% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block username %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
@@ -61,13 +61,13 @@
 
     <div class="box-body">
         <div class="form-group">
-            <form action="/estudiante/subir/correcciones" method="post"
+            <form action="/estudiante/solicitud/retiro_propuesta" method="post"
                   enctype="multipart/form-data">
                 <div class="">
-                    <label for="exampleInputFile">Documentos</label>
+                    <label for="exampleInputFile">Solicitud de Retiro</label>
                     <input type="file" id="exampleInputFile" name="documento">
-                    <p class="help-block">Seleccione el documento de la
-                        propuesta
+                    <p class="help-block">Seleccione el documento del
+                        retiro de la propuesta
                         .</p>
                 </div>
                 <div class="box-footer">

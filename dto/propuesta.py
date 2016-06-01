@@ -138,7 +138,7 @@ class Propuesta:
         self.__fecha = fecha
 
     def getDocumento_correcciones(self):
-        return self.__documento_corecciones
+        return self.__documento_correcciones
 
     def setDocumento_correcciones(self, documento):
-        self.__documento_corecciones = documento
+        self.__documento_correcciones = documento
