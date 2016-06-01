@@ -6,6 +6,46 @@
 {{usuario_u.getNombres()}}
 {% endblock %}
 {% block menu %}
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Propuesta</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+
+</li>
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Solicitudes
+    </span> <i
+            class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="estudiantesM.html"><i class="fa fa-circle-o"></i>
+            Sustentacion</a></li>
+        <li><a href="estudiantesM.html"><i class="fa fa-circle-o"></i>
+            Retiro de la propuesta</a></li>
+        <li><a href="estudiantesM.html"><i class="fa fa-circle-o"></i>
+            Prorroga</a></li>
+    </ul>
+</li>
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Descargas</span> <i
+            class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="estudiantesM.html"><i class="fa fa-circle-o"></i>
+            Protocolos</a></li>
+    </ul>
+</li>
+
+<li>
+    <a href="/coordinador/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+</li>
 {% endblock %}
 {% block contenido %}
 
@@ -14,7 +54,7 @@
         <h3 class="box-title">Registro de Propuesta</h3>
     </div>
     <form class="form-horizontal" action="/estudiante/registro_propuesta"
-          method="POST" id="form-registro">
+          method="POST" id="form-registro"  enctype=multipart/form-data>
         <div class="box-body">
             <p>En esté formulario, usted podra registrar la propuesta
                 de trabajo.</p>

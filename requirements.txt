@@ -1,0 +1,3 @@
+Flask==0.10
+flask-mysql==1.3
+gunicorn==19.5
