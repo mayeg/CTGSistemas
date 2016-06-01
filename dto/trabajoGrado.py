@@ -1,9 +1,9 @@
-
+from dto.propuesta import Propuesta
 
 
 class TrabajoGrado:
 
-    def __init__(self, codigo="", titulo="", director_proyecto="",
+    def __init__(self, codigo="", titulo="", director_proyecto="", id_propuesta=0,
                  cod_jurado1="", cod_jurado2="", cod_jurado3="", correciones="", protocolo="",
                  estado="", documentacion="", modalidad="", fecha_correcciones="",
                  fecha_sustentacion="", lugar_sustentacion="", fecha="",nota="",hora_sustentacion=""):
@@ -11,6 +11,7 @@ class TrabajoGrado:
         self.__codigo = codigo
         self.__titulo = titulo
         self.__director_proyecto = director_proyecto
+        self.__id_propuesta = Propuesta(id=id_propuesta)
         self.__cod_jurado1 = cod_jurado1
         self.__cod_jurado2 = cod_jurado2
         self.__cod_jurado3 = cod_jurado3
@@ -44,8 +45,11 @@ class TrabajoGrado:
     def setDirector_proyecto(self, director_proyecto):
         self.__director_proyecto = director_proyecto
 
-    def setCod_estudiante4(self, cod_estudiante4):
-        self.__cod_estudiante4 = cod_estudiante4
+    def getId_propuesta(self):
+        return self.__id_propuesta
+
+    def setId_propuesta(self, id_propuesta):
+        self.__id_propuesta = id_propuesta
 
     def getCod_jurado1(self):
         return self.__cod_jurado1
@@ -132,3 +136,9 @@ class TrabajoGrado:
 
     def setHora_Sustentacion(self,hora_sustentacion):
         self.__hora_sustentacion=hora_sustentacion
+
+
+
+
+
+

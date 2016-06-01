@@ -205,9 +205,9 @@ class TrabajoGradoDao:
                 return []
             for trabajoG in data:
                 for trabajo in data:
-                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1], fecha_sustentacion=trabajo[12],
-                                       lugar_sustentacion=trabajo[13],fecha_correcciones=trabajo[14],
-                                       hora_sustentacion=trabajo[17], nota=trabajo[16], fecha=trabajo[15])
+                    tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],modalidad=trabajo[7],
+                                       fecha_sustentacion=trabajo[13],lugar_sustentacion=trabajo[14],
+                                       hora_sustentacion=trabajo[17], fecha=trabajo[15])
                     resultado.append(tra)
             return resultado
         except Exception as e:

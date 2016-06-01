@@ -321,3 +321,62 @@ class PropuestaDao:
         except Exception as e:
             print e.message
             return []
+            
+            
+    def get_propuesta_consultaN(self, propuest):
+        try:
+            query = "SELECT * FROM `propuesta` WHERE titulo LIKE  %s or titulo LIKE %s or titulo LIKE %s"
+            param = (propuest.getTitulo() + "%", "%" + propuest.getTitulo() + "%", "%" + propuest.getTitulo())
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+
+            if data is None:
+                return None
+            for propuesta in data:
+                pro = Propuesta(titulo=propuesta[1], director_trabajo=propuesta[2],comentario=propuesta[6],estado=propuesta[8],
+                                modalidad = propuesta[10])
+                resultado.append(pro)
+            return resultado
+
+        except Exception as e:
+            print e.message
+            return None
+            
+            
+    def get_propuesta_cancelar(self, propuesta, estado):
+        try:
+            print propuesta.getTitulo()
+
+            query = "UPDATE `propuesta` SET estado= %s WHERE titulo=%s "
+            param = (propuesta.getEstado(),propuesta.getTitulo(),)
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
+
+
+
+
+    def get_propuesta_estado(self, propuesta):
+        try:
+            query = "SELECT * FROM `propuesta` WHERE estado = %s"
+            param = (propuesta.getEstado(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+
+            if data is None:
+                return None
+            for propuesta in data:
+                pro = Propuesta(titulo=propuesta[1], director_trabajo=propuesta[2],comentario=propuesta[6],estado=propuesta[8],
+                                modalidad = propuesta[10])
+                resultado.append(pro)
+            return resultado
+
+        except Exception as e:
+            print e.message
+            return None
