@@ -91,7 +91,7 @@ class Login:
             token = hashlib.sha1(
                 str(usuario_c.getId()) + usuario_c.getCodigo()).hexdigest()
             usuario_c.setTokenPassword(token)
-            mensaje = "Para realizar el cambio de contraseña en el sistema XXX " \
+            mensaje = "Para realizar el cambio de contraseña en el sistema " \
                       "haga <a href='http://localhost:5000/cambiar_contrasena/" + \
                       usuario_c.getTokenPassword() + "'>clic aquí.</a>"
             print mensaje

@@ -4,6 +4,8 @@ from flask.globals import session
 from flask.helpers import flash
 from flask import render_template, redirect, url_for, session
 from datetime import datetime
+
+from controllers.emails import EmailController
 from dao.propuesta_dao import PropuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.usuario_dao import UsuarioDao
@@ -67,10 +69,26 @@ class EstudianteController:
         if usuario_e is None:
             flash("El codigo del estudiante no existe", "error")
             return redirect(url_for("estudiante.home"))
-        usuario_p = Propuesta_UsuarioDao().get_propuesta_codigo(
+        usuario_p = Propuesta_UsuarioDao().get_propuesta_usuario(
             UsuarioPropuesta(id_estudiante=usuario_e.getId()))
         if usuario_p is not None:
             flash("El estudiante ya esta asignado a una propuesta", "error")
+            return redirect(url_for("estudiante.home"))
+
+        usuario_pro = Propuesta_UsuarioDao().get_propuesta_usuario(
+            UsuarioPropuesta(id_estudiante = session['usuario']['id']))
+        print usuario_pro
+        if Propuesta_UsuarioDao().crear_propuesta_usuario(usuario_pro.getId_propuesta(),
+                                                          usuario_e.getId()):
+            mensaje = "Ha sido asignado a una propuesta de trabajo." \
+                      "Favor ingresar al sistema y verificar la informacion," \
+                      " si no esta deacuerdo por favor diligenciar un retiro " \
+                      "de la propuesta." \
+                      ""
+            flash("Se ha asignado correctamente al estudiante", "success")
+            EmailController().enviar_email(
+                usuario_e.getEmail(), mensaje,
+                "Asignacion de Propuesta - CTG Sistemas")
             return redirect(url_for("estudiante.home"))
 
 
@@ -93,6 +111,7 @@ class EstudianteController:
 
     def get_subir_entregable(self):
         return render_template("/estudiante/entregables.html")
+
 
 
 

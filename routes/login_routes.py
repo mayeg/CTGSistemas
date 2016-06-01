@@ -53,7 +53,6 @@ def recordar_contrasena(token=None):
 @login_r.route("/descargar/<archivo>/", methods=['GET'])
 def descargar_archivo(archivo):
     from proyecto import UPLOAD_FOLDER
-
     return send_from_directory(UPLOAD_FOLDER, archivo)
 
 
