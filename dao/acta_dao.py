@@ -50,6 +50,24 @@ class ActaDao:
             print e.__class__
             print e.message
             return False
+            
+    def get_acta_fecha(self, acta):
+        try:
+            query = "SELECT * FROM acta WHERE fecha = %s"
+            param = (acta.getFecha(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
+                return []
+            for acta in data:
+                act = Acta(titulo=acta[1], tipo=acta[2], fecha=acta[3],
+                           descripcion=acta[5])
+                resultado.append(act)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
 
 
     def get_acta_consulta(self, acta):
