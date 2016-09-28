@@ -11,7 +11,6 @@ class Acta:
         self.__archivo = archivo
         self.__descripcion = descripcion
 
-
     def getCodigo(self):
         return self.__codigo
 

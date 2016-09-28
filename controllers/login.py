@@ -3,7 +3,6 @@ import hashlib
 
 from flask import session, render_template, redirect, url_for
 from flask.helpers import flash
-
 from controllers.secretaria import SecretariaController
 from controllers.emails import EmailController
 from controllers.estudiante import EstudianteController

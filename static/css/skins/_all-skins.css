@@ -988,7 +988,7 @@
 .skin-red .wrapper,
 .skin-red .main-sidebar,
 .skin-red .left-side {
-  background-color: #222d32;
+  background-color: #f9fafc;
 }
 .skin-red .user-panel > .info,
 .skin-red .user-panel > .info > a {
@@ -996,7 +996,7 @@
 }
 .skin-red .sidebar-menu > li.header {
   color: #4b646f;
-  background: #1a2226;
+  background: #f9fafc;
 }
 .skin-red .sidebar-menu > li > a {
   border-left: 3px solid transparent;
