@@ -21,6 +21,7 @@ class ActaDao:
             print e.message
             return None
 
+
     def crear_acta(self, acta):
         try:
             query = "INSERT INTO acta (titulo, tipo, fecha, " \
