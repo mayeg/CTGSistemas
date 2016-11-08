@@ -29,9 +29,9 @@ app.register_blueprint(estudiante, url_prefix="/estudiante")
 
 # MySQL configurations
 
-app.config['MYSQL_DATABASE_USER'] = 'ufps_35'
+app.config['MYSQL_DATABASE_USER'] = 'ufps_15'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'ufps_11'
-app.config['MYSQL_DATABASE_DB'] = 'ufps_35'
+app.config['MYSQL_DATABASE_DB'] = 'ufps_15'
 app.config['MYSQL_DATABASE_HOST'] = 'sandbox2.ufps.edu.co'
 mysql.init_app(app)
 
