@@ -40,10 +40,9 @@ class Propuesta_UsuarioDao:
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            user = UsuarioPropuesta(id_estudiante=data[1], id_propuesta=data[2],
+            user = UsuarioPropuesta(id=data[0], id_estudiante=data[1], id_propuesta=data[2],
                                     estado=data[3])
-
-            propuesta = Propuesta(id=user.getId_propuesta(), titulo=data[5],
+            propuesta = Propuesta(id=user.getId_propuesta().getId(), titulo=data[5],
                                   director_trabajo=data[6], documentacion=data[13],
                                   modalidad=data[14], fecha=data[21])
             user.setId_propuesta(propuesta)

@@ -45,7 +45,8 @@ def registro_propuesta():
 @estudiante.route("/asignar_estudiante", methods=["POST"])
 def asignar_estudiante():
     if request.method == "POST":
-        codigo = request.form.get('codigo', None)
+        codigo = request.form.get('codigo_estudiante', None)
+        print request.form.get('codigo_estudiante', None), 'desde routes'
         return EstudianteController().asignar_propuesta(codigo)
 
 

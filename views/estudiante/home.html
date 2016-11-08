@@ -23,9 +23,11 @@
             class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="/estudiante/solicitud/sustentacion"><i class="fa fa-circle-o"></i>
+        <li><a href="/estudiante/solicitud/sustentacion"><i
+                class="fa fa-circle-o"></i>
             Sustentacion</a></li>
-        <li><a href="/estudiante/solicitud/retiro_propuesta"><i class="fa fa-circle-o"></i>
+        <li><a href="/estudiante/solicitud/retiro_propuesta"><i
+                class="fa fa-circle-o"></i>
             Retiro de la propuesta</a></li>
 
     </ul>
@@ -135,7 +137,7 @@
                                                     <input type="text"
                                                            class="form-control"
                                                            placeholder="Codigo"
-                                                           name="codigo">
+                                                           name="codigo_estudiante">
                                                 </div>
                                             </div>
                                         </div>
@@ -160,22 +162,7 @@
             </div>
         </div>
         <!-- /.box-body -->
-        {% else %}
-        <div class="col-md-12">
-            <div class="alert alert-info">
-                No tiene Propuesta registrada en el sistema.
-            </div>
 
-            <div class="row" style="margin-bottom: 15px">
-                <div class=" text-right">
-                    <a href="/estudiante/registro_propuesta"
-                       class="btn btn-primary">
-                        <i class="fa fa-plus"></i> Registrar Propuesta
-                    </a>
-                </div>
-            </div>
-        </div>
-        {% endif %}
     </div>
 </div>
 <div class="row">
@@ -281,5 +268,20 @@
     </div>
 
 </div>
+{% else %}
+<div class="col-md-12">
+    <div class="alert alert-info">
+        No tiene Propuesta registrada en el sistema.
+    </div>
+</div>
+<div class="row" style="margin-bottom: 15px">
+    <div class=" text-right">
+        <a href="/estudiante/registro_propuesta"
+           class="btn btn-primary">
+            <i class="fa fa-plus"></i> Registrar Propuesta
+        </a>
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}

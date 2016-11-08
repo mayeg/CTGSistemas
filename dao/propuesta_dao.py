@@ -43,7 +43,7 @@ class PropuestaDao:
 
     def subir_entregable(self, prop):
         try:
-            query = "UPDATE propuesta SET entregables=%s " \
+            query = "UPDATE propuesta SET Entregables=%s " \
                     "WHERE id=%s"
             param = (prop.getId_propuesta().getEntregables(),
                      prop.getId_propuesta().getId())

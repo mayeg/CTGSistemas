@@ -34,7 +34,8 @@ class EstudianteController:
         propuesta = Propuesta_UsuarioDao().get_propuesta_usuario(
             UsuarioPropuesta(id_estudiante=session['usuario']['id']))
         if propuesta is None:
-            return render_template("estudiante/home.html", usuario=usuario)
+            return render_template("estudiante/home.html", usuario=usuario,
+                                   propuesta=propuesta)
 
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
                     id_propuesta=propuesta.getId_propuesta().getId()))
@@ -51,6 +52,7 @@ class EstudianteController:
                               modalidad=modalidad, documentacion=filename,
                               fecha=fecha)
         propuest = PropuestaDao().get_propuesta_titulo(propuesta)
+        print propuest, 'la prpuesta a buscar'
         if propuest is not None:
             flash("Ya existe una propuesta con ese titulo", "error")
             return self.get_registro_propuesta()
@@ -65,8 +67,8 @@ class EstudianteController:
         return self.get_registro_propuesta()
 
     def asignar_propuesta(self, codigo):
-        usuario = Usuario(codigo=codigo)
-        usuario_e = UsuarioDao().get_usuario_por_codigo(usuario)
+        usuario_pro = Usuario(codigo=codigo)
+        usuario_e = UsuarioDao().get_usuario_por_codigo(usuario_pro)
         if usuario_e is None:
             flash("El codigo del estudiante no existe", "error")
             return redirect(url_for("estudiante.home"))
@@ -78,7 +80,6 @@ class EstudianteController:
 
         usuario_pro = Propuesta_UsuarioDao().get_propuesta_usuario(
             UsuarioPropuesta(id_estudiante = session['usuario']['id']))
-        print usuario_pro
         if Propuesta_UsuarioDao().crear_propuesta_usuario(usuario_pro.getId_propuesta(),
                                                           usuario_e.getId()):
             mensaje = "Ha sido asignado a una propuesta de trabajo." \
@@ -97,7 +98,6 @@ class EstudianteController:
         from proyecto import UPLOAD_FOLDER
         filename = str(datetime.now().microsecond) + secure_filename(
             file.filename)
-        print filename, "filename"
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
             UsuarioPropuesta(id_estudiante=id))
@@ -107,7 +107,6 @@ class EstudianteController:
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
         pro.getId_propuesta().setEntregables(filename)
-        print pro.getId_propuesta().getEntregables()
         if PropuestaDao().subir_entregable(pro):
             flash("se subio correctamente el archivo", "success")
             return redirect(url_for("estudiante.home"))
@@ -122,7 +121,6 @@ class EstudianteController:
         from proyecto import UPLOAD_FOLDER
         filename = str(datetime.now().microsecond) + secure_filename(
             file.filename)
-        print filename, "ad"
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
             UsuarioPropuesta(id_estudiante=id))
@@ -132,7 +130,6 @@ class EstudianteController:
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
         pro.getId_propuesta().setDocumento_correcciones(filename)
-        print pro.getId_propuesta().getDocumento_correcciones()
         if PropuestaDao().subir_correcciones(pro):
             flash("se subio correctamente el archivo", "success")
             return redirect(url_for("estudiante.home"))
