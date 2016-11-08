@@ -459,7 +459,7 @@ class PropuestaDao:
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return data[10]
+            return data[0]
         except Exception as e:
             print e.message
             return None
