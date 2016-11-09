@@ -22,8 +22,12 @@ class Login:
         tipos = TipoUsuarioDao().listar_tipo_usuario()
         if 'usuario' in session:
             tipoU = session['usuario']['tipo']
+            codigo = session['usuario']['codigo']
+            print tipoU
+            print codigo
             usuario = UsuarioDao().get_usuario_por_codigo(
                 Usuario(codigo=session['usuario']['codigo']))
+            print usuario
             if tipoU == 2:
                 actas = SecretariaController().get_actas()
                 return render_template('secretaria/home.html', titulo="Inicio",

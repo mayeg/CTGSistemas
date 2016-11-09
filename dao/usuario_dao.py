@@ -98,10 +98,12 @@ class UsuarioDao:
 
     def get_usuario_por_codigo(self, usuario):
         try:
+            print usuario.getCodigo(), 'codigo dao'
             query = "SELECT * FROM usuario WHERE codigo = %s"
             param = (str(usuario.getCodigo()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
+            print data
             if data is None:
                 return None
             return Usuario(id=data[0], codigo=data[1], cedula=data[2],
