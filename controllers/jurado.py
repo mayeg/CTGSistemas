@@ -53,13 +53,14 @@ class JuradoController:
         propuesta = PropuestaDao().get_propuesta2(id_propuesta)
         return render_template("jurado/comentario.html", propuesta=propuesta)
 
-
     def get_guardar_comentario(self, id_propuesta, comentario):
         com1 = PropuestaDao().get_comentarios(id_propuesta)
         if(com1 is None):
             com1=""
-        va =PropuestaDao().get_guardar_comentario(id_propuesta,com1+";"+comentario)
+        va =PropuestaDao().get_guardar_comentario(id_propuesta,com1+"------"+comentario)
         if (va):
             flash("Se ha enviado Exitosamente.", "success")
-            return render_template("jurado/home.html")
+            usuario = UsuarioDao().get_usuario_por_codigo(
+            Usuario(codigo=session['usuario']['codigo']))
+            return render_template("jurado/home.html",usuario=usuario)
         return render_template("jurado/consulta_sustentacion.html")
