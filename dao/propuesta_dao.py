@@ -424,8 +424,8 @@ class PropuestaDao:
             if data is None:
                 return None
             for propuesta in data:
-                pro = Propuesta(titulo=propuesta[1], director_trabajo=propuesta[2],comentario=propuesta[6],estado=propuesta[8],
-                                modalidad = propuesta[10])
+                pro = Propuesta(titulo=propuesta[1], director_trabajo=propuesta[2],comentario=propuesta[7],estado=propuesta[9],
+                                modalidad = propuesta[11])
                 resultado.append(pro)
             return resultado
 
