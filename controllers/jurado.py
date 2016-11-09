@@ -50,5 +50,16 @@ class JuradoController:
             return render_template("jurado/consulta_sustentacion.html", usuario=usuario)
 
     def get_view_enviar_comentario(self,id_propuesta):
-        propuesta = PropuestaDao().get_propuesta_id(id_propuesta)
-        return render_template("jurado/comentario.html",propuesta=propuesta)
+        propuesta = PropuestaDao().get_propuesta2(id_propuesta)
+        return render_template("jurado/comentario.html", propuesta=propuesta)
+
+
+    def get_guardar_comentario(self, id_propuesta, comentario):
+        com1 = PropuestaDao().get_comentarios(id_propuesta)
+        if(com1 is None):
+            com1=""
+        va =PropuestaDao().get_guardar_comentario(id_propuesta,com1+";"+comentario)
+        if (va):
+            flash("Se ha enviado Exitosamente.", "success")
+            return render_template("jurado/home.html")
+        return render_template("jurado/consulta_sustentacion.html")

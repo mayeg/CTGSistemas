@@ -432,3 +432,49 @@ class PropuestaDao:
         except Exception as e:
             print e.message
             return None
+        
+
+    def get_propuesta2(self, propuesta):
+
+        try:
+            query = "SELECT * FROM `propuesta` WHERE id = %s"
+            param = (propuesta,)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchone()
+            if data is None:
+                return None
+            return Propuesta(id=data[0],titulo=data[1], director_trabajo=data[2],comentario=data[6],estado=data[8],
+                                modalidad = data[10])
+        except Exception as e:
+            print e.message
+            return None
+
+
+    def get_comentarios(self, id):
+
+        try:
+            query = "SELECT Comentario FROM `propuesta` WHERE id = %s"
+            param = (id,)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchone()
+            if data is None:
+                return None
+            return data[0]
+        except Exception as e:
+            print e.message
+            return None
+
+
+
+    def get_guardar_comentario(self, id,comentario):
+        try:
+            query = "UPDATE propuesta SET comentario= %s WHERE id=%s "
+            param = (comentario, id)
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
+

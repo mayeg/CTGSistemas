@@ -40,7 +40,15 @@ def consultar_sustentacion():
     if request.method == "GET":
         return JuradoController().get_view_consultar_sustentaciones()
 
-@jurado.route("/enviar_comentario/<codigo_propuesta>")
-def enviar_comentario(codigo_propuesta):
+
+
+@jurado.route("/enviar_comentario/<id_propuesta>", methods=["GET"])
+def enviar_comentario(id_propuesta):
     if request.method == "GET":
-        return JuradoController().get_view_enviar_comentario(codigo_propuesta)
+        return JuradoController().get_view_enviar_comentario(id_propuesta)
+
+@jurado.route("/guardar_comentario/<id_propuesta>" , methods=["POST"])
+def guardar_comentario(id_propuesta):
+    if request.method == "POST":
+      comentario = request.form.get('descripcion', None)
+      return JuradoController().get_guardar_comentario(id_propuesta,comentario)
