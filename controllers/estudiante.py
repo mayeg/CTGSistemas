@@ -138,7 +138,7 @@ class EstudianteController:
         tipo = session['usuario']['tipo']
         usuario = Usuario(nombres=session['usuario']['nombres'],
                           tipo_usuario=tipo)
-        return render_template("/estudiante/entregables.html", usuario=usuario)
+        return render_template("/estudiante/correciones.html", usuario=usuario)
 
     def get_solicitar_sustentacion(self):
         tipo = session['usuario']['tipo']
