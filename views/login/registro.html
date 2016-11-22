@@ -60,7 +60,8 @@
                     <label class="control-label"
                            for="nombres">Codigo: </label>
                     <input type="text" class="form-control" placeholder="Codigo"
-                           id="codigo" name="codigo" value="{{usuario['codigo']}}">
+                           id="codigo" name="codigo"
+                           value="{{usuario['codigo']}}">
 
                 </div>
                 <div class="form-group">
@@ -69,7 +70,7 @@
                     <div class="">
                         <input type="text" class="form-control" id="nombres"
                                placeholder="Nombres" name="nombres"
-                                 value="{{usuario['nombres']}}">
+                               value="{{usuario['nombres']}}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -117,16 +118,12 @@
         </form>
     </div>
 
-        <!-- jQuery 2.1.4 -->
-        <script src="{{ url_for('static', filename='plugins/jQuery/jQuery-2.1.4.min.js') }}">
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}">
-    <script src="{{ url_for('static', filename='plugins/iCheck/icheck.min.js') }}">
-
-    <script src="{{ url_for('static', filename='plugins/datepicker/datepicker3.css') }}">
-
-    <script src="{{ url_for('static', filename='js/proyecto/registro.js') }}">
-        </script>
-        <script>
+    <!-- jQuery 2.1.4 -->
+    <script src="{{ url_for('static', filename='plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/proyecto/registro.js') }}"></script>
+    <script>
       $(function () {
       $('#datetimepicker3').datetimepicker();
         $('input').iCheck({
@@ -136,8 +133,8 @@
         });
       });
 
+    </script>
 
-        </script>
 </div>
 </body>
 </html>

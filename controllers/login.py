@@ -23,15 +23,13 @@ class Login:
         if 'usuario' in session:
             tipoU = session['usuario']['tipo']
             codigo = session['usuario']['codigo']
-            print tipoU
-            print codigo
             usuario = UsuarioDao().get_usuario_por_codigo(
-                Usuario(codigo=session['usuario']['codigo']))
-            print usuario
+                Usuario(codigo=codigo))
+            print usuario.getNombres(), 'getnombres desde login '
             if tipoU == 2:
                 actas = SecretariaController().get_actas()
                 return render_template('secretaria/home.html', titulo="Inicio",
-                                       usuario=usuario,actas=actas)
+                                       usuario=usuario, actas=actas)
             elif tipoU == 3:
                 trabajos = TrabajoGradoDao().get_trabajos()
                 return render_template('coordinador/home.html', titulo="Inicio",
