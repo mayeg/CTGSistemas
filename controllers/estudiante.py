@@ -9,6 +9,7 @@ from controllers.emails import EmailController
 from dao.propuesta_dao import PropuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.usuario_dao import UsuarioDao
+from dto.entregable_propuesta import EntregablePropuesta
 from dto.propuesta import Propuesta
 from dto.usuario import Usuario
 from dto.usuario_propuesta import UsuarioPropuesta
@@ -104,10 +105,14 @@ class EstudianteController:
         if propuesta_e is None:
             flash("La propuesta no existe", "error")
             return redirect(url_for("estudiante.home"))
+
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
-        pro.getId_propuesta().setEntregables(filename)
-        if PropuestaDao().subir_entregable(pro):
+        fecha = datetime.now().date()
+        entregable_propuesta = EntregablePropuesta(id_propuesta=pro.getId(),
+                                                   entregable=filename,
+                                                   fecha=fecha)
+        if PropuestaDao().subir_entregable(entregable_propuesta):
             flash("se subio correctamente el archivo", "success")
             return redirect(url_for("estudiante.home"))
 

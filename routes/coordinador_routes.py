@@ -9,7 +9,7 @@ coordinador = Blueprint("coordinador", __name__)
 
 @coordinador.route("/home", methods=["GET"])
 def home():
-        return Login().get_home_usuario()
+    return Login().get_home_usuario()
 
 @coordinador.route("/configuracion", methods=["GET", "POST"])
 def cambiar_contrasena():

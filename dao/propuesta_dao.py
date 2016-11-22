@@ -41,12 +41,12 @@ class PropuestaDao:
             print e.__class__, e.message
             return None
 
-    def subir_entregable(self, prop):
+    def subir_entregable(self, entregable):
         try:
-            query = "UPDATE entregable_propuesta SET entregable=%s " \
-                    "WHERE id=%s"
-            param = (prop.getEntregable(),
-                     prop.getId_propuesta().getId())
+            query = "INSERT INTO entregable_propuesta (id_propuesta, entregable, " \
+                    "fecha) VALUES (%s, %s, %s)"
+            param = (entregable.getId_propuesta().getId(), entregable.getEntregable(),
+                     entregable.getFecha())
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True

@@ -12,7 +12,7 @@ estudiante = Blueprint("estudiante", __name__)
 
 @estudiante.route("/home", methods=["GET"])
 def home():
-        return Login().get_home_usuario()
+    return Login().get_home_usuario()
 
 
 @estudiante.route("/configuracion", methods=["GET", "POST"])
