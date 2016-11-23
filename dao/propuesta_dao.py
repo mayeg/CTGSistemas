@@ -56,9 +56,9 @@ class PropuestaDao:
 
     def subir_correcciones(self, prop):
         try:
-            query = "UPDATE propuesta SET documento_correcciones=%s " \
+            query = "UPDATE propuesta SET documentacion=%s " \
                     "WHERE id=%s"
-            param = (prop.getId_propuesta().getDocumento_correcciones(),
+            param = (prop.getId_propuesta().getDocumentacion(),
                      prop.getId_propuesta().getId())
             self.__cur.execute(query, param)
             self.__conn.commit()

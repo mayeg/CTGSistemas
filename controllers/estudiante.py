@@ -37,7 +37,6 @@ class EstudianteController:
         if propuesta is None:
             return render_template("estudiante/home.html", usuario=usuario,
                                    propuesta=propuesta)
-
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
                     id_propuesta=propuesta.getId_propuesta().getId()))
 
@@ -134,7 +133,7 @@ class EstudianteController:
             return redirect(url_for("estudiante.home"))
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
-        pro.getId_propuesta().setDocumento_correcciones(filename)
+        pro.getId_propuesta().setDocumentacion(filename)
         if PropuestaDao().subir_correcciones(pro):
             flash("se subio correctamente el archivo", "success")
             return redirect(url_for("estudiante.home"))

@@ -23,10 +23,10 @@ class EntregablePropuesta:
         self.__id_propuesta = id
 
     def getEntregable(self):
-        return self.__entegrable
+        return self.__entregable
 
     def setEntregable(self, entregable):
-        self.__entegrable = entregable
+        self.__entregable = entregable
 
     def getFecha_Entregable(self):
         return self.__fecha_entregable
