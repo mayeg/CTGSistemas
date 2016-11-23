@@ -35,8 +35,10 @@ class Login:
                 return render_template('coordinador/home.html', titulo="Inicio",
                                        usuario=usuario, trabajos=trabajos)
             elif tipoU == 4:
+                p = PropuestaDao().get_propuesta_consulta_jurado(usuario)
+                t = TrabajoGradoDao().get_trabajos_Jurado(usuario)
                 return render_template('jurado/home.html', titulo="Inicio",
-                                      usuario=usuario)
+                                      usuario=usuario, propuestas=p,trabajos=t)
             elif tipoU == 5:
                 return EstudianteController().get_registrar_propuesta()
 
