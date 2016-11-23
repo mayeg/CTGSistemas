@@ -10,25 +10,19 @@
 
 {% endblock %}
 {% block menu %}
-<li class="treeview">
+<li class="treeview ">
     <a href="/jurado/propuestas_cargo">
         <i class="fa fa-pie-cog" aria-hidden="true"></i>
         <span>Consultar Propuesta</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
-<li class="treeview">
+<li class="treeview active">
     <a href="/jurado/trabajos_cargo">
         <i class="fa fa-pie-cog" aria-hidden="true"></i>
         <span>Consutar Trabajo de Grado</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
 <li class="treeview">
-    <a href="/jurado/sustentaciones">
-        <i class="fa fa-pie-cog" aria-hidden="true"></i>
-        <span>Consultar Sustentaciones</span>
-        <i class="fa fa-angle-left pull-right"></i>
-    </a>
-    <li class="treeview">
     <a href="/jurado/configuracion">
         <i class="fa fa-pie-cong"></i>
         <span>Configuracion</span>
@@ -36,7 +30,7 @@
     </a>
     {% endblock %}
     {% block contenido %}
-      <div class="box box-primary">
+    <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Trabajos de Grado a Cargo</h3>
         </div>
@@ -44,71 +38,81 @@
               id="form-config">
             <div class="box-body">
                 <div class="box-body">
-                <h3 class="box-title">Proyectos</h3>
+                    <h3 class="box-title">Proyectos</h3>
                 </div>
 
                 {% if trabajos %}
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Tablas Trabajos</h3>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">Tablas Trabajos</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Titulo</th>
+                                        <th>Fecha Creación</th>
+                                        <th>Fecha Sustentación</th>
+                                        <th>Lugar Sustentación</th>
+                                        <th>Hora Sustentación</th>
+                                        <th>Opciones</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for trabajo in trabajos %}
+                                    <tr>
+                                        <td>{{trabajo.getCodigo()}}</td>
+                                        <td>{{trabajo.getTitulo()}}</td>
+                                        <td>{{trabajo.getFecha()}}</td>
+                                        <td>{{trabajo.getFecha_Sustentacion()}}</td>
+                                        <td>{{trabajo.getLugar_Sustentacion()}}</td>
+                                        <td>{{trabajo.getHora_Sustentacion()}}</td>
+
+                                        <td>
+
+                                            <div class="btn-group">
+                                                <a data-toggle="modal" data-target="#info1" type="button"
+                                                   class="btn btn-social btn-bitbucket "><p class="fa fa-edit"></p>
+                                                    Opciones</a>
+                                                <button type="button" class="btn btn-bitbucket dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#"><p class="fa fa-download"></p> Descargar Trabajo</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                        {% else %}
+                        <div class="col-md-12">
+                            <div class="alert alert-info">
+                                No se ha Asignado ninguna Trabajo de Grado.
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>Titulo</th>
-                                <th>Modalidad</th>
-                                <th>Opciones</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for trabajo in trabajos %}
-                            <tr>
-                                <td>{{trabajo.getTitulo()}}</td>
-                                <td>{{trabajo.getModalidad()}}</td>
-
-                                <td>
-
-                                    <div class="btn-group">
-                                        <a data-toggle="modal" data-target="#info1" type="button"
-                                           class="btn btn-social btn-bitbucket "><p class="fa fa-edit"></p>Opciones</a>
-                                        <button type="button" class="btn btn-bitbucket dropdown-toggle"
-                                                data-toggle="dropdown">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#"><p class="fa fa-download"></p> Descargar Trabajo</a></li>
-
-                                        </ul>
-                                    </div>
-
-                                </td>
-
-                            </tr>
-                            {% endfor %}
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
                 </div>
-                <!-- /.box -->
-                {% else %}
-                <div class="col-md-12">
-                    <div class="alert alert-info">
-                        No se ha Asignado ninguna Trabajo de Grado.
-                    </div>
-                </div>
-                {% endif %}
             </div>
-        </div>
-        </div>
         </form>
     </div>
     {% endblock%}
