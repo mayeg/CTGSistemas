@@ -57,7 +57,7 @@ class Propuesta_UsuarioDao:
             query = "INSERT INTO usuario_propuesta " \
                     "(id_estudiante, id_propuesta, estado) " \
                     "VALUES (%s, %s, %s)"
-            param = (id, propuest.getId(), "Activo")
+            param = (id, propuest.getId(), "Activa")
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True

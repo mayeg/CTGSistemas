@@ -3,31 +3,27 @@ from dto.propuesta import Propuesta
 
 class TrabajoGrado:
 
-    def __init__(self, codigo="", titulo="", director_proyecto="", id_propuesta=0,
-                 cod_jurado1="", cod_jurado2="", cod_jurado3="", correciones="", protocolo="",
-                 estado="", documentacion="", modalidad="", fecha_correcciones="",
+    def __init__(self, codigo="", titulo="", id_propuesta=0,
+                 cod_jurado1="", cod_jurado2="", cod_jurado3="", correciones="",
+                 estado="", documentacion="", fecha_correcciones="",
                  fecha_sustentacion="", lugar_sustentacion="", fecha="",nota="",
-                 hora_sustentacion="", documento_correcciones=""):
+                 hora_sustentacion=""):
 
         self.__codigo = codigo
         self.__titulo = titulo
-        self.__director_proyecto = director_proyecto
         self.__id_propuesta = Propuesta(id=id_propuesta)
         self.__cod_jurado1 = cod_jurado1
         self.__cod_jurado2 = cod_jurado2
         self.__cod_jurado3 = cod_jurado3
-        self.__modalidad = modalidad
         self.__correciones = correciones
         self.__estado = estado
         self.__documentacion = documentacion
-        self.__protocolo = protocolo
         self.__fecha_correcciones = fecha_correcciones
         self.__fecha_sustentacion = fecha_sustentacion
         self.__lugar_sustentacion = lugar_sustentacion
         self.__fecha = fecha
         self.__nota = nota
         self.__hora_sustentacion= hora_sustentacion
-        self.__documento_correcciones = documento_correcciones
 
     def getCodigo(self):
         return self.__codigo
@@ -83,19 +79,11 @@ class TrabajoGrado:
     def setCorreciones(self, correciones):
         self.__correciones = correciones
 
-    def getProtocolo(self):
-        return self.__protocolo
-
-    def setProtoloco(self, protocolo):
-        self.__protocolo = protocolo
-
-
     def getDocumentacion(self):
         return self.__documentacion
 
     def setDocumentacion(self, documentacion):
         self.__documentacion = documentacion
-
 
     def getEstado(self):
         return self.__estado
@@ -139,11 +127,6 @@ class TrabajoGrado:
     def setHora_Sustentacion(self,hora_sustentacion):
         self.__hora_sustentacion=hora_sustentacion
 
-    def getDocumento_correcciones(self):
-            return self.__documento_corecciones
-
-    def setDocumento_correcciones(self, documento):
-            self.__documento_corecciones = documento
 
 
 
