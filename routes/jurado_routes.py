@@ -1,4 +1,4 @@
-from flask.blueprints import Blueprint
+    from flask.blueprints import Blueprint
 from flask import request, session
 
 from controllers.jurado import JuradoController
@@ -41,11 +41,12 @@ def consultar_sustentacion():
         return JuradoController().get_view_consultar_sustentaciones()
 
 
+
+
 @jurado.route("/enviar_comentario/<id_propuesta>", methods=["GET"])
 def enviar_comentario(id_propuesta):
     if request.method == "GET":
         return JuradoController().get_view_enviar_comentario(id_propuesta)
-
 
 @jurado.route("/guardar_comentario/<id_propuesta>" , methods=["POST"])
 def guardar_comentario(id_propuesta):
