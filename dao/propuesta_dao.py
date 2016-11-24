@@ -293,8 +293,6 @@ class PropuestaDao:
             print e.message
             return []
 
-
-
     def asignar_jurados(self,propuesta,jurado1,jurado2,jurado3):
         try:
             query = "UPDATE propuesta SET cod_jurado1= %s, cod_jurado2= %s, cod_jurado3= %s WHERE titulo=%s "
@@ -308,26 +306,23 @@ class PropuestaDao:
             print e.message
             return False
 
-
-    
-       def get_propuesta_consulta_jurado(self, jurado):
-            try:
-                query = "SELECT * FROM  `propuesta` WHERE  `cod_jurado1` = %s OR  `cod_jurado2` =%s " \
+    def get_propuesta_consulta_jurado(self, jurado):
+        try:
+            query = "SELECT * FROM  `propuesta` WHERE  `cod_jurado1` = %s OR  `cod_jurado2` =%s " \
                         "OR  `cod_jurado3` =%s"
-                param = (jurado.getCodigo(), jurado.getCodigo(), jurado.getCodigo())
-                self.__cur.execute(query, param)
-                data = self.__cur.fetchall()
-                resultado = list()
-                if data is None:
-                    return []
-                for propuesta in data:
-                    pro = Propuesta(id=propuesta[0],titulo=propuesta[1], fecha_comentario=propuesta[12],comentario=propuesta[6])
-                    resultado.append(pro)
-                return resultado
-            except Exception as e:
-                print e.message
+            param = (jurado.getCodigo(), jurado.getCodigo(), jurado.getCodigo())
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+            if data is None:
                 return []
-
+            for propuesta in data:
+                pro = Propuesta(id=propuesta[0],titulo=propuesta[1], fecha_comentario=propuesta[12],comentario=propuesta[6])
+                resultado.append(pro)
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
 
     def get_propuesta_id(self,id_propuesta):
         try:

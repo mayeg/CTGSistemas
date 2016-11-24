@@ -1,4 +1,4 @@
-    from flask.blueprints import Blueprint
+from flask.blueprints import Blueprint
 from flask import request, session
 
 from controllers.jurado import JuradoController
