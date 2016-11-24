@@ -26,33 +26,23 @@ class PropuestaDao:
 
     def get_propuesta_titulo(self, propuesta):
         try:
+            print propuesta.getTitulo(), 'propuesta.getTiulo desde DAO'
             query = "SELECT * FROM propuesta WHERE titulo = %s"
             param = (propuesta.getTitulo(),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
+            print data, 'data'
             if data is None:
                 return None
-            propuest = Propuesta(id=data[0], titulo=data[1], estado=data[8],
-                             documentacion=data[9], modalidad=data[10],
-                             fecha=data[17])
+            propuest = Propuesta(id=data[0], titulo=data[1], documentacion=data[7],
+                                 modalidad=data[8], fecha=data[14])
             return propuest
 
         except Exception as e:
             print e.__class__, e.message
             return None
 
-    def subir_entregable(self, entregable):
-        try:
-            query = "INSERT INTO entregable_propuesta (id_propuesta, entregable, " \
-                    "fecha) VALUES (%s, %s, %s)"
-            param = (entregable.getId_propuesta().getId(), entregable.getEntregable(),
-                     entregable.getFecha())
-            self.__cur.execute(query, param)
-            self.__conn.commit()
-            return True
-        except Exception as e:
-            print e.__class__, e.message
-            return False
+
 
     def subir_correcciones(self, prop):
         try:

@@ -6,6 +6,7 @@ from flask import render_template, redirect, url_for, session
 from datetime import datetime
 
 from controllers.emails import EmailController
+from dao.entregable_propuesta_dao import Entregable_propuestaDao
 from dao.propuesta_dao import PropuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.usuario_dao import UsuarioDao
@@ -52,16 +53,18 @@ class EstudianteController:
                               modalidad=modalidad, documentacion=filename,
                               fecha=fecha)
         propuest = PropuestaDao().get_propuesta_titulo(propuesta)
-        print propuest, 'la prpuesta a buscar'
         if propuest is not None:
             flash("Ya existe una propuesta con ese titulo", "error")
             return self.get_registro_propuesta()
-
         if PropuestaDao().crear_propuesta(propuesta):
+            print propuesta.getTitulo(), 'propuesta.getTitulo'
             pro = PropuestaDao().get_propuesta_titulo(propuesta)
+            print pro, 'pro'
             if Propuesta_UsuarioDao().crear_propuesta_usuario(pro, id):
-                flash("se creo la propuesta exitosamente.", "success")
-                return self.get_registrar_propuesta()
+                print 'crea propuesta Usuario'
+                if Entregable_propuestaDao().crear_entregable_propuesta(pro):
+                    flash("se creo la propuesta exitosamente.", "success")
+                    return self.get_registrar_propuesta()
         else:
                 flash("error al crear la propuesta", "error")
         return self.get_registro_propuesta()
@@ -104,15 +107,18 @@ class EstudianteController:
         if propuesta_e is None:
             flash("La propuesta no existe", "error")
             return redirect(url_for("estudiante.home"))
-
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
         fecha = datetime.now().date()
-        entregable_propuesta = EntregablePropuesta(id_propuesta=pro.getId(),
-                                                   entregable=filename,
-                                                   fecha=fecha)
-        if PropuestaDao().subir_entregable(entregable_propuesta):
-            flash("se subio correctamente el archivo", "success")
+        entregable_propuesta = Entregable_propuestaDao().get_entregable_propuesta(pro)
+        entregable_propuesta.setFecha(fecha)
+        entregable_propuesta.setEntregable(filename)
+        if entregable_propuesta.getFecha_Entregable() > entregable_propuesta.getFecha():
+            if Entregable_propuestaDao().subir_entregable(entregable_propuesta):
+                flash("se subio correctamente el archivo", "success")
+                return redirect(url_for("estudiante.home"))
+        else:
+            flash("Ya excedio la fecha limite de presentar el entregable", "error")
             return redirect(url_for("estudiante.home"))
 
     def get_subir_entregable(self):
@@ -134,8 +140,12 @@ class EstudianteController:
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
             id_propuesta=propuesta_e.getId_propuesta().getId()))
         pro.getId_propuesta().setDocumentacion(filename)
-        if PropuestaDao().subir_correcciones(pro):
-            flash("se subio correctamente el archivo", "success")
+        if pro.getId_propuesta().getFecha_Comentario() > pro.getId_propuesta().getFecha():
+            if PropuestaDao().subir_correcciones(pro):
+                flash("se subio correctamente el archivo", "success")
+                return redirect(url_for("estudiante.home"))
+        else:
+            flash("Ya excedio la fecha limite de presentar la correccion", "error")
             return redirect(url_for("estudiante.home"))
 
     def get_subir_correciones(self):
