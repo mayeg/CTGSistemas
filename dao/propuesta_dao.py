@@ -310,7 +310,7 @@ class PropuestaDao:
 
 
     
-    def get_propuesta_consulta_jurado(self, jurado):
+       def get_propuesta_consulta_jurado(self, jurado):
             try:
                 query = "SELECT * FROM  `propuesta` WHERE  `cod_jurado1` = %s OR  `cod_jurado2` =%s " \
                         "OR  `cod_jurado3` =%s"
@@ -321,16 +321,7 @@ class PropuestaDao:
                 if data is None:
                     return []
                 for propuesta in data:
-                    pro = Propuesta(id=propuesta[0], titulo=propuesta[1], director_trabajo=propuesta[2],
-                                    cod_jurado1=propuesta[3], cod_jurado2=propuesta[4], cod_jurado3=propuesta[5],
-                                    comentario=propuesta[6],
-                                    entegrables=propuesta[7], estado=propuesta[8], documentacion=propuesta[9],
-                                    modalidad=propuesta[10],
-                                    solicitud_retiro=propuesta[11], solicitud_sustentacion=propuesta[12],
-                                    solicitud_prorroga=propuesta[13],
-                                    fecha_comentario=propuesta[14], fecha_correcciones=propuesta[15],
-                                    fecha_entregables=propuesta[16],
-                                    fecha=propuesta[17])
+                    pro = Propuesta(id=propuesta[0],titulo=propuesta[1], fecha_comentario=propuesta[12],comentario=propuesta[6])
                     resultado.append(pro)
                 return resultado
             except Exception as e:

@@ -21,7 +21,7 @@ class JuradoController:
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
         propuestas = PropuestaDao().get_propuesta_consulta_jurado(usuario)
         if (propuestas != ""):
-            print"hay algo"
+
             return render_template("jurado/consulta_propuesta.html", usuario=usuario, propuestas=propuestas)
         else:
          flash("No existen Propuestas a cargo.", "error")
@@ -31,7 +31,7 @@ class JuradoController:
     def get_view_consultar_trabajo(self):
         cod = session['usuario']['codigo']
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
-        trabajos = TrabajoGradoDao().get_trabajo_consulta_jurado(usuario)
+        trabajos = TrabajoGradoDao().get_trabajos_Jurado(usuario)
         if (trabajos != ""):
             return render_template("jurado/consulta_trabajo.html", usuario=usuario, trabajos=trabajos)
         else:
@@ -39,28 +39,20 @@ class JuradoController:
             return render_template("jurado/consulta_trabajo.html", usuario=usuario)
 
 
-    def get_view_consultar_sustentaciones(self):
-        cod = session['usuario']['codigo']
-        usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
-        trabajos = TrabajoGradoDao().get_trabajo_consulta_jurado(usuario)
-        if (trabajos != ""):
-            return render_template("jurado/consulta_sustentacion.html", usuario=usuario, trabajos=trabajos)
-        else:
-            flash("No existen Trabajos a cargo.", "error")
-            return render_template("jurado/consulta_sustentacion.html", usuario=usuario)
 
     def get_view_enviar_comentario(self,id_propuesta):
         propuesta = PropuestaDao().get_propuesta2(id_propuesta)
         return render_template("jurado/comentario.html", propuesta=propuesta)
 
+
     def get_guardar_comentario(self, id_propuesta, comentario):
         com1 = PropuestaDao().get_comentarios(id_propuesta)
+        print com1
         if(com1 is None):
             com1=""
-        va =PropuestaDao().get_guardar_comentario(id_propuesta,com1+"------"+comentario)
+        va =PropuestaDao().get_guardar_comentario(id_propuesta,com1+";"+comentario)
         if (va):
             flash("Se ha enviado Exitosamente.", "success")
-            usuario = UsuarioDao().get_usuario_por_codigo(
-            Usuario(codigo=session['usuario']['codigo']))
-            return render_template("jurado/home.html",usuario=usuario)
+            return render_template("jurado/home.html")
+        flash("Ha ocurrido un error.","error")
         return render_template("jurado/consulta_sustentacion.html")
