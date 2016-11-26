@@ -1,8 +1,10 @@
-from flask.blueprints import Blueprint
-from flask import request, session
-from flask.helpers import flash
-from werkzeug.utils import redirect
+import os
 
+from flask.blueprints import Blueprint
+from flask import request, session, app
+from flask.globals import current_app
+from flask.helpers import flash, send_from_directory
+from werkzeug.utils import redirect
 from controllers.estudiante import EstudianteController
 from controllers.login import Login
 from controllers.usuario import UsuarioController
@@ -72,6 +74,7 @@ def subir_correcciones():
         return redirect(request.url)
     return EstudianteController().subir_correcciones(file, id)
 
+
 @estudiante.route("/solicitud/sustentacion", methods=["GET", "POST"])
 def solicitar_sustentacion():
     if request.method == "GET":
@@ -83,6 +86,7 @@ def solicitar_sustentacion():
         return redirect(request.url)
     return EstudianteController().solicitar_sustentacion(file, id)
 
+
 @estudiante.route("/solicitud/retiro_propuesta", methods=["GET", "POST"])
 def solicitar_retiro_propuesta():
     if request.method == "GET":
@@ -93,4 +97,12 @@ def solicitar_retiro_propuesta():
         flash('No selecciono el archivo', 'Error')
         return redirect(request.url)
     return EstudianteController().solicitar_retiro(file, id)
+
+
+@estudiante.route("/descargar/<filename>", methods=["POST"])
+def descargar_propuesta(filename):
+    print('entro a routes')
+    uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
+    return send_from_directory(directory=uploads, filename=filename)
+
 

@@ -21,7 +21,7 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Maitree', serif;
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
@@ -163,7 +163,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Maitree', serif;
 }
 /* General Links */
 a {
@@ -302,10 +302,10 @@ a:focus {
 }
 .main-header .logo .logo-lg {
   display: block;
-}
+  }
 .main-header .logo .logo-mini {
   display: none;
-}
+  }
 .main-header .navbar-brand {
   color: #fff;
 }

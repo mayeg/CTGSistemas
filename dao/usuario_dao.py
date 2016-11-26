@@ -21,7 +21,7 @@ class UsuarioDao:
             return Usuario(id=data[0], nombres=data[4], codigo=data[1],
                            contrasena=data[3], tipo_usuario=data[7])
         except Exception as e:
-            print e.message
+            print(e.message)
             return None
 
     def get_lista_usuarios(self, pagina, codigo, nombres, cedula, apellidos,
@@ -51,7 +51,7 @@ class UsuarioDao:
                 resultado.append(user)
             return resultado
         except Exception as e:
-            print e.message
+            print(e.message)
             return []
 
     def listar_jurados(self, usuario):
@@ -76,7 +76,7 @@ class UsuarioDao:
             return resultado
 
         except Exception as e:
-            print e.message
+            print(e.message)
             return []
 
 
@@ -88,29 +88,26 @@ class UsuarioDao:
                      , "%"+apellidos+"%")
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
-            print data[0]
             if data is None:
                 return 0
             return data[0]
         except Exception as e:
-            print e.message
+            print(e.message)
             return 0
 
     def get_usuario_por_codigo(self, usuario):
         try:
-            print usuario.getCodigo(), 'codigo dao'
             query = "SELECT * FROM usuario WHERE codigo = %s"
             param = (str(usuario.getCodigo()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
-            print data
             if data is None:
                 return None
             return Usuario(id=data[0], codigo=data[1], cedula=data[2],
                            nombres=data[4], apellidos=data[5], email=data[6],
                            token_password=data[8], tipo_usuario=data[7])
         except Exception as e:
-            print e.message
+            print(e.message)
             return None
 
     def crear_usuario(self, usuario):
@@ -127,24 +124,22 @@ class UsuarioDao:
             return True
         except Exception as e:
             print e.__class__
-            print e.message
+            print(e.message)
             return False
 
     def get_usuario_por_tipo(self, usuario_tipo):
         try:
-            print "en el dao"+ usuario_tipo.getTipoUsuario().getId()
             query = "SELECT * FROM usuario WHERE tipo_usuario = %s"
             param = (int(usuario_tipo.getTipoUsuario().getId()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
-            print data, "data dao"
             if data is None:
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
                            nombres=data[4], apellidos=data[5],
                            tipo_usuario=data[7])
         except Exception as e:
-            print e.message, "execpcion"
+            print(e.message)
             return None
 
     def get_usuario_por_id(self, usuario):
@@ -159,7 +154,7 @@ class UsuarioDao:
                            nombres=data[4], apellidos=data[5], email=data[6],
                            tipo_usuario=data[7])
         except Exception as e:
-            print e.message
+            print(e.message)
             return None
 
     def get_usuario_por_token(self, usuario):
@@ -174,7 +169,7 @@ class UsuarioDao:
                            nombres=data[4], apellidos=data[5], email=data[6],
                            tipo_usuario=data[7])
         except Exception as e:
-            print e.message
+            print(e.message)
             return None
 
     def eliminar_usuario(self, usuario):
@@ -185,7 +180,7 @@ class UsuarioDao:
             self.__conn.commit()
             return True
         except Exception as e:
-            print e.message
+            print(e.message)
             return False
 
     def editar_usuario(self, usuario):
@@ -200,14 +195,13 @@ class UsuarioDao:
             self.__conn.commit()
             return True
         except Exception as e:
-            print e.__class__, e.message
+            print(e.message)
             return False
 
     def cambiar_contrasena(self, usuario, contrasena_n):
         try:
             query = "UPDATE usuario SET contraseña = %s WHERE id=%s"
             param = (contrasena_n, usuario.getId())
-            print contrasena_n, usuario.getId()
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True
@@ -244,5 +238,5 @@ class UsuarioDao:
                 resultado.append(user)
             return resultado
         except Exception as e:
-            print e.message
+            print(e.message)
             return []        

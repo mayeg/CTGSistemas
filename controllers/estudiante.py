@@ -1,6 +1,5 @@
 import os
 
-from flask.globals import session
 from flask.helpers import flash
 from flask import render_template, redirect, url_for, session
 from datetime import datetime
@@ -10,7 +9,6 @@ from dao.entregable_propuesta_dao import Entregable_propuestaDao
 from dao.propuesta_dao import PropuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.usuario_dao import UsuarioDao
-from dto.entregable_propuesta import EntregablePropuesta
 from dto.propuesta import Propuesta
 from dto.usuario import Usuario
 from dto.usuario_propuesta import UsuarioPropuesta
@@ -57,11 +55,8 @@ class EstudianteController:
             flash("Ya existe una propuesta con ese titulo", "error")
             return self.get_registro_propuesta()
         if PropuestaDao().crear_propuesta(propuesta):
-            print propuesta.getTitulo(), 'propuesta.getTitulo'
             pro = PropuestaDao().get_propuesta_titulo(propuesta)
-            print pro, 'pro'
             if Propuesta_UsuarioDao().crear_propuesta_usuario(pro, id):
-                print 'crea propuesta Usuario'
                 if Entregable_propuestaDao().crear_entregable_propuesta(pro):
                     flash("se creo la propuesta exitosamente.", "success")
                     return self.get_registrar_propuesta()
