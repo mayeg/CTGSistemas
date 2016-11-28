@@ -49,3 +49,16 @@ class Entregable_propuestaDao:
         except Exception as e:
             print e.__class__, e.message
             return False
+        
+        
+    def modificar_fechas(self,entregable_propuesta):
+        try:
+            query = "UPDATE entregable_propuesta SET fecha_entregable= %s WHERE id_propuesta=%s "
+            param = (entregable_propuesta.getFecha_Entregable(), entregable_propuesta.getId_propuesta().getId())
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False    
