@@ -4,7 +4,7 @@
 {% block username %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
 {{usuario.getNombres()}}
-{{usuario.getTipoUsuario().getNombre()}}
+{{usuario.getTipoUsuario().getLabel()}}
 {% endblock %}
 {% block header%}
 {% endblock %}
@@ -103,6 +103,7 @@
             </a></p>
 
         </div>
+        {% if propuesta.getEstado() != 'Cancelado' %}
         <div class="row ">
             <div class="text-right">
                 <a data-toggle="modal" data-target="#info"
@@ -261,6 +262,7 @@
             <i class="fa fa-plus"></i> Subir Correciones
         </a>
     </div>
+        {% endif %}
 
 </div>
 {% else %}

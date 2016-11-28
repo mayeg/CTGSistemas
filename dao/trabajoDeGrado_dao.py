@@ -142,7 +142,7 @@ class TrabajoGradoDao:
                 resultado.append(tra)
             return resultado
         except Exception as e:
-            print e.message
+            print(e.message)
             return []
 
 
@@ -157,8 +157,8 @@ class TrabajoGradoDao:
             self.__conn.commit()
             return True
         except Exception as e:
-            print e.__class__
-            print e.message
+            print(e.__class__)
+            print(e.message)
             return False
 
 
@@ -177,7 +177,7 @@ class TrabajoGradoDao:
                 resultado.append(tra)
             return resultado
         except Exception as e:
-            print e.message
+            print(e.message)
             return []
 
     def asignar_jurados_trabajo(self, trabajo, jurado1, jurado2, jurado3):
@@ -189,8 +189,8 @@ class TrabajoGradoDao:
             self.__conn.commit()
             return True
         except Exception as e:
-            print e.__class__
-            print e.message
+            print(e.__class__)
+            print(e.message)
             return False
 
 
@@ -228,7 +228,6 @@ class TrabajoGradoDao:
                 pro = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],director_proyecto=trabajo[2],modalidad=trabajo[7],
                                 estado=trabajo[10], nota = trabajo[16])
                 resultado.append(pro)
-            print "holaaa por aca"
             return resultado
 
         except Exception as e:

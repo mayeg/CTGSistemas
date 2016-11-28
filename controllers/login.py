@@ -25,7 +25,7 @@ class Login:
             tipoU = session['usuario']['tipo']
             codigo = session['usuario']['codigo']
             usuario = UsuarioDao().get_usuario_por_codigo(
-                Usuario(codigo=codigo, tipo_usuario=tipoU))
+                Usuario(codigo=codigo))
             if tipoU == 2:
                 actas = SecretariaController().get_actas()
                 return render_template('secretaria/home.html', titulo="Inicio",
@@ -38,7 +38,7 @@ class Login:
                 p = PropuestaDao().get_propuesta_consulta_jurado(usuario)
                 t = TrabajoGradoDao().get_trabajos_Jurado(usuario)
                 return render_template('jurado/home.html', titulo="Inicio",
-                                      usuario=usuario, propuestas=p,trabajos=t)
+                                      usuario=usuario, propuestas=p, trabajos=t)
             elif tipoU == 5:
                 return EstudianteController().get_registrar_propuesta()
 

@@ -67,7 +67,6 @@ class UsuarioDao:
                 user = Usuario(id=jurado[0], codigo=jurado[1], cedula=jurado[2],
                                contrasena=jurado[3], nombres=jurado[4],
                                apellidos=jurado[5], email=jurado[6])
-
                 tipo_usuario = TipoUsuario(id=jurado[8], label=jurado[10],
                                        nombre=jurado[9])
                 user.setTipoUsuario(tipo_usuario)
@@ -78,7 +77,6 @@ class UsuarioDao:
         except Exception as e:
             print(e.message)
             return []
-
 
     def get_total_usuarios(self, pagina, codigo, nombres, cedula, apellidos):
         try:
@@ -103,9 +101,10 @@ class UsuarioDao:
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return Usuario(id=data[0], codigo=data[1], cedula=data[2],
+            user = Usuario(id=data[0], codigo=data[1], cedula=data[2],
                            nombres=data[4], apellidos=data[5], email=data[6],
                            token_password=data[8], tipo_usuario=data[7])
+            return user
         except Exception as e:
             print(e.message)
             return None
@@ -123,7 +122,7 @@ class UsuarioDao:
             self.__conn.commit()
             return True
         except Exception as e:
-            print e.__class__
+            print(e.__class__)
             print(e.message)
             return False
 
@@ -206,7 +205,7 @@ class UsuarioDao:
             self.__conn.commit()
             return True
         except Exception as e:
-            print e.__class__
+            print(e.__class__)
             return False
 
     def cambiar_recordar_contrasena(self, usuario):
@@ -219,7 +218,7 @@ class UsuarioDao:
             self.__conn.commit()
             return True
         except Exception as e:
-            print e.__class__
+            print(e.__class__)
             return False
     
     def get_jurados(self, usuario_tipo):
