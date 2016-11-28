@@ -13,7 +13,6 @@ class Entregable_propuestaDao:
 
     def crear_entregable_propuesta(self, pro):
         try:
-            print pro.getId(), 'pro.getid'
             query = " INSERT INTO entregable_propuesta (id_propuesta) VALUES (%s)"
             param = (pro.getId(),)
             self.__cur.execute(query, param)

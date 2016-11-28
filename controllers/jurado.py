@@ -17,8 +17,9 @@ class JuradoController:
         pass
 
     def get_view_consultar_propuesta(self):
-        cod = session['usuario']['codigo']
-        usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
+        codigo = session['usuario']['codigo']
+        usuario = UsuarioDao().get_usuario_por_codigo(
+            Usuario(codigo=codigo))
         propuestas = PropuestaDao().get_propuesta_consulta_jurado(usuario)
         if (propuestas != ""):
 
@@ -41,18 +42,29 @@ class JuradoController:
 
 
     def get_view_enviar_comentario(self,id_propuesta):
+        codigo = session['usuario']['codigo']
+        usuario = UsuarioDao().get_usuario_por_codigo(
+            Usuario(codigo=codigo))
         propuesta = PropuestaDao().get_propuesta2(id_propuesta)
-        return render_template("jurado/comentario.html", propuesta=propuesta)
+        return render_template("jurado/comentario.html", propuesta=propuesta,
+                               usuario=usuario)
 
 
     def get_guardar_comentario(self, id_propuesta, comentario):
         com1 = PropuestaDao().get_comentarios(id_propuesta)
-        print com1
+        codigo = session['usuario']['codigo']
+        usuario = UsuarioDao().get_usuario_por_codigo(
+            Usuario(codigo=codigo))
+        p = PropuestaDao().get_propuesta_consulta_jurado(usuario)
+        t = TrabajoGradoDao().get_trabajos_Jurado(usuario)
         if(com1 is None):
             com1=""
         va =PropuestaDao().get_guardar_comentario(id_propuesta,com1+";"+comentario)
         if (va):
             flash("Se ha enviado Exitosamente.", "success")
-            return render_template("jurado/home.html")
+
+            return render_template('jurado/home.html', titulo="Inicio",
+                                   usuario=usuario, propuestas=p, trabajos=t)
         flash("Ha ocurrido un error.","error")
-        return render_template("jurado/consulta_sustentacion.html")
+        return render_template("jurado/consulta_trabajo.html", usuario=usuario,
+                               trabajos=t)

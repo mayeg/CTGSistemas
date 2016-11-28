@@ -112,7 +112,8 @@ class SecretariaController:
 
     def crear_acta(self, titulo, tipo, fecha, file, descripcion):
         from proyecto import UPLOAD_FOLDER
-        filename = str(datetime.now().microsecond) + secure_filename(file.filename)
+        filename = str(datetime.now().microsecond) + secure_filename(
+            file.filename)
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         cod = session['usuario']['codigo']
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
@@ -224,7 +225,8 @@ class SecretariaController:
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
         propuesta = Propuesta(id=codigo, titulo=titulo)
         propuestas = PropuestaDao().get_propuesta_consulta(propuesta)
-        if (propuestas is not None):
+        if propuestas is not None:
+            print('not none')
             return render_template("secretaria/propuesta/ConsultarPropuesta.html",
                                    propuestas=propuestas, usuario=usuario)
         else:
@@ -273,7 +275,7 @@ class SecretariaController:
                               fecha_comentario=fechaComentarios,
                               fecha_correcciones=fechaCorrecciones)
         entregable_propuesta = EntregablePropuesta(id_propuesta=codigo_propuesta,fecha_entregable=fechaEntregables)
-        if PropuestaDao().modificar_fechas(propuesta)or Propuesta_EntregableDao().modificar_fechas(entregable_propuesta):
+        if PropuestaDao().modificar_fechas(propuesta)or Entregable_propuestaDao().modificar_fechas(entregable_propuesta):
             flash("Se han modificado las fechas exitosamente.", "success")
             return render_template("secretaria/propuesta/ConsultarPropuesta.html",
                                    usuario=usuario)
@@ -473,7 +475,8 @@ class SecretariaController:
 
     def registrar_protocolo(self, nombre, descripcion, file):
         from proyecto import UPLOAD_FOLDER
-        filename = str(datetime.now().microsecond) + secure_filename(file.filename)
+        filename = str(datetime.now().microsecond) + secure_filename(
+            file.filename)
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         protocolo = Protocolo(nombre=nombre, descripcion=descripcion,
                               filename=filename)

@@ -226,9 +226,10 @@ def asignar_jurados_trabajo():
 def registrar_protocolo():
     if(request.method=="GET"):
         return SecretariaController().get_view_registrar_protocolo()
+    print('entra en POST')
     nombre = request.form.get('nombre', None)
     descripcion = request.form.get('descripcion', None)
-    file = request.files['documento']
+    file = request.files['archivo']
     if file.filename == '':
         flash('No selecciono el archivo', 'Error')
         return redirect(request.url)

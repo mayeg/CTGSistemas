@@ -98,7 +98,6 @@ class Login:
             mensaje = "Para realizar el cambio de contraseña en el sistema " \
                       "haga <a href='https://ctgistemas.herokuapp.com/cambiar_contrasena/" + \
                       usuario_c.getTokenPassword() + "'>clic aquí.</a>"
-            print mensaje
             if EmailController().enviar_email(
                     usuario_c.getEmail(), mensaje,
                     "Cambio de Contraseña - CTG Sistemas"):

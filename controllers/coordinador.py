@@ -82,7 +82,6 @@ class CoordinadorController:
 
         propuesta = Propuesta(titulo=nombre, estado=estado)
         propuesta_2=PropuestaDao().get_propuesta_titulo(propuesta)
-        print propuesta_2.getId(), 'id propuesta a cancelar'
         if (propuesta_2 is not None):
             Propuesta_UsuarioDao().get_propuesta_cancelar(propuesta_2)
             flash("Actualiacion Exitosa", "success")
@@ -165,7 +164,6 @@ class CoordinadorController:
             return render_template("/coordinador/juradoEstudiante.html",usuario=usuario_u, tipoU=tipoU)
 
         trabajoG = TrabajoGrado(id_propuesta=usuario_p.getId_propuesta().getId())
-        print trabajoG.getId_propuesta().getId()
         if TrabajoGradoDao().get_trabajo_Estudiante(trabajoG):
             trabajos = TrabajoGradoDao().get_trabajo_Estudiante(trabajoG)
             tipoU = session['usuario']['tipo']
@@ -187,20 +185,14 @@ class CoordinadorController:
             return render_template("/coordinador/modalidadT.html",usuario=usuario_u, tipoU=tipoU)
 
     def consulta_modalidadT(self, tipo_modalidad, trabajo_a):
-        print  'entroo33'
         propuesta = Propuesta(modalidad=tipo_modalidad)
         propuestas = PropuestaDao().get_propuesta_modalidadT(propuesta)
         if (propuestas):
-            print  'propuestas'
             trabajos = list()
             for propuesta in propuestas:
-
                 pro = TrabajoGradoDao().get_trabajo_modalidadT(propuesta, trabajo_a)
                 if(pro is not None):
                   trabajos.append(pro)
-
-            print trabajos, 'trabajos'
-
             tipoU = session['usuario']['tipo']
             usuario_u = UsuarioDao().get_usuario_por_codigo(
                 Usuario(codigo=session['usuario']['codigo']))
@@ -220,7 +212,6 @@ class CoordinadorController:
             return render_template("/coordinador/consultarA.html",usuario=usuario_u, tipoU=tipoU)
 
     def consulta_actaC(self, fecha):
-
         acta = Acta(fecha=fecha)
         if (ActaDao().get_acta_fecha(acta)):
             actas = ActaDao().get_acta_fecha(acta)
