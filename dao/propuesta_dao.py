@@ -375,12 +375,8 @@ class PropuestaDao:
             if data is None:
                 return None
             for propuesta in data:
-                pro = Propuesta(id=propuesta[0], titulo=propuesta[1], director_trabajo=propuesta[2],
-                                cod_jurado1=propuesta[3], cod_jurado2=propuesta[4], cod_jurado3=propuesta[5],
-                                comentario=propuesta[6],
-                                documentacion=propuesta[7], modalidad=propuesta[8], solicitud_retiro=propuesta[9],
-                                solicitud_sustentacion=propuesta[10], solicitud_prorroga=propuesta[11],
-                                fecha_comentario=propuesta[12], fecha_correcciones=propuesta[13], fecha=propuesta[14])
+                pro = Propuesta(titulo=propuesta[1], director_trabajo=propuesta[2],comentario=propuesta[7],estado=propuesta[9],
+                                modalidad = propuesta[11])
                 resultado.append(pro)
             return resultado
 
@@ -466,4 +462,23 @@ class PropuestaDao:
             print e.__class__, e.message
             return False
 
+    def get_propuesta_modalidadT(self, propuesta):
+        try:
+
+            query = "SELECT * FROM `propuesta` WHERE modalidad = %s"
+            param = (propuesta.getModalidad(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            print data, 'Data proues'
+            resultado = list()
+            if data is None:
+                return []
+            for propuesta in data:
+                pro = Propuesta(id=propuesta[0],)
+                resultado.append(pro)
+
+            return resultado
+        except Exception as e:
+            print e.message
+            return []
 
