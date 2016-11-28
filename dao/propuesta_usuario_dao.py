@@ -65,3 +65,29 @@ class Propuesta_UsuarioDao:
             print e.__class__
             print e.message
             return False
+        
+        
+    def modificar_estado(self,propuesta):
+        try:
+            query = "UPDATE usuario_propuesta SET estado= %s WHERE id_propuesta=%s "
+
+            param = (propuesta.getEstado(),propuesta.getId())
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
+
+    def desactivar_propuesta(self, id_propuesta):
+        try:
+            query = "UPDATE usuario_propuesta SET estado=%s " \
+                    "WHERE id_propuesta=%s"
+            param = ('Desactivado',id_propuesta,)
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__, e.message
+            return False
