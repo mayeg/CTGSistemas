@@ -2,7 +2,7 @@ import hashlib
 import os
 
 from dao.acta_dao import ActaDao
-from dao.propuesta_entregable_dao import Propuesta_EntregableDao
+from dao.entregable_propuesta_dao import Entregable_propuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.trabajoDeGrado_dao import TrabajoGradoDao

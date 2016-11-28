@@ -159,7 +159,7 @@ class TrabajoGradoDao:
                                    hora_sustentacion=trabajo[14])
                 resultado.append(tra)
             return resultado
-        except Exception as e:
+         except Exception as e:
             print(e.message)
             return []
 

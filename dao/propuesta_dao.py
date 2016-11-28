@@ -100,7 +100,7 @@ class PropuestaDao:
                              fecha_comentario=propuesta[12],fecha_correcciones=propuesta[13],fecha=propuesta[14])
         except Exception as e:
             print e.message
-            return Non
+            return None
 
     def get_propuesta_consulta(self,propuest):
         if(propuest.getId() == "" and propuest.getTitulo() != ""):
