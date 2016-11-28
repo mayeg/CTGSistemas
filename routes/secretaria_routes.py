@@ -3,6 +3,9 @@ from flask import request, session
 from controllers.login import Login
 from controllers.secretaria import SecretariaController
 from controllers.usuario import UsuarioController
+from flask.helpers import flash
+from werkzeug.utils import redirect
+
 
 secretaria = Blueprint("secretaria", __name__)
 
@@ -81,9 +84,12 @@ def registro_acta():
     titulo = request.form.get('titulo',None)
     tipo = request.form.get('tipo',None)
     fecha = request.form.get('fecha',None)
-    archivo = request.form.get('archivo', None)
+    file = request.files['archivo']
+    if file.filename == '':
+        flash('No selecciono el archivo', 'Error')
+        return redirect(request.url)
     descripcion = request.form.get('descripcion',None)
-    return SecretariaController().crear_acta(titulo, tipo, fecha, archivo,
+    return SecretariaController().crear_acta(titulo, tipo, fecha, file,
                                              descripcion)
 
 
@@ -95,6 +101,10 @@ def descargar_modificar_acta():
     tipo = request.form.get('tipo', None)
     fecha = request.form.get('fecha', None)
     return SecretariaController().get_consulta_descarga(titulo, tipo, fecha)
+
+@secretaria.route("/descargar_acta/<codigo_acta>", methods=["GET"])
+def descargar_acta(codigo_acta):
+    SecretariaController().descargar_acta(codigo_acta)
 
 
 @secretaria.route("/modificar/<titulo_acta>", methods=["GET", "POST"])
@@ -188,17 +198,19 @@ def agregar_fechas_trabajo(codigo_trabajo):
     fechaCorrecciones = request.form.get('fechaCorrecciones',None)
     return SecretariaController().agregar_fechas_trabajo(codigo_trabajo,fechaCorrecciones)
 
+@secretaria.route("/agregar_datos_sus/<id_propuesta>", methods=["GET","POST"])
+def agregar_datos_sus(id_propuesta):
+    if(request.method=="GET"):
+        return SecretariaController().get_view_agregar_datos_sustentacion_propuesta(id_propuesta)
+    lugar = request.form.get('lugar', None)
+    fecha = request.form.get('fecha', None)
+    hora = request.form.get('hora', None)
+    return SecretariaController().agregar_datos_sustentacion(id_propuesta, lugar, fecha, hora)
 
 @secretaria.route("/agregar_datos_sustentacion",methods=["GET","POST"])
 def agregar_datos_sustentacion():
     if(request.method=="GET"):
         return SecretariaController().get_view_agregar_datos_sustentacion()
-    trabajo = request.form.get('trabajo',None)
-    lugar = request.form.get('lugar',None)
-    fecha = request.form.get('fecha',None)
-    hora = request.form.get('hora',None)
-    return SecretariaController().agregar_datos_sustentacion(trabajo,lugar,fecha,hora)
-
 
 @secretaria.route("/asignar_jurados_trabajo",methods=["GET","POST"])
 def asignar_jurados_trabajo():
@@ -214,3 +226,12 @@ def asignar_jurados_trabajo():
 def registrar_protocolo():
     if(request.method=="GET"):
         return SecretariaController().get_view_registrar_protocolo()
+    nombre = request.form.get('nombre', None)
+    descripcion = request.form.get('descripcion', None)
+    file = request.files['documento']
+    if file.filename == '':
+        flash('No selecciono el archivo', 'Error')
+        return redirect(request.url)
+    id = session['usuario']['id']
+    return SecretariaController().registrar_protocolo(
+        nombre,descripcion, file)
