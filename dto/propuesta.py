@@ -2,11 +2,10 @@ class Propuesta:
 
     def __init__(self, id=0, titulo="", director_trabajo="",
                  cod_jurado1="", cod_jurado2="", cod_jurado3="", comentario="",
-                 documentacion="", modalidad="",
+                 entegrables="", estado="", documentacion="", modalidad="",
                  solicitud_retiro="", solicitud_sustentacion="",
                  solicitud_prorroga="", fecha_comentario="",
-                 fecha_correcciones="", fecha="",
-                 documento_corecciones=""):
+                 fecha_correcciones="",  fecha="",documento_corecciones=""):
 
         self.__id = id
         self.__titulo = titulo
@@ -15,6 +14,8 @@ class Propuesta:
         self.__cod_jurado2 = cod_jurado2
         self.__cod_jurado3 = cod_jurado3
         self.__comentario = comentario
+        self.__entegrables = entegrables
+        self.__estado = estado
         self.__documentacion = documentacion
         self.__modalidad = modalidad
         self.__solicitud_retiro = solicitud_retiro
@@ -68,6 +69,12 @@ class Propuesta:
     def setModalidad(self, modalidad):
         self.__modalidad = modalidad
 
+    def getEntregables(self):
+        return self.__entegrables
+
+    def setEntregables(self, entregables):
+        self.__entegrables = entregables
+
     def getComentario(self):
         return self.__comentario
 
@@ -80,6 +87,12 @@ class Propuesta:
     def setDocumentacion(self, documentacion):
         self.__documentacion = documentacion
 
+    def getEstado(self):
+        return self.__estado
+
+    def setEstado(self, estado):
+        self.__estado = estado
+
     def getFecha_Comentario(self):
         return self.__fecha_comentario
 
@@ -91,6 +104,12 @@ class Propuesta:
 
     def setFecha_Correcciones(self,fechaCorrecciones):
         self.__fecha_correcciones = fechaCorrecciones
+
+    def getFecha_Entregables(self):
+        return self.__fecha_entregables
+
+    def setFecha_Entregables(self, fechaEntregable):
+        self.__fecha_entregables = fechaEntregable
 
     def getSolicitud_retiro(self):
         return self.__solicitud_retiro

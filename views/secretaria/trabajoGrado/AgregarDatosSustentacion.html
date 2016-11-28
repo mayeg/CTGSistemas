@@ -100,21 +100,19 @@
             <div class="box-header">
                 <h3 class="box-title">Consultas</h3>
             </div>
-            <form action="/secretaria/agregar_datos_sustentacion" method="POST">
+            <form action="/secretaria/agregar_datos_sus/{{propuesta.getId()}}" method="POST">
                 <div class="box-body">
 
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <br><br>
-                                <label> Trabajos de Grado SIN Sustentacion:</label>
-                                <select class="form-control" name="trabajo">
-                                    <option><-- No Selected --></option>
-                                    {% for trabajo in trabajos %}
-                                    <option>{{trabajo.getTitulo()}}-{{trabajo.getCodigo()}}</option>
-                                    {% endfor %}
+                                <label> Datos Propuesta:</label> <br>
+                                <label>Id: {{propuesta.getId()}}</label> <br>
+                                <label>Titulo: {{propuesta.getTitulo()}}</label> <br>
+                                <label>Fecha: {{propuesta.getFecha()}}</label> <br>
+                                <label>Director : {{propuesta.getDirector_trabajo()}}</label> <br>
 
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -171,3 +169,4 @@
 {% block scripts %}
 
 {% endblock %}
+

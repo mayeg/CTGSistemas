@@ -1,17 +1,25 @@
 import hashlib
-from _hashlib import new
+import os
 
 from dao.acta_dao import ActaDao
+from dao.propuesta_entregable_dao import Propuesta_EntregableDao
+from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
 from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.trabajoDeGrado_dao import TrabajoGradoDao
 from dao.usuario_dao import UsuarioDao
 from dao.propuesta_dao import PropuestaDao
+from dao.protocolo_dao import ProtocoloDao
 from dto.acta import Acta
 from flask.helpers import flash, url_for
 from flask import render_template, redirect, url_for, session
+
+from dto.entregable_propuesta import EntregablePropuesta
 from dto.trabajoGrado import TrabajoGrado
 from dto.usuario import Usuario
 from dto.propuesta import Propuesta
+from dto.protocolo import Protocolo
+from datetime import datetime
+from werkzeug.utils import secure_filename
 
 
 class SecretariaController:
@@ -102,10 +110,13 @@ class SecretariaController:
         return render_template("secretaria/acta/RegistrarActa.html",
                                usuario=usuario)
 
-    def crear_acta(self, titulo, tipo, fecha, archivo, descripcion):
+    def crear_acta(self, titulo, tipo, fecha, file, descripcion):
+        from proyecto import UPLOAD_FOLDER
+        filename = str(datetime.now().microsecond) + secure_filename(file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
         cod = session['usuario']['codigo']
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
-        acta = Acta(titulo=titulo, tipo=tipo, fecha=fecha, archivo=archivo,
+        acta = Acta(titulo=titulo, tipo=tipo, fecha=fecha, archivo=filename,
                     descripcion=descripcion)
         if (ActaDao().get_acta_titulo(acta) != None):
             flash("Ya existe un acta con ese titulo {}.".format(
@@ -235,7 +246,7 @@ class SecretariaController:
         cod = session['usuario']['codigo']
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
         propuesta = Propuesta(id=codigo_propuesta, estado=estado)
-        if (PropuestaDao().modificar_estado(propuesta)):
+        if (Propuesta_UsuarioDao().modificar_estado(propuesta)):
             flash("Se ha modificado exitosamente el estado.", "success")
             return render_template("secretaria/propuesta/ConsultarPropuesta.html",
                                    usuario=usuario)
@@ -260,9 +271,9 @@ class SecretariaController:
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
         propuesta = Propuesta(id=codigo_propuesta,
                               fecha_comentario=fechaComentarios,
-                              fecha_correcciones=fechaCorrecciones,
-                              fecha_entregables=fechaEntregables)
-        if (PropuestaDao().modificar_fechas(propuesta)):
+                              fecha_correcciones=fechaCorrecciones)
+        entregable_propuesta = EntregablePropuesta(id_propuesta=codigo_propuesta,fecha_entregable=fechaEntregables)
+        if PropuestaDao().modificar_fechas(propuesta)or Propuesta_EntregableDao().modificar_fechas(entregable_propuesta):
             flash("Se han modificado las fechas exitosamente.", "success")
             return render_template("secretaria/propuesta/ConsultarPropuesta.html",
                                    usuario=usuario)
@@ -388,24 +399,38 @@ class SecretariaController:
         return render_template("secretaria/trabajoGrado/ConsultarTrabajoGrado.html",
                                usuario=usuario)
 
+    def get_view_agregar_datos_sustentacion_propuesta(self,id_propuesta):
+        cod = session['usuario']['codigo']
+        usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
+        propuestaa = Propuesta(id=id_propuesta)
+        propuesta = PropuestaDao().get_propuesta_codigo(propuestaa)
+        return render_template("secretaria/trabajoGrado/AgregarDatosSustentacion.html",
+                               propuesta=propuesta, usuario=usuario)
 
     def get_view_agregar_datos_sustentacion(self):
         cod = session['usuario']['codigo']
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
-        trabajos = TrabajoGradoDao().get_trabajos_sin_sustentacion()
+        propuestass = PropuestaDao().get_propuesta_solicitud_sustentacion()
+        propuestas = list()
+        for propuesta in propuestass :
+            if PropuestaDao().verificar_propuesta_activa(propuesta):
+                propuestas.append(propuesta)
         return render_template(
-            "secretaria/trabajoGrado/AgregarDatosSustentacion.html",
-            trabajos=trabajos, usuario=usuario)
+            "secretaria/trabajoGrado/VerPropuestasSolicitudes.html",
+            propuestas=propuestas, usuario=usuario)
 
 
-    def agregar_datos_sustentacion(self, trabajo, lugar, fecha, hora):
+    def agregar_datos_sustentacion(self, id_propuesta, lugar, fecha, hora):
         cod = session['usuario']['codigo']
         usuario = Usuario(nombres=session['usuario']['nombres'], codigo=cod)
-        trabajoDividido = trabajo.split('-')
-        trab = TrabajoGrado(codigo=trabajoDividido[1], lugar_sustentacion=lugar,
+        pro = Propuesta(id=id_propuesta)
+        propuesta = PropuestaDao().get_propuesta_codigo(pro)
+        trab = TrabajoGrado(titulo=propuesta.getTitulo(),documentacion=propuesta.getDocumentacion(),
+                            id_propuesta=id_propuesta,fecha=propuesta.getFecha(),lugar_sustentacion=lugar,
                             fecha_sustentacion=fecha, hora_sustentacion=hora)
-        if (TrabajoGradoDao().agregar_datos_sustentacion(trab)):
-            flash("Se han agregado los datos exitosamente", "success")
+        if (TrabajoGradoDao().de_propuesta_a_trabajo_de_grado(trab)):
+            Propuesta_UsuarioDao().desactivar_propuesta(id_propuesta)
+            flash("Se han agregado los datos y registrado Trabajo de Grado exitosamente", "success")
             return render_template("secretaria/home.html", usuario=usuario)
         else:
             flash("No se han podido agregar datos", "error")
@@ -446,7 +471,29 @@ class SecretariaController:
         return render_template("secretaria/protocolo/SubirArchivo.html",
                                usuario=usuario)
 
+    def registrar_protocolo(self, nombre, descripcion, file):
+        from proyecto import UPLOAD_FOLDER
+        filename = str(datetime.now().microsecond) + secure_filename(file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        protocolo = Protocolo(nombre=nombre, descripcion=descripcion,
+                              filename=filename)
+        protocol = ProtocoloDao().get_protocolo_nombre(protocolo)
+        if protocol is not None:
+            flash("Ya existe una protocolo con ese nombre", "error")
+            return self.get_view_registrar_protocolo()
+
+        if ProtocoloDao().crear_protocolo(protocolo):
+            flash("se creo la propuesta exitosamente.", "success")
+            return self.get_view_registrar_protocolo()
+        else:
+            flash("error al crear la propuesta", "error")
+            return self.get_view_registrar_protocolo()
 
     def get_actas(self):
         actas = ActaDao().get_actas()
         return actas
+
+    def descargar_acta(self, codigo_acta):
+        acta = ActaDao().acta_codigo(codigo_acta)
+        archivo = acta.getArchivo()
+        # urllib.urlretrieve("uploads//"+archivo, "archivo.docx")

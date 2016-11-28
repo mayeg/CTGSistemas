@@ -126,10 +126,3 @@ class TrabajoGrado:
 
     def setHora_Sustentacion(self,hora_sustentacion):
         self.__hora_sustentacion=hora_sustentacion
-
-
-
-
-
-
-
