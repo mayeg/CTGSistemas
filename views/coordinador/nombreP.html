@@ -107,7 +107,7 @@
                             <h3 class="box-title">Propuestas Encontradas</h3>
                         </div>
                         <div class="box-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>Titulo</th>
@@ -121,11 +121,11 @@
                                 <tbody>
                                 {% for propuesta in propuestas %}
                                 <tr>
-                                    <td>{{propuesta.getTitulo()}}</td>
-                                    <td>{{propuesta.getDirector_trabajo()}}</td>
-                                    <td>{{propuesta.getModalidad()}}</td>
+                                    <td>{{propuesta.getId_propuesta().getTitulo()}}</td>
+                                    <td>{{propuesta.getId_propuesta().getDirector_trabajo()}}</td>
+                                    <td>{{propuesta.getId_propuesta().getModalidad()}}</td>
                                     <td>{{propuesta.getEstado()}}</td>
-                                    <td>{{propuesta.getComentario()}}</td>
+                                    <td>{{propuesta.getId_propuesta().getComentario()}}</td>
                                 </tr>
                                 {% endfor %}
 
@@ -137,16 +137,14 @@
             </div>
         </div>
     </div>
+
     {% else %}
     <div class="col-md-12">
         <div class="alert alert-info">
-            No se ha realizado  ninguna consulta.
+            No se ha realizado ninguna consulta.
         </div>
     </div>
     {% endif %}
 </section>
-
-
-
 
 {% endblock%}
