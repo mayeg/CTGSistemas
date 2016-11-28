@@ -91,3 +91,39 @@ class Propuesta_UsuarioDao:
         except Exception as e:
             print e.__class__, e.message
             return False
+
+    def get_propuesta_cancelar(self, propuesta):
+        try:
+
+
+            query = "UPDATE `usuario_propuesta` SET estado= %s WHERE id_propuesta=%s "
+            param = ('Cancelado',propuesta.getId(),)
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
+
+
+
+    def get_propuesta_estado(self, propuesta_U):
+        try:
+            query = "SELECT * FROM `usuario_propuesta` WHERE estado = %s"
+            param = (propuesta_U.getEstado(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchall()
+            resultado = list()
+
+            if data is None:
+                return None
+            for propuesta_u in data:
+                pro = UsuarioPropuesta(id=propuesta_u[0], id_estudiante=propuesta_u[1], id_propuesta=propuesta_u[2],
+                                    estado=propuesta_u[3])
+                resultado.append(pro)
+
+            return resultado
+        except Exception as e:
+            print e.message
+            return None
