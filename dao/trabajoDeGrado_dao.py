@@ -15,11 +15,8 @@ class TrabajoGradoDao:
             data = self.__cur.fetchone()
             if data is None:
                 return None
-            return TrabajoGrado(codigo=data[0], titulo=data[1],cod_jurado1=data[2],cod_jurado2=data[3],
-                                       cod_jurado3=data[4],correciones=data[5],documentacion=data[6],estado=data[7],
-                                       fecha_correcciones=data[8],nota=data[9],id_propuesta=data[10],
-                                       fecha=data[11],fecha_sustentacion=data[12],lugar_sustentacion=data[13],
-                                        hora_sustentacion=data[14])
+            return TrabajoGrado(codigo=data[0], titulo=data[1],fecha_sustentacion=data[12],lugar_sustentacion=data[13],
+                                   hora_sustentacion=data[17],nota=data[16],fecha=data[15])
         except Exception as e:
             print e.message
             return None
@@ -253,8 +250,8 @@ class TrabajoGradoDao:
             if data is None:
                 return None
             for trabajo in data:
-                pro = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],director_proyecto=trabajo[2],modalidad=trabajo[7],
-                                estado=trabajo[10], nota = trabajo[16])
+                pro = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1],fecha=trabajo[11],fecha_sustentacion=trabajo[12],
+                                estado=trabajo[7], nota = trabajo[9])
                 resultado.append(pro)
             print "holaaa por aca"
             return resultado
@@ -274,12 +271,8 @@ class TrabajoGradoDao:
             if data is None:
                 return []
             for trabajo in data:
-                tra = TrabajoGrado(codigo=trabajo[0], titulo=trabajo[1], cod_jurado1=trabajo[2], cod_jurado2=trabajo[3],
-                                   cod_jurado3=trabajo[4], correciones=trabajo[5], documentacion=trabajo[6],
-                                   estado=trabajo[7],
-                                   fecha_correcciones=trabajo[8], nota=trabajo[9], id_propuesta=trabajo[10],
-                                   fecha=trabajo[11], fecha_sustentacion=trabajo[12], lugar_sustentacion=trabajo[13],
-                                   hora_sustentacion=trabajo[14])
+                tra = TrabajoGrado(codigo=data[0], titulo=data[1],fecha=data[11],fecha_sustentacion=data[12],
+                                estado=data[7], nota = data[9])
                 resultado.append(tra)
             return resultado
         except Exception as e:
