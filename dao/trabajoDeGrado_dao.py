@@ -404,3 +404,23 @@ class TrabajoGradoDao:
             print e.__class__
             print e.message
             return False
+
+    def get_trabajo_id_propuesta(self, trabajo):
+        try:
+            query = "SELECT * FROM trabajo_de_grado " \
+                    "JOIN propuesta ON propuesta.id = trabajo_de_grado.id_propuesta " \
+                    "WHERE id_propuesta = %s "
+            param = (trabajo.getId_propuesta().getId(),)
+            self.__cur.execute(query, param)
+            data = self.__cur.fetchone()
+            print(data, 'data')
+            if data is None:
+                return None
+            trabajo = TrabajoGrado(codigo=data[0], titulo=data[1], id_propuesta=data[10],
+                                   fecha_sustentacion=data[12], lugar_sustentacion=data[13],
+                                   hora_sustentacion=data[14])
+            return trabajo
+        except Exception as e:
+            print(e.__class__, e.message)
+            return None
+

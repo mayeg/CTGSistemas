@@ -43,8 +43,8 @@ class Propuesta_UsuarioDao:
             user = UsuarioPropuesta(id=data[0], id_estudiante=data[1],
                                     id_propuesta=data[2], estado=data[3])
             propuesta = Propuesta(id=user.getId_propuesta().getId(), titulo=data[5],
-                                  director_trabajo=data[6], documentacion=data[11],
-                                  modalidad=data[12], fecha_correcciones=data[17],
+                                  director_trabajo=data[6],
+                                  modalidad=data[12], comentario=data[10],
                                   fecha=data[18])
             user.setId_propuesta(propuesta)
             return user
@@ -84,7 +84,7 @@ class Propuesta_UsuarioDao:
         try:
             query = "UPDATE usuario_propuesta SET estado=%s " \
                     "WHERE id_propuesta=%s"
-            param = ('Desactivado',id_propuesta,)
+            param = ('Sustencion',id_propuesta,)
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True
@@ -94,8 +94,6 @@ class Propuesta_UsuarioDao:
 
     def get_propuesta_cancelar(self, propuesta):
         try:
-
-
             query = "UPDATE `usuario_propuesta` SET estado= %s WHERE id_propuesta=%s "
             param = ('Cancelado',propuesta.getId(),)
             self.__cur.execute(query, param)

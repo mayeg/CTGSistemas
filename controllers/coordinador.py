@@ -33,6 +33,7 @@ class CoordinadorController:
         tipoU = session['usuario']['tipo']
         usuario_u = UsuarioDao().get_usuario_por_codigo(
             Usuario(codigo=session['usuario']['codigo']))
+        print(usuario_u, 'usuario_u')
         return render_template("/coordinador/nombreT.html",  usuario=usuario_u, tipoU=tipoU)
 
 
@@ -190,9 +191,11 @@ class CoordinadorController:
         if (propuestas):
             trabajos = list()
             for propuesta in propuestas:
+
+
                 pro = TrabajoGradoDao().get_trabajo_modalidadT(propuesta, trabajo_a)
-                if(pro is not None):
-                  trabajos.append(pro)
+                trabajos.append(pro)
+
             tipoU = session['usuario']['tipo']
             usuario_u = UsuarioDao().get_usuario_por_codigo(
                 Usuario(codigo=session['usuario']['codigo']))

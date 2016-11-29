@@ -1,11 +1,16 @@
 class Protocolo:
 
-    def __init__(self, nombre="", descripcion="", filename=""):
+    def __init__(self, id=0, nombre="", descripcion="", documento=""):
+        self.__id = id
         self.__nombre = nombre
         self.__descripcion = descripcion
-        self.__filename = filename
+        self.__documento = documento
 
+    def getId(self):
+        return self.__id
 
+    def setId(self, id):
+        self.__id = id
 
     def getNombre(self):
         return self.__nombre
@@ -19,8 +24,8 @@ class Protocolo:
     def setDescripcion(self,descripcion):
         self.__descripcion = descripcion
 
-    def getFilename(self):
-        return self.__filename
+    def getDocumento(self):
+        return self.__documento
 
-    def setFilename(self,filename):
-        self.__filename = filename
+    def setDocumento(self, documento):
+        self.__documento = documento

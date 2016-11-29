@@ -1,7 +1,7 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}CTG | Consulta Modalidad {% endblock %}
-{% block username %}{{usuario_u.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario_u.getNombres()}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
 {{usuario.getNombres()}}
 {{usuario.getTipoUsuario().getNombre()}}
@@ -82,6 +82,7 @@
                 <div class="form-group">
                   <select id="tipo_modalidad" name="tipo_modalidad" class="form-control"> >
                       <option value="" selected disabled> Modalidad... </option>
+                       <option>Trabajo De Grado</option>
                     <option>Proyecto de Investigación</option>
                     <option>Monografía</option>
                       <option>Generación o aplicación de conocimientos</option>

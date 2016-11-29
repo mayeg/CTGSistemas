@@ -3,13 +3,15 @@ import os
 from flask.helpers import flash
 from flask import render_template, redirect, url_for, session
 from datetime import datetime
-
 from controllers.emails import EmailController
 from dao.entregable_propuesta_dao import Entregable_propuestaDao
 from dao.propuesta_dao import PropuestaDao
 from dao.propuesta_usuario_dao import Propuesta_UsuarioDao
+from dao.protocolo_dao import ProtocoloDao
+from dao.trabajoDeGrado_dao import TrabajoGradoDao
 from dao.usuario_dao import UsuarioDao
 from dto.propuesta import Propuesta
+from dto.trabajoGrado import TrabajoGrado
 from dto.usuario import Usuario
 from dto.usuario_propuesta import UsuarioPropuesta
 from werkzeug.utils import secure_filename
@@ -38,9 +40,21 @@ class EstudianteController:
                                    propuesta=propuesta)
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
                     id_propuesta=propuesta.getId_propuesta().getId()))
+        entregable_propuesta = Entregable_propuestaDao().get_entregable_propuesta(pro)
+        if pro.getEstado() != 'Sustentacion':
+            return render_template("estudiante/home.html", propuesta=pro,
+                           estudiante=propuesta, entregable= entregable_propuesta,
+                           usuario=usuario)
+        else:
+            trabajo = TrabajoGrado(id_propuesta=pro.getId())
+            t= TrabajoGradoDao().get_trabajo_id_propuesta(trabajo)
+            flash("Ya estan asiganadas las fechas de sustentacion", "success")
+            return render_template("estudiante/home.html", propuesta=pro,
+                                   estudiante=propuesta, usuario=usuario,
+                                   trabajo=t)
 
-        return render_template("estudiante/home.html", propuesta=pro,
-                               estudiante=propuesta, usuario=usuario)
+
+
 
     def registrar_propuesta(self, titulo, director, modalidad, file, id):
         from proyecto import UPLOAD_FOLDER
@@ -195,6 +209,41 @@ class EstudianteController:
         if PropuestaDao().solicitar_retiro_propuesta(pro):
             flash("se subio correctamente el archivo", "success")
             return redirect(url_for("estudiante.home"))
+
+    def get_solicitar_prorroga(self):
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("/estudiante/solicitud_prorroga.html",
+                               usuario=usuario)
+
+    def solicitar_prorroga(self, file, id):
+        from proyecto import UPLOAD_FOLDER
+        filename = str(datetime.now().microsecond) + secure_filename(
+            file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        propuesta_e = Propuesta_UsuarioDao().get_propuesta_usuario(
+            UsuarioPropuesta(id_estudiante=id))
+        print(propuesta_e)
+        if propuesta_e is None:
+            flash("La propuesta no existe", "error")
+            return redirect(url_for("estudiante.home"))
+        pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
+            id_propuesta=propuesta_e.getId_propuesta().getId()))
+        print(pro)
+        pro.getId_propuesta().setSolicitud_prorroga(filename)
+        print(pro.getId_propuesta().getSolicitud_prorroga())
+        if PropuestaDao().solicitar_prorroga(pro):
+            flash("se subio correctamente el archivo", "success")
+            return redirect(url_for("estudiante.home"))
+
+    def get_protocolos(self):
+        protocolos= ProtocoloDao().get_protocolos()
+        tipo = session['usuario']['tipo']
+        usuario = Usuario(nombres=session['usuario']['nombres'],
+                          tipo_usuario=tipo)
+        return render_template("/estudiante/protocolos.html",
+                               usuario=usuario, protocolos=protocolos)
 
 
 

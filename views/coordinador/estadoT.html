@@ -1,7 +1,7 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}CTG | Consulta Estado Trabajo {% endblock %}
-{% block username %}{{usuario_u.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario_u.getNombres()}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
 {{usuario.getNombres()}}
 {{usuario.getTipoUsuario().getNombre()}}
@@ -179,4 +179,3 @@
 
 
 
-{% endblock%}

@@ -98,6 +98,22 @@ def solicitar_retiro_propuesta():
         return redirect(request.url)
     return EstudianteController().solicitar_retiro(file, id)
 
+@estudiante.route("/solicitud/prorroga", methods=["GET", "POST"])
+def solicitar_prorroga():
+    if request.method == "GET":
+        return EstudianteController().get_solicitar_prorroga()
+    else:
+        file = request.files['documento']
+        id = session['usuario']['id']
+        if file.filename == '':
+            flash('No selecciono el archivo', 'Error')
+            return redirect(request.url)
+        return EstudianteController().solicitar_prorroga(file, id)
+
+@estudiante.route("/protocolos", methods=["GET", "POST"])
+def protocolos():
+    if request.method == "GET":
+        return EstudianteController().get_protocolos()
 
 @estudiante.route("/descargar/<filename>", methods=["POST"])
 def descargar_propuesta(filename):

@@ -1,0 +1,125 @@
+{% extends "plantillas/principal.html" %}
+{% block titulo %}GTG| Protocolos {% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block informacionU %}
+{{usuario.getNombres()}}
+{{usuario.getTipoUsuario().getNombre()}}
+{% endblock %}
+{% block header%}
+{% endblock %}
+{% block menu %}
+<li>
+    <a href="/estudiante/home">
+        <i class="fa fa-dashboard"></i> <span>Propuesta</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+
+</li>
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Solicitudes
+    </span> <i
+            class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="/estudiante/solicitud/sustentacion"><i
+                class="fa fa-circle-o"></i>
+            Sustentacion</a></li>
+        <li><a href="/estudiante/solicitud/retiro_propuesta"><i
+                class="fa fa-circle-o"></i>
+            Retiro de la propuesta</a></li>
+        <li><a href="/estudiante/solicitud/prorroga"><i
+                class="fa fa-circle-o"></i>
+            prorroga</a></li>
+
+    </ul>
+</li>
+<li>
+    <a href="#">
+        <i class="fa fa-dashboard"></i> <span>Descargas</span> <i
+            class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="/estudiante/protocolos"><i class="fa fa-circle-o"></i>
+            Protocolos</a></li>
+    </ul>
+</li>
+<li>
+    <a href="/estudiante/configuracion">
+        <i class="fa fa-pie-cong"></i>
+        <span>Configuracion</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+</li>
+{% endblock %}
+{% block contenido %}
+{% if protocolos %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">Protocolos</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Opciones</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for protocolo in protocolos %}
+                                    <tr>
+                                        <td>{{protocolo.getId()}}</td>
+                                        <td>{{protocolo.getNombre()}}</td>
+                                        <td>{{protocolo.getDescripcion()}}</td>
+                                        <td>
+
+                                            <div class="btn-group">
+                                                <a type="button"
+                                                   class="btn btn-social btn-bitbucket "><p class="fa fa-edit"></p>
+                                                    Opciones</a>
+                                                <button type="button" class="btn btn-bitbucket dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href=""><p class="fa fa-download"></p> Descargar
+                                                        Protocolo</a></li>
+
+                                                </ul>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                        {% else %}
+                        <div class="col-md-12">
+                            <div class="alert alert-info">
+                                No hay protocolos.
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endblock%}

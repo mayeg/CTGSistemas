@@ -1,7 +1,7 @@
 {% extends "plantillas/principal.html" %}
 {% block titulo %}CTG | Nombre Porpuesta {% endblock %}
-{% block username %}{{usuario_u.getNombres()}}{% endblock %}
-{% block nombreU %}{{usuario_u.getNombres()}}{% endblock %}
+{% block username %}{{usuario.getNombres()}}{% endblock %}
+{% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
 {{usuario.getNombres()}}
 {{usuario.getTipoUsuario().getNombre()}}
@@ -112,8 +112,8 @@
                                 <tr>
                                     <th>Titulo</th>
                                     <th>Director</th>
+                                    <th>Fecha</th>
                                     <th>Modalidad</th>
-                                    <th>Estado</th>
                                     <th>Comentarios</th>
                                 </tr>
                                 </thead>
@@ -121,11 +121,11 @@
                                 <tbody>
                                 {% for propuesta in propuestas %}
                                 <tr>
-                                    <td>{{propuesta.getId_propuesta().getTitulo()}}</td>
-                                    <td>{{propuesta.getId_propuesta().getDirector_trabajo()}}</td>
-                                    <td>{{propuesta.getId_propuesta().getModalidad()}}</td>
-                                    <td>{{propuesta.getEstado()}}</td>
-                                    <td>{{propuesta.getId_propuesta().getComentario()}}</td>
+                                    <td>{{propuesta.getTitulo()}}</td>
+                                    <td>{{propuesta.getDirector_trabajo()}}</td>
+                                    <td>{{propuesta.getFecha()}}</td>
+                                    <td>{{propuesta.getModalidad()}}</td>
+                                    <td>{{propuesta.getComentario()}}</td>
                                 </tr>
                                 {% endfor %}
 

@@ -1,5 +1,5 @@
 {% extends "plantillas/principal.html" %}
-{% block titulo %} GTG| Correcciones {% endblock %}
+{% block titulo %}GTG| Prorroga {% endblock %}
 {% block nombreU %}{{usuario.getNombres()}}{% endblock %}
 {% block username %}{{usuario.getNombres()}}{% endblock %}
 {% block informacionU %}
@@ -23,11 +23,13 @@
             class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="/estudiante/solicitud/sustentacion"><i class="fa fa-circle-o"></i>
+        <li><a href="/estudiante/solicitud/sustentacion"><i
+                class="fa fa-circle-o"></i>
             Sustentacion</a></li>
-        <li><a href="/estudiante/solicitud/retiro_propuesta"><i class="fa fa-circle-o"></i>
+        <li><a href="/estudiante/solicitud/retiro_propuesta"><i
+                class="fa fa-circle-o"></i>
             Retiro de la propuesta</a></li>
-         <li><a href="/estudiante/solicitud/prorroga"><i
+        <li><a href="/estudiante/solicitud/prorroga"><i
                 class="fa fa-circle-o"></i>
             prorroga</a></li>
 
@@ -54,7 +56,10 @@
 {% block contenido %}
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title"> Correciones de la Propuesta</h3>
+        <h3 class="box-title">
+            <strong>
+                Solicitud de Prorroga
+            </strong></h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool"
                     data-widget="collapse"><i class="fa fa-minus"></i>
@@ -64,14 +69,13 @@
 
     <div class="box-body">
         <div class="form-group">
-            <form action="/estudiante/subir/correcciones" method="post"
+            <form action="/estudiante/solicitud/prorroga" method="post"
                   enctype="multipart/form-data">
                 <div class="">
-                    <label for="exampleInputFile">Documentos</label>
+                    <label for="exampleInputFile">Solicitud de
+                        Prorroga</label>
                     <input type="file" id="exampleInputFile" name="documento">
-                    <p class="help-block">Seleccione el documento de la
-                        propuesta
-                        .</p>
+                    <p class="help-block">Seleccione el documento de la prorroga.</p>
                 </div>
                 <div class="box-footer">
                     <a class="btn btn-default"
