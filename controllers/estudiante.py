@@ -40,10 +40,11 @@ class EstudianteController:
                                    propuesta=propuesta)
         pro = Propuesta_UsuarioDao().get_propuesta_codigo(UsuarioPropuesta(
                     id_propuesta=propuesta.getId_propuesta().getId()))
+
         entregable_propuesta = Entregable_propuestaDao().get_entregable_propuesta(pro)
         if pro.getEstado() != 'Sustentacion':
             return render_template("estudiante/home.html", propuesta=pro,
-                           estudiante=propuesta, entregable= entregable_propuesta,
+                           estudiante=propuesta, entregable=entregable_propuesta,
                            usuario=usuario)
         else:
             trabajo = TrabajoGrado(id_propuesta=pro.getId())
@@ -51,10 +52,7 @@ class EstudianteController:
             flash("Ya estan asiganadas las fechas de sustentacion", "success")
             return render_template("estudiante/home.html", propuesta=pro,
                                    estudiante=propuesta, usuario=usuario,
-                                   trabajo=t)
-
-
-
+                                   trabajo=t, entregable=entregable_propuesta)
 
     def registrar_propuesta(self, titulo, director, modalidad, file, id):
         from proyecto import UPLOAD_FOLDER

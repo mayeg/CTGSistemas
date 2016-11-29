@@ -28,13 +28,15 @@ class Entregable_propuestaDao:
             param = (pro.getId_propuesta().getId(),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
-            entregable = EntregablePropuesta(id=data[0],id_propuesta=data[1],
+            if data is None:
+                return None
+
+            entregable = EntregablePropuesta(id=data[0], id_propuesta=data[1],
                                              entregable=data[2],
                                              fecha_entregable=data[3], fecha=data[4])
             return entregable
         except Exception as e:
             print e.__class__, e.message
-            return False
 
     def subir_entregable(self, entregable):
         try:

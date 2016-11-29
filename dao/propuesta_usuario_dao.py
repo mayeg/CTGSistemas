@@ -43,7 +43,7 @@ class Propuesta_UsuarioDao:
             user = UsuarioPropuesta(id=data[0], id_estudiante=data[1],
                                     id_propuesta=data[2], estado=data[3])
             propuesta = Propuesta(id=user.getId_propuesta().getId(), titulo=data[5],
-                                  director_trabajo=data[6],
+                                  director_trabajo=data[6],documentacion=data[11],
                                   modalidad=data[12], comentario=data[10],
                                   fecha=data[18])
             user.setId_propuesta(propuesta)

@@ -116,9 +116,8 @@ def protocolos():
         return EstudianteController().get_protocolos()
 
 @estudiante.route("/descargar/<filename>", methods=["POST"])
-def descargar_propuesta(filename):
-    print('entro a routes')
-    uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
+def descargar(filename):
+    uploads = app.config['UPLOAD_FOLDER']
     return send_from_directory(directory=uploads, filename=filename)
 
 
